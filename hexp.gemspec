@@ -1,9 +1,9 @@
 # encoding: utf-8
 
-require_relative 'lib/hexp/version'
+require File.expand_path('../lib/hexp/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.name        = 'gemspec'
+  gem.name        = 'hexp'
   gem.version     = Hexp::VERSION
   gem.authors     = [ 'Arne Brasseur' ]
   gem.email       = [ 'arne@arnebrasseur.net' ]
