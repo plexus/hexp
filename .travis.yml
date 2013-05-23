@@ -1,7 +1,19 @@
 language: ruby
+before_install: gem install bundler
+bundler_args: --without yard guard benchmarks
+script: "bundle exec rake ci:metrics"
 rvm:
-  - "1.9.2"
-  - "1.9.3"
-  - jruby-19mode
+  - ree
+  - 1.9.2
+  - 1.9.3
+  - 2.0.0
+  - ruby-head
   - rbx-19mode
-# script: bundle exec rspec spec
+  - jruby-19mode
+  - jruby-head
+notifications:
+  email:
+    recipients:
+      - arne@arnebrasseur.net
+    on_success: never
+    on_failure: change
