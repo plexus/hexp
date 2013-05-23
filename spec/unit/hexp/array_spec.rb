@@ -1,7 +1,4 @@
-require 'rspec/autorun'
-
-$LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
-require 'hexp'
+require 'spec_helper'
 
 H=Hexp::Array
 
@@ -52,6 +49,12 @@ describe Hexp::Array do
             [:p,  {class: 'greeting'}, ["hello world"] ],
             "Some loose text"
           ]
+      end
+    end
+
+    describe 'with bad input' do
+      it 'should raise exception' do
+        expect { H[:p, {}, [123]] }.to raise_exception
       end
     end
   end
