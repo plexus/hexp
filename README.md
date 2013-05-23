@@ -7,7 +7,7 @@ hexp
 [![Code Climate](https://codeclimate.com/github/plexus/hexp.png)][codeclimate]
 [![Coverage Status](https://coveralls.io/repos/plexus/hexp/badge.png?branch=master)][coveralls]
 
-[gem]: https://rubygems.org/gems/dm-mapper
+[gem]: https://rubygems.org/gems/hexp
 [travis]: https://travis-ci.org/plexus/hexp
 [gemnasium]: https://gemnasium.com/plexus/hexp
 [codeclimate]: https://codeclimate.com/github/plexus/hexp
