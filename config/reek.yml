@@ -14,8 +14,8 @@ ControlParameter:
 DataClump:
   enabled: true
   exclude: []
-  max_copies: 0
-  min_clump_size: 1
+  max_copies: 2
+  min_clump_size: 2
 DuplicateMethodCall:
   enabled: true
   exclude: []
@@ -30,12 +30,14 @@ IrresponsibleModule:
 LongParameterList:
   enabled: true
   exclude: []
-  max_params: 1
-  overrides: {}
+  max_params: 2
+  overrides:
+    initialize:
+      max_params: 3
 LongYieldList:
   enabled: true
   exclude: []
-  max_params: 0
+  max_params: 2
 NestedIterators:
   enabled: true
   exclude: []
@@ -51,15 +53,16 @@ RepeatedConditional:
 TooManyInstanceVariables:
   enabled: true
   exclude: []
-  max_instance_variables: 12
+  max_instance_variables: 3
 TooManyMethods:
   enabled: true
   exclude: []
-  max_methods: 15
+  max_methods: 10
 TooManyStatements:
   enabled: true
-  exclude: []
-  max_statements: 5
+  exclude:
+  - each
+  max_statements: 4
 UncommunicativeMethodName:
   enabled: true
   exclude: []

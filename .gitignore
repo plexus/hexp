@@ -16,3 +16,6 @@ tmp
 .yardoc
 _yardoc
 doc/
+
+#yardstick report
+measurements/report.txt

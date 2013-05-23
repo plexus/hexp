@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-H=Hexp::Array
+H=Hexp::Triplet
 
-describe Hexp::Array do
+describe Hexp::Triplet do
   describe 'normalization' do
     describe 'with a single parameter' do
       it 'should return a triplet' do

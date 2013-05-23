@@ -1,5 +1,6 @@
+# Hexp namespace
 module Hexp
 end
 
 require 'hexp/version'
-require 'hexp/array'
+require 'hexp/triplet'
