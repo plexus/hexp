@@ -23,4 +23,4 @@ if ENV['COVERAGE'] == 'true'
 
 end
 
-require 'shared_helper' # requires hexp
+require 'shared_helper'

@@ -4,3 +4,4 @@ end
 
 require 'hexp/version'
 require 'hexp/triplet'
+require 'hexp/triplet/normalize'

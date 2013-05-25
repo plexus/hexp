@@ -23,7 +23,8 @@ DuplicateMethodCall:
   allow_calls: []
 FeatureEnvy:
   enabled: true
-  exclude: []
+  exclude:
+    - Hexp::Triplet::Normalize#children
 IrresponsibleModule:
   enabled: true
   exclude: []
