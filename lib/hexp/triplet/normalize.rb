@@ -23,7 +23,7 @@ module Hexp
       # @api private
       #
       def call
-        [@raw.first, attributes, normalized_children]
+        [@raw.first, normalized_attributes, normalized_children]
       end
 
       private
@@ -40,6 +40,14 @@ module Hexp
         {}
       end
 
+      def normalized_attributes
+        Hash[*
+          attributes.flat_map do |key, value|
+            [key, value].map(&:to_s)
+          end
+        ]
+      end
+
       # Pulls the children list out of a non-strict hexp
       #
       # @return [Array] the list of child hexps, non-strict
@@ -48,8 +56,8 @@ module Hexp
       #
       def children
         @raw[1..2].each do |arg|
-          return [arg] if arg.instance_of? String
-          return arg   if arg.instance_of? Array
+          return [arg] if arg.instance_of?(String) || arg.instance_of?(TextNode)
+          return arg   if arg.instance_of?(Array)  || arg.instance_of?(NodeList)
         end
         []
       end
@@ -61,14 +69,20 @@ module Hexp
       # @api private
       #
       def normalized_children
-        children.map do |child|
-          case child
-          when String
-            child
-          when Array
-            Hexp::Triplet[*child]
+        Hexp::NodeList[*
+          children.map do |child|
+            case child
+            when String, TextNode
+              Hexp::TextNode.new(child)
+            when Array
+              Hexp::Triplet[*child]
+            else
+              if child.respond_to? :to_hexp
+                Hexp::Triplet[*child.to_hexp]
+              end
+            end
           end
-        end
+        ]
       end
     end
 

@@ -1,21 +1,19 @@
 require 'spec_helper'
 
 describe Hexp::Triplet::Normalize, '#call' do
-  subject { Hexp::Triplet::Normalize.new(triplet).() }
+  subject { Hexp::Triplet[*triplet] }
 
   describe 'with a single element' do
     let (:triplet) { [:div] }
 
-    its(:count) { should == 3 }
-
     it 'should treat the first as the tag' do
-      subject[0].should == :div
+      subject.tag.should == :div
     end
     it 'should set an empty attribute list' do
-      subject[1].should == {}
+      subject.attributes.should == {}
     end
     it 'should set an empty children list' do
-      subject[2].should == []
+      subject.children.should == []
     end
   end
 
@@ -23,13 +21,13 @@ describe Hexp::Triplet::Normalize, '#call' do
     let (:triplet) { [:div, {class: 'foo'}] }
 
     it 'should treat the first as the tag' do
-      subject[0].should == :div
+      subject.tag.should == :div
     end
     it 'should treat the second as the attribute list, if it is a Hash' do
-      subject[1].should == {class: 'foo'}
+      subject.attributes.should == {class: 'foo'}
     end
     it 'should treat the second as a list of children, if it is an Array' do
-      subject[2].should == []
+      subject.children.should == []
     end
   end
 
@@ -37,7 +35,7 @@ describe Hexp::Triplet::Normalize, '#call' do
     let(:triplet) { [:div, "this is text in the div"] }
 
     it 'should set is as the single child' do
-      subject[2].should == ["this is text in the div"]
+      subject.children.should == Hexp::NodeList["this is text in the div"]
     end
   end
 
@@ -52,9 +50,9 @@ describe Hexp::Triplet::Normalize, '#call' do
     }
 
     it 'must normalize them recursively' do
-      subject[2].should == [
-        [:h1, {},                  ["Big Title"]   ],
-        [:p,  {class: 'greeting'}, ["hello world"] ],
+      subject.children.should == Hexp::NodeList[
+        Hexp::Triplet[:h1, {},                  Hexp::NodeList["Big Title"]   ],
+        Hexp::Triplet[:p,  {class: 'greeting'}, Hexp::NodeList["hello world"] ],
         "Some loose text"
       ]
     end

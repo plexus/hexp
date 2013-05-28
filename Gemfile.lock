@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/dkubb/equalizer.git
+  revision: 7b0a30dee57ed0378df6b32e5defda64adaff0da
+  specs:
+    equalizer (0.0.5)
+      adamantium (~> 0.0.7)
+      backports (~> 3.2, >= 3.2.0)
+
+GIT
   remote: https://github.com/datamapper/devtools.git
   revision: f0e3a3a42673266c46b983bc79a4ab6e1623bccc
   specs:
@@ -33,9 +41,6 @@ GEM
       thor
     descendants_tracker (0.0.1)
     diff-lcs (1.2.4)
-    equalizer (0.0.5)
-      adamantium (~> 0.0.6)
-      backports (~> 3.0, >= 3.0.3)
     ffi (1.8.1)
     ffi-hunspell (0.3.0)
       ffi (~> 1.0)
@@ -84,6 +89,7 @@ GEM
       rspec (~> 2.13.0)
       to_source (~> 0.2.19)
     mutant-melbourne (2.0.3)
+    nokogiri (1.5.9)
     pelusa (0.2.2)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -142,6 +148,7 @@ DEPENDENCIES
   backports (~> 3.3, >= 3.3.0)
   coveralls (~> 0.6.6)
   devtools!
+  equalizer!
   flay (~> 2.2.0)
   flog (~> 4.0.0)
   guard (~> 1.8.0)
@@ -153,6 +160,7 @@ DEPENDENCIES
   libnotify (~> 0.8.0)
   listen (~> 1.0.2)
   mutant (~> 0.2.20)
+  nokogiri
   pelusa (~> 0.2.2)
   rake (~> 10.0.4)
   rb-fchange (~> 0.0.6)
