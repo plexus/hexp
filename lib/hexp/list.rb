@@ -1,5 +1,5 @@
 module Hexp
-  class NodeList < SimpleDelegator
+  class List < SimpleDelegator
     include Equalizer.new(:__getobj__)
 
     def initialize(nodes)

@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Hexp::Triplet::Normalize, '#call' do
-  subject { Hexp::Triplet[*triplet] }
+describe Hexp::Node::Normalize, '#call' do
+  subject { Hexp::Node[*node] }
 
   describe 'with a single element' do
-    let (:triplet) { [:div] }
+    let (:node) { [:div] }
 
     it 'should treat the first as the tag' do
       subject.tag.should == :div
@@ -18,7 +18,7 @@ describe Hexp::Triplet::Normalize, '#call' do
   end
 
   describe 'with two parameters' do
-    let (:triplet) { [:div, {class: 'foo'}] }
+    let (:node) { [:div, {class: 'foo'}] }
 
     it 'should treat the first as the tag' do
       subject.tag.should == :div
@@ -32,15 +32,15 @@ describe Hexp::Triplet::Normalize, '#call' do
   end
 
   describe 'with a single text child node' do
-    let(:triplet) { [:div, "this is text in the div"] }
+    let(:node) { [:div, "this is text in the div"] }
 
     it 'should set is as the single child' do
-      subject.children.should == Hexp::NodeList["this is text in the div"]
+      subject.children.should == Hexp::List["this is text in the div"]
     end
   end
 
   describe 'with child nodes' do
-    let(:triplet) {
+    let(:node) {
       [:div, [
           [:h1, "Big Title"],
           [:p, {class: 'greeting'}, "hello world"],
@@ -50,9 +50,9 @@ describe Hexp::Triplet::Normalize, '#call' do
     }
 
     it 'must normalize them recursively' do
-      subject.children.should == Hexp::NodeList[
-        Hexp::Triplet[:h1, {},                  Hexp::NodeList["Big Title"]   ],
-        Hexp::Triplet[:p,  {class: 'greeting'}, Hexp::NodeList["hello world"] ],
+      subject.children.should == Hexp::List[
+        Hexp::Node[:h1, {},                  Hexp::List["Big Title"]   ],
+        Hexp::Node[:p,  {class: 'greeting'}, Hexp::List["hello world"] ],
         "Some loose text"
       ]
     end

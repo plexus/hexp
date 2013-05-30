@@ -21,7 +21,7 @@ module Hexp
     end
 
     def to_a
-      [:text, self, Hexp::NodeList[]]
+      [:text, self, Hexp::List[]]
     end
 
   end

@@ -1,2 +1,2 @@
 require 'hexp'
-H=Hexp::Triplet
+H=Hexp::Node

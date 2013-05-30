@@ -1,6 +1,6 @@
 module Hexp
-  # A Hexp Triplet
-  class Triplet
+  # A Hexp Node
+  class Node
     include Equalizer.new(:tag, :attributes, :children)
     attr_reader :tag, :attributes, :children
 
@@ -10,11 +10,11 @@ module Hexp
 
     # Array-style constructor, but normalize the arguments
     #
-    # @param args [Array] args a Hexp triplet
-    # @return [Hexp::Triplet]
+    # @param args [Array] args a Hexp node
+    # @return [Hexp::Node]
     #
     # @example
-    #    Hexp::Triplet[:p, {'class' => 'foo'}, [[:b, "Hello, World!"]]]
+    #    Hexp::Node[:p, {'class' => 'foo'}, [[:b, "Hello, World!"]]]
     #
     # @api public
     def self.[](*args)
@@ -60,19 +60,19 @@ module Hexp
     end
 
     def apply_filter(filter)
-      children.flat_map do |triplet|
+      children.flat_map do |node|
         if filter.arity == 1
-          filter.call(triplet)
+          filter.call(node)
         elsif filter.arity == 3
-          filter.call(*triplet)
+          filter.call(*node)
         end
-      end.map do |triplet|
-        (triplet.instance_of?(String) || triplet.instance_of?(TextNode) ? triplet : H[*triplet].filter(filter))
+      end.map do |node|
+        (node.instance_of?(String) || node.instance_of?(TextNode) ? node : H[*node].filter(filter))
       end
       # self.class[*
-      #   to_enum(:breadth_first_walk).flat_map do |triplet|
-      #     filter.call(triplet) if filter.arity == 1
-      #     filter.call(triplet.tag, triplet.attributes, triplet.children) if filter.arity == 3
+      #   to_enum(:breadth_first_walk).flat_map do |node|
+      #     filter.call(node) if filter.arity == 1
+      #     filter.call(node.tag, node.attributes, node.children) if filter.arity == 3
       #   end.first
       # ]
     end

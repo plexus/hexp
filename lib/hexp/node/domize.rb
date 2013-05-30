@@ -1,11 +1,11 @@
 module Hexp
-  class Triplet
-    # Turn triplets into DOM objects
+  class Node
+    # Turn nodes into DOM objects
     class Domize
       attr_reader :dom
 
-      def initialize(triplet, dom = Hexp::DOM)
-        @raw = triplet
+      def initialize(hexp, dom = Hexp::DOM)
+        @raw = hexp
         @dom = dom
       end
 
@@ -18,12 +18,12 @@ module Hexp
 
       private
 
-      def domize(triplet, parent)
-        dom::Node.new(triplet.tag.to_s, @doc).tap do |node|
-          triplet.attributes.each do |key,value|
+      def domize(hexp, parent)
+        dom::Node.new(hexp.tag.to_s, @doc).tap do |node|
+          hexp.attributes.each do |key,value|
             node[key] = value
           end
-          triplet.children.each do |child|
+          hexp.children.each do |child|
             if child.instance_of?(TextNode)
               node << dom::Text.new(child, @doc)
             else

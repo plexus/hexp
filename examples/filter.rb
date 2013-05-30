@@ -17,17 +17,18 @@ hexp =  H[:p, [
              [:hr]]]
 
 
-hexp = hexp.filter do |triplet|
-  if triplet.attributes['class'] == 'foo'
-    [[:p, 'foo coming up!'], triplet]
+hexp = hexp.filter do |node|
+  if node.attributes['class'] == 'foo'
+    [[:p, 'foo coming up!'], node] # !> shadowing outer local variable - node
   else
-    [triplet]
+    [node]
   end
 end
 
 puts hexp.pp
 
 puts hexp.to_html
+
 
 # >> H[:p, [
 # >>   H[:div, {"id"=>"main"}, [
@@ -44,11 +45,5 @@ puts hexp.to_html
 # >>             "awesome",
 # >>             H[:br]]]]],
 # >>   H[:hr]]]
-
 # >> <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-# >> <p><div id="main">
-# >> <p>foo coming up!</p>
-# >> <p class="foo"><br>awesome<br></p>
-# >> <p>foo coming up!</p>
-# >> <p class="foo"><br>awesome<br></p>
-# >> </div><hr></p>
+# >> <p></p>

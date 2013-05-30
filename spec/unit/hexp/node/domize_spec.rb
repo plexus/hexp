@@ -8,8 +8,8 @@ class Nokogiri::XML::Node
   include Equalizer.new(:name, :attributes, :children)
 end
 
-describe Hexp::Triplet::Domize do
-  subject { Hexp::Triplet::Domize.new( hexp ).() }
+describe Hexp::Node::Domize do
+  subject { Hexp::Node::Domize.new( hexp ).() }
 
   describe 'a single node' do
     let(:hexp) { [:p, {}, []] }
