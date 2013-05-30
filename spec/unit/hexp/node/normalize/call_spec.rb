@@ -13,7 +13,7 @@ describe Hexp::Node::Normalize, '#call' do
       subject.attributes.should == {}
     end
     it 'should set an empty children list' do
-      subject.children.should == []
+      subject.children.should == Hexp::List[]
     end
   end
 
@@ -24,10 +24,10 @@ describe Hexp::Node::Normalize, '#call' do
       subject.tag.should == :div
     end
     it 'should treat the second as the attribute list, if it is a Hash' do
-      subject.attributes.should == {class: 'foo'}
+      subject.attributes.should == {'class' => 'foo'}
     end
     it 'should treat the second as a list of children, if it is an Array' do
-      subject.children.should == []
+      subject.children.should == Hexp::List[]
     end
   end
 
