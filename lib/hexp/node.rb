@@ -4,8 +4,10 @@ module Hexp
     include Equalizer.new(:tag, :attributes, :children)
     attr_reader :tag, :attributes, :children
 
-    def initialize(tag, attributes, children)
-      @tag, @attributes, @children = Hexp.deep_freeze([tag, attributes, children])
+    def initialize(*args)
+      @tag, @attributes, @children = Hexp.deep_freeze(
+        Normalize.new(args).call
+      )
     end
 
     # Array-style constructor, but normalize the arguments
@@ -18,7 +20,7 @@ module Hexp
     #
     # @api public
     def self.[](*args)
-      new(*Normalize.new(args).call)
+      new(*args)
     end
 
     def to_hexp
@@ -56,7 +58,7 @@ module Hexp
     def filter(*filters, &blk)
       filters = [*filters, blk].compact
       return self if filters.empty?
-      self.class[tag, attributes, apply_filter(filters.first)]#.filter(*filters[1..-1])
+      self.class[tag, attributes, apply_filter(filters.first)].filter(*filters[1..-1])
     end
 
     def apply_filter(filter)
