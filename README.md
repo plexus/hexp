@@ -70,6 +70,24 @@ It does! The really neat part is having filters that process this HTML tree befo
 
 Hexp stands for HTML expressions. It's a reference to s-expressions as they are known in LISP languages, a simple way to represent data as nested lists.
 
+How to use it
+-------------
+
+Hexp objects come in two flavors : `Hexp::Node` and `Hexp::List`. A `Node` consists of three parts : its `tag`, `attributes` and `children`. A `List` is just that, a list (of nodes).
+
+To construct a `Node` use `H[tag, attributes, children]`. Use a `Symbol` for the `tag`, a `Hash` for the `attributes`, and an `Array` for the `children`. Attributes or children can be omitted when they are empty.
+
+The list of children will automatically be converted to `Hexp::List`, similarly for any nested nodes you can simply use `[tag, attributes, children]` without the `H`, all nodes in the tree will be converted to proper `Hexp::Node` objects.
+
+The entire API is centered around these two classes, and one of them you can think of as essentially just an `Array`, in other words Hexp is super easy to learn. Try it out in `irb`, have a look at the examples, and *build cool stuff*!
+
+A note on immutability
+----------------------
+
+All Hexp objects are deep frozen on creation, you can never alter them afterwards. Operations always return a new `Hexp::Node` rather than working in place.
+
+This might seem stringent when you are not used to this style of coding, but it's a pattern that generally promotes good code.
+
 Can I already use it
 --------------------
 
