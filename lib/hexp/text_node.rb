@@ -12,8 +12,8 @@ module Hexp
       {}.freeze
     end
 
-    def pp(indent)
-      "  "*indent + inspect
+    def pp
+      inspect
     end
 
     def filter(*filters, &blk)

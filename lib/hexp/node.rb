@@ -50,12 +50,12 @@ module Hexp
       [tag, attributes, children]
     end
 
-    def pp(indent=0)
+    def pp
       out = self.class.inspect_name
       out << "[#{tag.inspect}"
       out << (attributes.empty? ? ''  : (', ' + attributes.inspect))
-      out << (empty?   ? ']' : (", [\n" + children.map{|child| child.pp(indent+1)}.join(",\n") + "]]"))
-      out.lines.map{|line| "  "*indent + line}.join
+      out << (empty?   ? ']' : (", [\n" + children.map{|child| child.pp }.join(",\n") + "]]"))
+      out.lines.map.with_index{|line, idx| idx==0 ? line : "  " + line}.join
     end
 
     class << self
@@ -63,7 +63,7 @@ module Hexp
         if defined?(H) && H == self
           'H'
         else
-          self.class.name
+          self.name
         end
       end
     end
