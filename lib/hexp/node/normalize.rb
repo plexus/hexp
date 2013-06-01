@@ -56,8 +56,7 @@ module Hexp
       #
       def children
         @raw[1..2].each do |arg|
-          return [arg] if arg.instance_of?(String) || arg.instance_of?(TextNode)
-          return arg   if arg.instance_of?(Array)  || arg.instance_of?(List)
+          return Array(arg) unless [Symbol, Hash].any?{|klz| arg.instance_of?(klz)}
         end
         []
       end

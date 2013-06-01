@@ -20,19 +20,26 @@ module Hexp
 
       def domize(hexp)
         dom::Node.new(hexp.tag.to_s, @doc).tap do |node|
-          hexp.attributes.each do |key,value|
-            node[key] = value
-          end
-          hexp.children.each do |child|
-            if child.instance_of?(TextNode)
-              node << dom::Text.new(child, @doc)
-            else
-              node << domize(child)
-            end
-          end
+          set_attributes(node, hexp.attributes)
+          set_children(node, hexp.children)
         end
       end
 
+      def set_attributes(node, attributes)
+        attributes.each do |key,value|
+          node[key] = value
+        end
+      end
+
+      def set_children(node, children)
+        children.each do |child|
+          if child.instance_of?(TextNode)
+            node << dom::Text.new(child, @doc)
+          else
+            node << domize(child)
+          end
+        end
+      end
     end
   end
 end

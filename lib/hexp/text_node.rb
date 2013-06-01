@@ -1,4 +1,6 @@
 module Hexp
+  # Represents text inside HTML, at the moment a wrapper
+  # around a plain String. Needs work
   class TextNode < SimpleDelegator
     def inspect
       __getobj__.inspect
@@ -14,10 +16,6 @@ module Hexp
 
     def pp
       inspect
-    end
-
-    def filter(*filters, &blk)
-      self
     end
 
     def to_a

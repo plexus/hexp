@@ -39,11 +39,7 @@ module Hexp
     end
 
     def inspect
-      self.class.inspect_name + [
-        tag,
-        attributes.empty? ? nil : attributes,
-        empty?   ? nil : children,
-      ].compact.inspect
+      self.class.inspect_name + to_a.reject(&:empty?).inspect
     end
 
     def to_a
@@ -51,11 +47,7 @@ module Hexp
     end
 
     def pp
-      out = self.class.inspect_name
-      out << "[#{tag.inspect}"
-      out << (attributes.empty? ? ''  : (', ' + attributes.inspect))
-      out << (empty?   ? ']' : (", [\n" + children.map{|child| child.pp }.join(",\n") + "]]"))
-      out.lines.map.with_index{|line, idx| idx==0 ? line : "  " + line}.join
+      self.class::PP.new(self).call
     end
 
     class << self

@@ -12,9 +12,12 @@ module Hexp
 end
 
 require 'hexp/version'
+
 require 'hexp/node'
 require 'hexp/node/normalize'
 require 'hexp/node/domize'
+require 'hexp/node/pp'
+
 require 'hexp/text_node'
 require 'hexp/list'
 require 'hexp/dom'

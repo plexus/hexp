@@ -1,4 +1,12 @@
 module Hexp
+  # A list of nodes
+  #
+  # @example
+  #   Hexp::List[
+  #     Hexp::Node[:marquee, "Try Hexp for instanst satisfaction!"],
+  #     Hexp::Node[:hr],
+  #   ]
+  #
   class List < SimpleDelegator
     include Equalizer.new(:__getobj__)
 

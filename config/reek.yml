@@ -19,12 +19,16 @@ DataClump:
 DuplicateMethodCall:
   enabled: true
   exclude: []
-  max_calls: 1
+  max_calls: 2
   allow_calls: []
 FeatureEnvy:
   enabled: true
   exclude:
-    - Hexp::Triplet::Normalize#children
+    - Hexp::Node::Domize#set_attributes
+    - Hexp::Node::Normalize#children
+    - Hexp::Node::Normalize#normalized_children
+    - Hexp::Node::PP#pp_attributes
+    - Hexp::Node::PP#pp_children
 IrresponsibleModule:
   enabled: true
   exclude: []
@@ -43,7 +47,8 @@ NestedIterators:
   enabled: true
   exclude: []
   max_allowed_nesting: 1
-  ignore_iterators: []
+  ignore_iterators:
+    - any?
 NilCheck:
   enabled: true
   exclude: []
@@ -102,4 +107,6 @@ UtilityFunction:
   enabled: true
   exclude:
     - Hexp::List#initialize
+    - Hexp::Node::Domize#set_attributes
+    - Hexp::TextNode#attributes
   max_helper_calls: 0

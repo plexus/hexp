@@ -1,5 +1,7 @@
 module Hexp
   module Nokogiri
+    # Used in test to see if two Nokogiri objects have the same content,
+    # i.e. are equivalent as far as we are concerned
     class Equality
       CLASSES = [
         ::Nokogiri::HTML::Document,
@@ -38,9 +40,13 @@ module Hexp
       def equal_children?
         return true unless @this.respond_to? :children
         @this.children.count == @that.children.count &&
-          @this.children.map.with_index do |child, idx|
-            self.class.new(child, @that.children[idx]).call
-          end.all?
+          compare_children.all?
+      end
+
+      def compare_children
+        @this.children.map.with_index do |child, idx|
+          self.class.new(child, @that.children[idx]).call
+        end
       end
 
       def equal_attributes?
