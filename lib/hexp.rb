@@ -1,4 +1,5 @@
 require 'delegate'
+require 'forwardable'
 
 require 'nokogiri'
 require 'ice_nine'
@@ -17,3 +18,5 @@ require 'hexp/node/domize'
 require 'hexp/text_node'
 require 'hexp/list'
 require 'hexp/dom'
+
+require 'hexp/nokogiri/equality'

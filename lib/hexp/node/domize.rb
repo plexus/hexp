@@ -12,13 +12,13 @@ module Hexp
       def call
         dom::Document.new.tap do |doc|
           @doc = doc
-          doc << domize(@raw, doc)
+          doc << domize(@raw)
         end
       end
 
       private
 
-      def domize(hexp, parent)
+      def domize(hexp)
         dom::Node.new(hexp.tag.to_s, @doc).tap do |node|
           hexp.attributes.each do |key,value|
             node[key] = value
@@ -27,7 +27,7 @@ module Hexp
             if child.instance_of?(TextNode)
               node << dom::Text.new(child, @doc)
             else
-              node << domize(child, node)
+              node << domize(child)
             end
           end
         end

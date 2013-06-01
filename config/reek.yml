@@ -1,6 +1,6 @@
 ---
 Attribute:
-  enabled: true
+  enabled: false
   exclude: []
 BooleanParameter:
   enabled: true
@@ -100,5 +100,6 @@ UnusedParameters:
   exclude: []
 UtilityFunction:
   enabled: true
-  exclude: []
+  exclude:
+    - Hexp::List#initialize
   max_helper_calls: 0

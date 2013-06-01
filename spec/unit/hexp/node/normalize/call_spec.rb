@@ -58,4 +58,24 @@ describe Hexp::Node::Normalize, '#call' do
     end
   end
 
+  describe 'with an object that responds to to_hexp' do
+    let(:hexpable) {
+      Class.new do
+        def to_hexp
+          Hexp::Node[:em, "I am in your hexpz"]
+        end
+      end
+    }
+    let(:node) {
+      [:div, [ hexpable.new ] ]
+    }
+
+    it 'must expand that object' do
+      subject.children.should == Hexp::List[
+        Hexp::Node[:em, {}, Hexp::List["I am in your hexpz"] ]
+      ]
+    end
+
+  end
+
 end
