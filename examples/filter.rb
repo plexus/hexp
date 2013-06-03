@@ -1,3 +1,7 @@
+# The filter method is currently removed again, it needs to be redone using
+# depth-first rather than breadth first, and will probably be renamed to
+# rewrite.
+
 $:.unshift('/home/arne/github/hexp/lib')
 require 'hexp/h'
 
