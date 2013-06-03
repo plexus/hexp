@@ -18,4 +18,5 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'nokogiri', '~> 1.5.9'
   gem.add_dependency 'ice_nine', '~> 0.7.0'
+  gem.add_dependency 'equalizer', '~> 0.0.5'
 end
