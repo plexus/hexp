@@ -23,3 +23,5 @@ require 'hexp/list'
 require 'hexp/dom'
 
 require 'hexp/nokogiri/equality'
+
+require 'hexp/h'
