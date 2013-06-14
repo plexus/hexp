@@ -51,7 +51,8 @@ NestedIterators:
     - any?
 NilCheck:
   enabled: true
-  exclude: []
+  exclude:
+  - Hexp::Node#rewrite
 RepeatedConditional:
   enabled: true
   exclude: []
@@ -67,8 +68,10 @@ TooManyMethods:
 TooManyStatements:
   enabled: true
   exclude:
-  - each
-  max_statements: 4
+    - each
+    - Hexp::Node#rewrite
+    - Hexp::Node::Normalize#normalized_children
+  max_statements: 5
 UncommunicativeMethodName:
   enabled: true
   exclude: []

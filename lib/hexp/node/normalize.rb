@@ -71,13 +71,17 @@ module Hexp
         Hexp::List[*
           children.map do |child|
             case child
+            when Hexp::Node
+              child
             when String, TextNode
               Hexp::TextNode.new(child)
             when Array
               Hexp::Node[*child]
             else
               if child.respond_to? :to_hexp
-                Hexp::Node[*child.to_hexp]
+                response = child.to_hexp
+                raise FormatError, "to_hexp must return a Hexp::Node, got #{response.inspect}" unless response.instance_of?(Hexp::Node)
+                response
               end
             end
           end
