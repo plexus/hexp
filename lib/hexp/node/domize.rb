@@ -4,11 +4,22 @@ module Hexp
     class Domize
       attr_reader :dom
 
+      # Instanitiate a Domizer
+      #
+      # @param hexp [Hexp::Node]
+      # @param dom [Module]
+      # @api private
+      #
       def initialize(hexp, dom = Hexp::DOM)
         @raw = hexp
         @dom = dom
       end
 
+      # Turn the hexp into a DOM
+      #
+      # @return [Nokogiri::Document]
+      # @api private
+      #
       def call
         dom::Document.new.tap do |doc|
           @doc = doc

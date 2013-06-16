@@ -217,8 +217,8 @@ module Hexp
       self.children.flat_map {|child| child.rewrite(&blk)   }
                    .flat_map do |child|
         response = blk.call(child, self)
-        if response.instance_of? self.class
-          [ response ]
+        if response.respond_to? :to_hexp
+          [ response.to_hexp ]
         elsif response.respond_to? :to_ary
           if response.first.instance_of? Symbol
             [ response ]

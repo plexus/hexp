@@ -56,7 +56,7 @@ module Hexp
       #
       def children
         @raw[1..2].each do |arg|
-          return Array(arg) unless [Symbol, Hash].any?{|klz| arg.instance_of?(klz)}
+          return Hexp.Array(arg) unless [Symbol, Hash].any?{|klz| arg.instance_of?(klz)}
         end
         []
       end
@@ -75,14 +75,14 @@ module Hexp
               child
             when String, TextNode
               Hexp::TextNode.new(child)
+            when ->(ch) { ch.respond_to? :to_hexp }
+              response = child.to_hexp
+              raise FormatError, "to_hexp must return a Hexp::Node, got #{response.inspect}" unless response.instance_of?(Hexp::Node)
+              response
             when Array
               Hexp::Node[*child]
             else
-              if child.respond_to? :to_hexp
-                response = child.to_hexp
-                raise FormatError, "to_hexp must return a Hexp::Node, got #{response.inspect}" unless response.instance_of?(Hexp::Node)
-                response
-              end
+              raise FormatError, "Invalid value in Hexp literal : #{child.inspect} (#{child.class}) does not implement #to_hexp ; #{children.inspect}"
             end
           end
         ]

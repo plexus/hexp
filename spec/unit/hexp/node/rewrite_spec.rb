@@ -124,7 +124,18 @@ describe Hexp::Node, 'rewrite' do
         expect(subject).to eq H[:div, [ H[:p], H[:br] ]]
       end
     end
+  end
 
+  context 'when responding with something else than a Hexp or Array' do
+    let :blk do
+      proc do |node|
+        Object.new
+      end
+    end
+
+    it 'should raise a FormatError' do
+      expect{subject}.to raise_exception(Hexp::FormatError)
+    end
   end
 
 end

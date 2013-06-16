@@ -30,6 +30,7 @@ FeatureEnvy:
     - Hexp::Node::Normalize#normalized_children
     - Hexp::Node::PP#pp_attributes
     - Hexp::Node::PP#pp_children
+    - Hexp::Node#rewrite_children
 IrresponsibleModule:
   enabled: true
   exclude: []
@@ -47,7 +48,7 @@ LongYieldList:
 NestedIterators:
   enabled: true
   exclude: []
-  max_allowed_nesting: 1
+  max_allowed_nesting: 2
   ignore_iterators:
     - any?
 NilCheck:
@@ -77,7 +78,8 @@ TooManyStatements:
   max_statements: 5
 UncommunicativeMethodName:
   enabled: true
-  exclude: []
+  exclude:
+    - Hexp#self.Array
   reject:
   - !ruby/regexp /^[a-z]$/
   - !ruby/regexp /[0-9]$/
