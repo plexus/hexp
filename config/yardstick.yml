@@ -1,2 +1,33 @@
 ---
-threshold: 77.5
+threshold: 73.7
+rules:
+  ApiTag::Presence:
+    enabled: true
+    exclude: []
+  ApiTag::Inclusion:
+    enabled: true
+    exclude: []
+  ApiTag::ProtectedMethod:
+    enabled: true
+    exclude: []
+  ApiTag::PrivateMethod:
+    enabled: false
+    exclude: []
+  ExampleTag:
+    enabled: false
+    exclude: []
+  ReturnTag:
+    enabled: true
+    exclude: []
+  Summary::Presence:
+    enabled: true
+    exclude: []
+  Summary::Length:
+    enabled: true
+    exclude: []
+  Summary::Delimiter:
+    enabled: true
+    exclude: []
+  Summary::SingleLine:
+    enabled: true
+    exclude: []

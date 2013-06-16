@@ -6,10 +6,6 @@ module Hexp
       __getobj__.inspect
     end
 
-    def tree_walk
-      yield self
-    end
-
     def attributes
       {}.freeze
     end
@@ -17,10 +13,5 @@ module Hexp
     def pp
       inspect
     end
-
-    def to_a
-      [:text, self, Hexp::List[]]
-    end
-
   end
 end

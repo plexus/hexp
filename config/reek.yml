@@ -24,6 +24,7 @@ DuplicateMethodCall:
 FeatureEnvy:
   enabled: true
   exclude:
+    - Hexp::List#initialize
     - Hexp::Node::Domize#set_attributes
     - Hexp::Node::Normalize#children
     - Hexp::Node::Normalize#normalized_children
@@ -53,6 +54,7 @@ NilCheck:
   enabled: true
   exclude:
   - Hexp::Node#rewrite
+  - Hexp::Node#set_attr
 RepeatedConditional:
   enabled: true
   exclude: []
@@ -63,7 +65,8 @@ TooManyInstanceVariables:
   max_instance_variables: 3
 TooManyMethods:
   enabled: true
-  exclude: []
+  exclude:
+    - Hexp::Node
   max_methods: 10
 TooManyStatements:
   enabled: true

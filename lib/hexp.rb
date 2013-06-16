@@ -6,6 +6,14 @@ require 'ice_nine'
 require 'equalizer'
 
 module Hexp
+  # Deep freeze an object
+  #
+  # Delegates to IceNine
+  #
+  # @param args [Array] arguments to pass on
+  # @return Object
+  # @api private
+  #
   def self.deep_freeze(*args)
     IceNine.deep_freeze(*args)
   end

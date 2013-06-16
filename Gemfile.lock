@@ -1,10 +1,10 @@
 GIT
-  remote: git://github.com/dkubb/equalizer.git
-  revision: 7b0a30dee57ed0378df6b32e5defda64adaff0da
+  remote: git://github.com/dkubb/yardstick.git
+  revision: a2cb3c64b4c6b496709194fc94d5732704051fec
   specs:
-    equalizer (0.0.5)
-      adamantium (~> 0.0.7)
-      backports (~> 3.2, >= 3.2.0)
+    yardstick (0.9.7)
+      backports (~> 3.3, >= 3.3.0)
+      yard (~> 0.8, >= 0.8.6)
 
 GIT
   remote: https://github.com/datamapper/devtools.git
@@ -21,6 +21,15 @@ GIT
       ruby2ruby (~> 2.0.2)
       ruby_parser (~> 3.1.1)
       sexp_processor
+
+PATH
+  remote: .
+  specs:
+    hexp (0.0.1)
+      equalizer (~> 0.0.5)
+      ice_nine (~> 0.7.0)
+      nokogiri (~> 1.5.9)
+      sass (~> 3.2.9)
 
 GEM
   remote: https://rubygems.org/
@@ -41,6 +50,9 @@ GEM
       thor
     descendants_tracker (0.0.1)
     diff-lcs (1.2.4)
+    equalizer (0.0.5)
+      adamantium (~> 0.0.6)
+      backports (~> 3.0, >= 3.0.3)
     ffi (1.8.1)
     ffi-hunspell (0.3.0)
       ffi (~> 1.0)
@@ -120,6 +132,7 @@ GEM
       sexp_processor (~> 4.0)
     ruby_parser (3.1.3)
       sexp_processor (~> 4.1)
+    sass (3.2.9)
     sexp_processor (4.2.1)
     simplecov (0.7.1)
       multi_json (~> 1.0)
@@ -137,9 +150,6 @@ GEM
     yard-spellcheck (0.1.5)
       ffi-hunspell (~> 0.2)
       yard (~> 0.6)
-    yardstick (0.9.6)
-      backports (~> 3.3, >= 3.3.0)
-      yard (~> 0.8, >= 0.8.6)
 
 PLATFORMS
   ruby
@@ -148,19 +158,18 @@ DEPENDENCIES
   backports (~> 3.3, >= 3.3.0)
   coveralls (~> 0.6.6)
   devtools!
-  equalizer!
   flay (~> 2.2.0)
   flog (~> 4.0.0)
   guard (~> 1.8.0)
   guard-bundler (~> 1.0.0)
   guard-rspec (~> 2.5.4)
+  hexp!
   jruby-openssl (~> 0.8.5)
   json (~> 1.8.0)
   kramdown (~> 1.0.1)
   libnotify (~> 0.8.0)
   listen (~> 1.0.2)
   mutant (~> 0.2.20)
-  nokogiri
   pelusa (~> 0.2.2)
   rake (~> 10.0.4)
   rb-fchange (~> 0.0.6)
@@ -174,4 +183,4 @@ DEPENDENCIES
   terminal-notifier-guard (~> 1.5.3)
   yard (~> 0.8.6.1)
   yard-spellcheck (~> 0.1.5)
-  yardstick (~> 0.9.6)
+  yardstick (~> 0.9.6)!
