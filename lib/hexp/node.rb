@@ -127,6 +127,10 @@ module Hexp
       self.class::PP.new(self).call
     end
 
+    def text?
+      false
+    end
+
     # Rewrite a node tree
     #
     # Since nodes are immutable, this is the main entry point for deriving nodes
@@ -219,6 +223,8 @@ module Hexp
         response = blk.call(child, self)
         if response.respond_to? :to_hexp
           [ response.to_hexp ]
+        elsif response.respond_to? :to_str
+          [ response.to_str ]
         elsif response.respond_to? :to_ary
           if response.first.instance_of? Symbol
             [ response ]

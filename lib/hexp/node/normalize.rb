@@ -55,10 +55,14 @@ module Hexp
       # @api private
       #
       def children
-        @raw[1..2].each do |arg|
-          return Hexp.Array(arg) unless [Symbol, Hash].any?{|klz| arg.instance_of?(klz)}
+        last = @raw.last
+        if last.respond_to? :to_ary
+          last.to_ary
+        elsif @raw.count < 2 || last.instance_of?(Hash)
+          []
+        else
+          [last]
         end
-        []
       end
 
       # Normalize the third element of a hexp node, the list of children

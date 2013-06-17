@@ -24,6 +24,14 @@ module Hexp
       self
     end
 
+    def children
+      [].freeze
+    end
+
+    def text?
+      true
+    end
+
     def rewrite(&blk)
       # empty on purpose
       self

@@ -117,4 +117,5 @@ UtilityFunction:
     - Hexp::List#initialize
     - Hexp::Node::Domize#set_attributes
     - Hexp::TextNode#attributes
+    - Hexp::TextNode#children
   max_helper_calls: 0

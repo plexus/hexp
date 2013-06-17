@@ -13,12 +13,11 @@ if ENV['COVERAGE'] == 'true'
 
   SimpleCov.start do
     command_name 'spec:unit'
-
-    # add_filter 'config'
+    add_filter 'hexp/h.rb'
 
     # add_group 'Finalizer',    'lib/data_mapper/finalizer'
 
-    minimum_coverage 98.10  # 0.10 lower under JRuby
+    minimum_coverage 98.51 # so the badge rounds up to 99
   end
 
 end

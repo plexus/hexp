@@ -35,6 +35,7 @@ describe Hexp::Node, 'rewrite' do
     let :blk do
       proc do |child, parent|
         @tags << [child.tag, parent.tag]
+        nil
       end
     end
 
@@ -113,6 +114,26 @@ describe Hexp::Node, 'rewrite' do
       end
     end
 
+    context 'when responding with a String' do
+      let :hexp do
+        H[:div, [
+            [:p]
+          ]
+        ]
+      end
+
+      let :blk do
+        proc do |child|
+          "Hello"
+        end
+      end
+
+      it 'should convert it to a text node' do
+        expect(subject).to eq H[:div, [ Hexp::TextNode.new("Hello") ] ]
+      end
+    end
+
+
     context 'when responding with nil' do
       let :blk do
         proc do |node|
@@ -126,7 +147,7 @@ describe Hexp::Node, 'rewrite' do
     end
   end
 
-  context 'when responding with something else than a Hexp or Array' do
+  context 'when responding with something else than a Hexp, Array or String' do
     let :blk do
       proc do |node|
         Object.new

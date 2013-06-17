@@ -46,5 +46,9 @@ module Hexp
     def inspect
       __getobj__.inspect
     end
+
+    def to_ary
+      __getobj__
+    end
   end
 end

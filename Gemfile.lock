@@ -1,17 +1,17 @@
 GIT
+  remote: git://github.com/datamapper/devtools.git
+  revision: 00ccf924b8d662e6c28fc869a19ac1b20ecc2319
+  specs:
+    devtools (0.0.1)
+      ice_nine (~> 0.7.0)
+
+GIT
   remote: git://github.com/dkubb/yardstick.git
   revision: a2cb3c64b4c6b496709194fc94d5732704051fec
   specs:
     yardstick (0.9.7)
       backports (~> 3.3, >= 3.3.0)
       yard (~> 0.8, >= 0.8.6)
-
-GIT
-  remote: https://github.com/datamapper/devtools.git
-  revision: f0e3a3a42673266c46b983bc79a4ab6e1623bccc
-  specs:
-    devtools (0.0.1)
-      ice_nine (~> 0.7.0)
 
 GIT
   remote: https://github.com/troessner/reek.git
