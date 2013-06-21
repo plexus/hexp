@@ -40,6 +40,12 @@ module Hexp
         {}
       end
 
+      # Returns the attributes hash with key and value converted to strings
+      #
+      # @return [Hash]
+      #
+      # @api private
+      #
       def normalized_attributes
         Hash[*
           attributes.flat_map do |key, value|

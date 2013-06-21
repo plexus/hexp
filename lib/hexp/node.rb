@@ -84,6 +84,9 @@ module Hexp
 
     # Standard hexp coercion protocol, return self
     #
+    # @example
+    #   H[:p].to_hexp #=> H[:p]
+    #
     # @return [Hexp::Node] self
     # @api public
     #
@@ -104,14 +107,27 @@ module Hexp
       to_dom.to_html
     end
 
+    # Convert this node into a Nokogiri Document
+    #
+    # @example
+    #  H[:p].to_dom
+    #  #=> #<Nokogiri::HTML::Document name="document"
+    #        children=[#<Nokogiri::XML::DTD name="html">,
+    #        #<Nokogiri::XML::Element name="p">]>
+    #
+    # @return [Nokogiri::HTML::Document]
     # @api private
+    #
     def to_dom
       Domize.new(self).call
     end
 
     # Return a string representation that is close to the literal form
     #
-    # @return String
+    # @example
+    #   H[:p, {class: 'foo'}].inspect #=> "H[:p, {\"class\"=>\"foo\"}]"
+    #
+    # @return [String]
     # @api public
     #
     def inspect
@@ -120,13 +136,24 @@ module Hexp
 
     # Pretty print, a multiline representation with indentation
     #
-    # @return String
+    # @example
+    #   H[:p, [[:span], [:div]]].pp # => "H[:p, [\n  H[:span],\n  H[:div]]]"
+    #
+    # @return [String]
     # @api public
     #
     def pp
       self.class::PP.new(self).call
     end
 
+    # Is this a text node? Returns false
+    #
+    # @example
+    #   H[:p].text? #=> false
+    #
+    # @return [FalseClass]
+    # @api public
+    #
     def text?
       false
     end
@@ -210,17 +237,31 @@ module Hexp
       when 2
         set_attr(*args)
       else
-        raise ArgumentError, "wrong number of arguments, (#{arity} for 1..2)"
+        raise ArgumentError, "wrong number of arguments(#{arity} for 1..2)"
       end
     end
 
+    # Check for the presence of a class
+    #
+    # @example
+    #   H[:span, class: "banner strong"].class?("strong") #=> true
+    #
+    # @param klz [String] the name of the class to check for
+    # @return [Boolean] true if the class is present, false otherwise
+    # @api public
+    #
     def class?(klz)
       attr('class') && attr('class').split(' ').include?(klz)
     end
 
     private
 
+    # Helper for rewrite
+    #
+    # @param blk [Proc] the block for rewriting
+    # @return [Array<Hexp::Node>]
     # @api private
+    #
     def rewrite_children(&blk)
       self.children.flat_map {|child| child.rewrite(&blk)   }
                    .flat_map do |child|
@@ -243,6 +284,14 @@ module Hexp
       end
     end
 
+    # Set an attribute, used internally by #attr
+    #
+    # @param name [String|Symbol]
+    # @param value [String]
+    # @return [Hexp::Node]
+    #
+    # @api private
+    #
     def set_attr(name, value)
       if value.nil?
         new_attrs = {}
@@ -250,12 +299,13 @@ module Hexp
           new_attrs[nam] = val unless nam == name.to_s
         end
       else
-        new_attrs = attributes.merge(name.to_s => value)
+        new_attrs = attributes.merge(name.to_s => value.to_s)
       end
       self.class.new(self.tag, new_attrs, self.children)
     end
 
     class << self
+
       # Returns the class name for use in creating inspection strings
       #
       # This will return "H" if H == Hexp::Node, or "Hexp::Node" otherwise.
@@ -270,6 +320,7 @@ module Hexp
           self.name
         end
       end
+
     end
   end
 end

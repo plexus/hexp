@@ -28,6 +28,7 @@ module Hexp
     #
     # @param args [Array] individual nodes
     #
+    # @return [Hexp::List]
     # @api public
     #
     def self.[](*args)
@@ -47,6 +48,14 @@ module Hexp
       __getobj__.inspect
     end
 
+    # Internal coercion to Array
+    #
+    # @example
+    #   Hexp::List[ H[:p], H[:span] ].to_ary #=> [H[:p], H[:span]]
+    #
+    # @return [Array<Hexp::Node>]
+    # @api public
+    #
     def to_ary
       __getobj__
     end

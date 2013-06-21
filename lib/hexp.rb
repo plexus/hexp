@@ -53,6 +53,7 @@ require 'hexp/list'
 require 'hexp/dom'
 
 require 'hexp/format_error.rb'
+require 'hexp/illegal_request_error.rb'
 
 require 'hexp/nokogiri/equality'
 
@@ -60,6 +61,13 @@ require 'hexp/dsl'
 require 'hexp/h'
 
 module Hexp
+  # Inject the Hexp::DSL module into classes that include Hexp
+  #
+  # @param klazz [Class] The class that included Hexp
+  #
+  # @return [Class]
+  # @api private
+  #
   def self.included(klazz)
     klazz.send(:include, Hexp::DSL)
   end

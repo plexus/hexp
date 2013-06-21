@@ -110,7 +110,8 @@ UncommunicativeVariableName:
   accept: []
 UnusedParameters:
   enabled: true
-  exclude: []
+  exclude:
+    - Hexp::TextNode#class?
 UtilityFunction:
   enabled: true
   exclude:

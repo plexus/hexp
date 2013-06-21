@@ -2,6 +2,11 @@ module Hexp
   class Node
     # Turn nodes into DOM objects
     class Domize
+      # The resulting DOM Document
+      #
+      # @return [Nokogiri::HTML::Document]
+      # @api private
+      #
       attr_reader :dom
 
       # Instanitiate a Domizer
@@ -17,7 +22,7 @@ module Hexp
 
       # Turn the hexp into a DOM
       #
-      # @return [Nokogiri::Document]
+      # @return [Nokogiri::HTML::Document]
       # @api private
       #
       def call
@@ -29,6 +34,12 @@ module Hexp
 
       private
 
+      # Turn a Hexp::Node into a Document
+      #
+      # @param hexp [Hexp::Node]
+      # @return [Nokogiri::HTML::Document]
+      # @api private
+      #
       def domize(hexp)
         dom::Node.new(hexp.tag.to_s, @doc).tap do |node|
           set_attributes(node, hexp.attributes)
@@ -36,12 +47,26 @@ module Hexp
         end
       end
 
+      # Set attributes on a DOM node
+      #
+      # @param node [Nokogiri::XML::Element]
+      # @param attributes [Hash]
+      # @return [void]
+      # @api private
+      #
       def set_attributes(node, attributes)
         attributes.each do |key,value|
           node[key] = value
         end
       end
 
+      # Set children on the DOM node
+      #
+      # @param node [Nokogiri::XML::Element]
+      # @param children [Hexp::List]
+      # @return [void]
+      # @api private
+      #
       def set_children(node, children)
         children.each do |child|
           if child.instance_of?(TextNode)
