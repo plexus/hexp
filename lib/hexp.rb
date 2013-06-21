@@ -56,4 +56,11 @@ require 'hexp/format_error.rb'
 
 require 'hexp/nokogiri/equality'
 
+require 'hexp/dsl'
 require 'hexp/h'
+
+module Hexp
+  def self.included(klazz)
+    klazz.send(:include, Hexp::DSL)
+  end
+end
