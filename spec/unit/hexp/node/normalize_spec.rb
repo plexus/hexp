@@ -4,7 +4,7 @@ describe Hexp::Node::Normalize, '#call' do
   subject { Hexp::Node[*node] }
 
   describe 'with a single element' do
-    let (:node) { [:div] }
+    let(:node) { [:div] }
 
     it 'should treat the first as the tag' do
       subject.tag.should == :div
@@ -18,7 +18,7 @@ describe Hexp::Node::Normalize, '#call' do
   end
 
   describe 'with two parameters' do
-    let (:node) { [:div, {class: 'foo'}] }
+    let(:node) { [:div, {class: 'foo'}] }
 
     it 'should treat the first as the tag' do
       subject.tag.should == :div
