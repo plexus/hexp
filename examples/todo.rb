@@ -1,50 +1,42 @@
 $:.unshift File.expand_path('../../lib', __FILE__)
+$:.unshift File.expand_path('../../examples', __FILE__)
 
 require 'sinatra'
 require 'hexp'
+require 'widget'
 
-Entry = Struct.new(:id, :description) do
-  def to_hexp
-    H[:span, {class: :entry}, description].attr('data-entry-id', self.id)
-  end
-end
-
-class << Entry
-  def store(entry)
+class EntryStore
+  def self.store(entry)
     @counter ||= 0
     @entries ||= {}
     entry.id = (@counter+=1) unless entry.id
     @entries[entry.id] = entry
   end
 
-  def find(id)
+  def self.find(id)
     @entries[id]
   end
 
-  def all
+  def self.all
+    @entries ||= {}
     @entries.values || []
   end
 
-  def delete(id)
+  def self.delete(id)
     @entries.delete(id)
   end
 end
 
-class Layout
-  def initialize(*contents)
-    @contents = contents
-  end
+class Entry < Widget(:span)
+  attribute :id, Integer
+  attribute :description, String
 
-  def to_hexp
-    H[:html, [
-        H[:head],
-        H[:body,  @contents ]
-      ]
-    ]
+  def widget
+    [ description ]
   end
 end
 
-class List
+class EntryList
   def initialize(entries)
     @entries = entries
   end
@@ -68,53 +60,79 @@ class AddEntryForm
   end
 end
 
+class Layout
+  include Hexp
+
+  def initialize(*contents)
+    @contents = contents
+    p @contents
+  end
+
+  def to_hexp
+    H[:html, [
+        H[:head],
+        H[:body,  @contents ]
+      ]
+    ]
+  end
+end
+
 class ListPage
+  include Hexp
   TITLE = 'Todo List'
 
   def to_hexp
-    Layout.new(
-      List.new(Entry.all),
+    hexp = Layout.new(
+      EntryList.new(EntryStore.all),
       AddEntryForm.new
-    ).to_hexp
-      .rewrite(&method(:add_title))
-      .rewrite(&method(:wrap_entry_forms))
-  end
-
-  def add_title(node, parent)
-    if node.tag == :head
-      H[:head, node.attributes, node.children + [title]]
-    end
-  end
-
-  def wrap_entry_forms(node, parent)
-    if node.attr('class') == 'entry'
-      H[:form, {method: 'POST', action: "/#{node.attr('data-entry-id')}"}, [
-          node,
-          H[:input, type: 'hidden', name: '_method', value: 'DELETE'],
-          H[:input, type: 'submit', value: '-']
-        ]
-      ]
-    end
+    )
+    hexp = add_title(hexp)
+    hexp = wrap_entry_forms(hexp)
   end
 
   def title
     H[:title, TITLE]
   end
+
+  def add_title(tree)
+    tree.rewrite do |node|
+      if node.tag == :head
+        H[:head, node.attributes, node.children + [title]]
+      end
+    end
+  end
+
+  def wrap_entry_forms(tree)
+    tree.rewrite do |node|
+      if node.class? 'entry'
+        H[:form, {method: 'POST', action: "/#{node.attr('data-id')}"}, [
+            node,
+            H[:input, type: 'hidden', name: '_method', value: 'DELETE'],
+            H[:input, type: 'submit', value: '-']
+          ]
+        ]
+      end
+    end
+  end
 end
 
 get '/' do
-  ListPage.new.to_hexp.to_html
+  ListPage.new.to_html
 end
 
 post '/' do
-  @entry = Entry.new(nil, params['entry_description'])
-  Entry.store(@entry)
+  @entry = Entry.new(description: params['entry_description'])
+  EntryStore.store(@entry)
 
-  ListPage.new.to_hexp.to_html
+  ListPage.new.to_html
 end
 
 delete '/:id' do
-  Entry.delete params[:id].to_i
+  EntryStore.delete params[:id].to_i
 
-  ListPage.new.to_hexp.to_html
+  ListPage.new.to_html
+end
+
+get '/handlebars' do
+  Entry.handlebars.to_html
 end
