@@ -32,6 +32,10 @@ module Hexp
       true
     end
 
+    def class?(klz)
+      false
+    end
+
     def rewrite(&blk)
       # empty on purpose
       self

@@ -214,6 +214,10 @@ module Hexp
       end
     end
 
+    def class?(klz)
+      attr('class') && attr('class').split(' ').include?(klz)
+    end
+
     private
 
     # @api private
