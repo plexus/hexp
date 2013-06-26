@@ -3,7 +3,5 @@ module Hexp
     Document = Nokogiri::HTML::Document
     Node     = Nokogiri::XML::Node
     Text     = Nokogiri::XML::Text
-
-
   end
 end

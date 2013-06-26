@@ -42,11 +42,27 @@ module Hexp
 end
 
 require 'hexp/version'
+require 'hexp/dsl'
+
+module Hexp
+  # Inject the Hexp::DSL module into classes that include Hexp
+  #
+  # @param klazz [Class] The class that included Hexp
+  #
+  # @return [Class]
+  # @api private
+  #
+  def self.included(klazz)
+    klazz.send(:include, Hexp::DSL)
+  end
+end
 
 require 'hexp/node'
 require 'hexp/node/normalize'
 require 'hexp/node/domize'
 require 'hexp/node/pp'
+require 'hexp/node/rewriter'
+require 'hexp/node/selector'
 
 require 'hexp/text_node'
 require 'hexp/list'
@@ -57,8 +73,8 @@ require 'hexp/illegal_request_error.rb'
 
 require 'hexp/nokogiri/equality'
 
-require 'hexp/dsl'
 require 'hexp/h'
+<<<<<<< HEAD
 
 module Hexp
   # Inject the Hexp::DSL module into classes that include Hexp
@@ -95,3 +111,16 @@ module Hexp
 end
 
 require 'hexp/builder'
+
+module Hexp
+  # Inject the Hexp::DSL module into classes that include Hexp
+  #
+  # @param klazz [Class] The class that included Hexp
+  #
+  # @return [Class]
+  # @api private
+  #
+  def self.included(klazz)
+    klazz.send(:include, Hexp::DSL)
+  end
+end
