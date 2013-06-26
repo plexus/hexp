@@ -4,7 +4,7 @@ module Hexp
     class Domize
       DEFAULT_OPTIONS = {
         :include_doctype => true
-      }
+      }.freeze
 
       # The resulting DOM Document
       #
