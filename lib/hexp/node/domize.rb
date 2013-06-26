@@ -2,6 +2,10 @@ module Hexp
   class Node
     # Turn nodes into DOM objects
     class Domize
+      DEFAULT_OPTIONS = {
+        :include_doctype => true
+      }.freeze
+
       # The resulting DOM Document
       #
       # @return [Nokogiri::HTML::Document]
@@ -12,12 +16,13 @@ module Hexp
       # Instanitiate a Domizer
       #
       # @param hexp [Hexp::Node]
-      # @param dom [Module]
+      # @param options [Hash] :include_doctype defaults to true
       # @api private
       #
-      def initialize(hexp, dom = Hexp::DOM)
-        @raw = hexp
-        @dom = dom
+      def initialize(hexp, options = {})
+        @dom     = Hexp::DOM
+        @raw     = hexp
+        @options = DEFAULT_OPTIONS.merge(options).freeze
       end
 
       # Turn the hexp into a DOM
@@ -26,9 +31,14 @@ module Hexp
       # @api private
       #
       def call
-        dom::Document.new.tap do |doc|
-          @doc = doc
-          doc << domize(@raw)
+        @doc  = dom::Document.new
+        @root = domize(@raw)
+        @doc << @root
+
+        if @options[:include_doctype]
+          @doc
+        else
+          @root
         end
       end
 

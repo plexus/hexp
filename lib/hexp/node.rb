@@ -103,8 +103,8 @@ module Hexp
     # @return [String]
     # @api public
     #
-    def to_html
-      to_dom.to_html
+    def to_html(options = {})
+      to_dom(options).to_html
     end
 
     # Convert this node into a Nokogiri Document
@@ -118,8 +118,8 @@ module Hexp
     # @return [Nokogiri::HTML::Document]
     # @api private
     #
-    def to_dom
-      Domize.new(self).call
+    def to_dom(options = {})
+      Domize.new(self, options).call
     end
 
     # Return a string representation that is close to the literal form
@@ -203,14 +203,12 @@ module Hexp
     # @return [Hexp::Node] The rewritten tree
     # @api public
     #
-    def rewrite(&blk)
-      return to_enum(:rewrite) unless block_given?
+    def rewrite(&block)
+      Rewriter.new(self, block)
+    end
 
-      self.class.new(
-        tag,
-        attributes,
-        rewrite_children(&blk)
-      )
+    def select(&block)
+      Selector.new(self, block)
     end
 
     # Attribute getter/setter
@@ -255,34 +253,6 @@ module Hexp
     end
 
     private
-
-    # Helper for rewrite
-    #
-    # @param blk [Proc] the block for rewriting
-    # @return [Array<Hexp::Node>]
-    # @api private
-    #
-    def rewrite_children(&blk)
-      self.children.flat_map {|child| child.rewrite(&blk)   }
-                   .flat_map do |child|
-        response = blk.call(child, self)
-        if response.respond_to? :to_hexp
-          [ response.to_hexp ]
-        elsif response.respond_to? :to_str
-          [ response.to_str ]
-        elsif response.respond_to? :to_ary
-          if response.first.instance_of? Symbol
-            [ response ]
-          else
-            response
-          end
-        elsif response.nil?
-          [ child ]
-        else
-          raise FormatError, "invalid rewrite response : #{response.inspect}, expected #{self.class} or Array, got #{response.class}"
-        end
-      end
-    end
 
     # Set an attribute, used internally by #attr
     #

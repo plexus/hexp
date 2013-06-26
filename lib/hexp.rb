@@ -42,23 +42,7 @@ module Hexp
 end
 
 require 'hexp/version'
-
-require 'hexp/node'
-require 'hexp/node/normalize'
-require 'hexp/node/domize'
-require 'hexp/node/pp'
-
-require 'hexp/text_node'
-require 'hexp/list'
-require 'hexp/dom'
-
-require 'hexp/format_error.rb'
-require 'hexp/illegal_request_error.rb'
-
-require 'hexp/nokogiri/equality'
-
 require 'hexp/dsl'
-require 'hexp/h'
 
 module Hexp
   # Inject the Hexp::DSL module into classes that include Hexp
@@ -72,3 +56,21 @@ module Hexp
     klazz.send(:include, Hexp::DSL)
   end
 end
+
+require 'hexp/node'
+require 'hexp/node/normalize'
+require 'hexp/node/domize'
+require 'hexp/node/pp'
+require 'hexp/node/rewriter'
+require 'hexp/node/selector'
+
+require 'hexp/text_node'
+require 'hexp/list'
+require 'hexp/dom'
+
+require 'hexp/format_error.rb'
+require 'hexp/illegal_request_error.rb'
+
+require 'hexp/nokogiri/equality'
+
+require 'hexp/h'
