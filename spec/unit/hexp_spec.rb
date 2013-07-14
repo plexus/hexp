@@ -22,5 +22,12 @@ describe Hexp, 'Array' do
       expect(Hexp.Array(array_like)).to eq([1,2,3])
     end
   end
+end
 
+describe Hexp, 'build' do
+  it 'should delegate to Hexp::Builder.new' do
+    block = proc {}
+    expect(Hexp::Builder).to receive(:new).with(:div, class: 'moambe', &block)
+    Hexp.build(:div, class: 'moambe', &block)
+  end
 end

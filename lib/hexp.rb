@@ -71,4 +71,27 @@ module Hexp
   def self.included(klazz)
     klazz.send(:include, Hexp::DSL)
   end
+
+  # Use builder syntax to create a Hexp
+  #
+  # (see Hexp::Builder)
+  #
+  # @example
+  #   list = Hexp.build do
+  #     ul do
+  #      3.times do |i|
+  #        li i.to_s
+  #      end
+  #     end
+  #   end
+  #
+  # @param args [Array]
+  # @return [Hexp::Builder]
+  # @api public
+  #
+  def self.build(*args, &block)
+    Hexp::Builder.new(*args, &block)
+  end
 end
+
+require 'hexp/builder'

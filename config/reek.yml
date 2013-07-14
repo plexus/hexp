@@ -10,7 +10,8 @@ ClassVariable:
   exclude: []
 ControlParameter:
   enabled: true
-  exclude: []
+  exclude:
+    - Hexp::Builder#initialize
 DataClump:
   enabled: true
   exclude: []
@@ -75,6 +76,7 @@ TooManyStatements:
     - each
     - Hexp::Node#rewrite
     - Hexp::Node::Normalize#normalized_children
+    - Hexp::Builder#tag!
   max_statements: 5
 UncommunicativeMethodName:
   enabled: true

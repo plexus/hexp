@@ -19,7 +19,6 @@ if ENV['COVERAGE'] == 'true'
 
     minimum_coverage 98.51 # so the badge rounds up to 99
   end
-
 end
 
 require 'shared_helper'
