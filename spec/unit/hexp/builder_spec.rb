@@ -44,7 +44,7 @@ describe Hexp::Builder do
     it 'should evaluate in the context of the builder' do
       this = self
       Hexp::Builder.new do
-        this.expect(Hexp::Builder === self).to this.be_true
+        this.expect(::Hexp::Builder === self).to this.be_true
       end
     end
 
@@ -62,7 +62,7 @@ describe Hexp::Builder do
     it 'should allow inserting Hexpable values with <<' do
       hexp = Hexp::Builder.new do
         div do |builder|
-          builder << H[:span]
+          builder << ::H[:span]
         end
       end.to_hexp
       expect(hexp).to eq(H[:div, H[:span]])

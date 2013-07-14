@@ -1,15 +1,15 @@
 language: ruby
 before_install: gem install bundler
 bundler_args: --without yard guard benchmarks
-script: "bundle exec rake ci:travis_metrics"
+script: "bundle exec rake ci:travis"
 rvm:
   - 1.9.2
   - 1.9.3
   - 2.0.0
   - jruby-19mode
   - jruby-head
-disabled:
   - ruby-head
+disabled:
   - rbx-19mode
 notifications:
   email:

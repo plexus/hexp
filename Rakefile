@@ -7,7 +7,7 @@ Devtools.init_rake_tasks
 # some other time
 namespace :ci do
   desc 'Run metrics (except mutant, rubocop) and spec'
-  task travis_metrics: %w[
+  task travis: %w[
     metrics:coverage
     spec:integration
     metrics:yardstick:verify
