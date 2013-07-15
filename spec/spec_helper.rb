@@ -17,7 +17,7 @@ if ENV['COVERAGE'] == 'true'
 
     # add_group 'Finalizer',    'lib/data_mapper/finalizer'
 
-    minimum_coverage 98.51 # so the badge rounds up to 99
+    minimum_coverage 99.5
   end
 end
 

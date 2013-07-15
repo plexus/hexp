@@ -25,7 +25,7 @@ module Hexp
       if tag
         tag!(tag, *args, &block)
       else
-        _process(&block)
+        _process(&block) if block
       end
     end
 
@@ -67,11 +67,30 @@ module Hexp
       if @stack.length > 1
         node = @stack.pop
         @stack.last[2] << node
+        NodeBuilder.new(node, self)
+      else
+        NodeBuilder.new(@stack.last, self)
       end
-      nil
     end
 
     alias method_missing tag!
+
+    # Add a text node to the tree
+    #
+    # @example
+    #   hexp = Hexp.build do
+    #     span do
+    #       text! 'Not all who wander are lost'
+    #     end
+    #   end
+    #
+    # @param text [String] the text to add
+    # @api public
+    #
+    def text!(text)
+      _raise_if_empty! "Hexp::Builder needs a root element to add text elements to"
+      @stack.last[2] << text.to_s
+    end
 
     # Add Hexp objects to the current tag
     #
@@ -114,13 +133,9 @@ module Hexp
     # @api public
     #
     def to_hexp
-      if @stack.empty?
-        ::Kernel.raise ::Hexp::FormatError, "Hexp::Builder was called without a root element."
-      end
+      _raise_if_empty!
       ::Hexp::Node[*@stack.last]
     end
-
-    private
 
     # Call the block, with a specific value of 'self'
     #
@@ -144,6 +159,59 @@ module Hexp
       end
     end
 
+    # Allow setting HTML classes through method calls
+    #
+    # @example
+    #   Hexp.build do
+    #     div.miraculous.wondrous do
+    #       hr
+    #     end
+    #   end
+    #
+    # @api private
+    #
+    class NodeBuilder
+      # @param node [Array] (tag, attrs, children) triplet
+      # @param builder [Hexp::Builder] The parent builder to delegate back
+      # @api private
+      #
+      def initialize(node, builder)
+        @node, @builder = node, builder
+      end
+
+      # Used for specifying CSS class names
+      #
+      # @example
+      #   Hexp.build { div.strong.warn }.to_hexp
+      #   # => H[:div, class: 'strong warn']
+      #
+      # @param sym [Symbol] the class to add
+      # @api public
+      #
+      def method_missing(sym, &block)
+        attrs = @node[1]
+        @node[1] = attrs.merge class: [attrs[:class], sym.to_s].compact.join(' ')
+        @builder._process &block if block
+        self
+      end
+    end
+
+    # Return a debugging representation
+    #
+    # Hexp is intended for HTML, so it shouldn't be a problem that this is an
+    # actual method. It really helps for debugging or when playing around in
+    # irb. If you really want an `<inspect>` tag, use `tag!(:inspect)`.
+    #
+    # @example
+    #   p Hexp.build { div }
+    #
+    # @return [String]
+    # @api public
+    #
+    def inspect
+      "#<Hexp::Builder #{@stack.empty? ? '[]' :to_hexp.inspect}>"
+    end
+
     # Gratefully borrowed from Builder.
     # I'd like to benchmark this singleton class based version vs
     # adding the methods to the class directly, before putting this in.
@@ -160,5 +228,11 @@ module Hexp
     #     end
     #   end
     # end
+
+    private
+
+    def _raise_if_empty!(text = 'Hexp::Builder is lacking a root element.')
+      ::Kernel.raise ::Hexp::FormatError, text if @stack.empty?
+    end
   end
 end

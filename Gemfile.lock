@@ -17,7 +17,7 @@ GIT
 PATH
   remote: .
   specs:
-    hexp (0.0.1)
+    hexp (0.1.0)
       equalizer (~> 0.0.5)
       ice_nine (~> 0.8.0)
       nokogiri (~> 1.6.0)

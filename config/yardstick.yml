@@ -1,5 +1,5 @@
 ---
-threshold: 98.7
+threshold: 98.4
 rules:
   ApiTag::Presence:
     enabled: true
@@ -15,7 +15,14 @@ rules:
     exclude: []
   ExampleTag:
     enabled: false
-    exclude: []
+    exclude:
+      - Hexp::Nokogiri::Equality#call
+      - Hexp::Nokogiri::Equality#equal_class?
+      - Hexp::Nokogiri::Equality#equal_name?
+      - Hexp::Nokogiri::Equality#equal_children?
+      - Hexp::Nokogiri::Equality#compare_children
+      - Hexp::Nokogiri::Equality#equal_attributes?
+      - Hexp::Nokogiri::Equality#equal_text?
   ReturnTag:
     enabled: true
     exclude: []

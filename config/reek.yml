@@ -55,11 +55,12 @@ NestedIterators:
 NilCheck:
   enabled: true
   exclude:
-  - Hexp::Node#rewrite
-  - Hexp::Node#set_attr
+    - Hexp::Node#rewrite
+    - Hexp::Node#set_attr
 RepeatedConditional:
   enabled: true
-  exclude: []
+  exclude:
+    - Hexp::Builder
   max_ifs: 1
 TooManyInstanceVariables:
   enabled: true

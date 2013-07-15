@@ -74,4 +74,28 @@ describe Hexp::Builder do
       }.to raise_exception(Hexp::FormatError)
     end
   end
+
+  describe Hexp::Builder::NodeBuilder do
+    it 'lets you add CSS classes through method calls' do
+      hexp = Hexp::Builder.new do
+        div.milky.ponderous do
+          blink 'My gracious, how wondrous'
+        end
+      end.to_hexp
+      expect(hexp).to eq(H[:div, {class: 'milky ponderous'}, H[:blink, 'My gracious, how wondrous']])
+    end
+  end
+
+  it 'should add text nodes with text!' do
+    hexp = Hexp::Builder.new do
+      div do
+        text! 'Babyface, bijou, scharmninkel'
+      end
+    end.to_hexp
+    expect(hexp).to eq(H[:div, 'Babyface, bijou, scharmninkel'])
+  end
+
+  it 'should return an inspection string' do
+    expect(Hexp::Builder.new { div }.inspect).to eq "#<Hexp::Builder H[:div]>"
+  end
 end
