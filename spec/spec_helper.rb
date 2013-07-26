@@ -15,8 +15,6 @@ if ENV['COVERAGE'] == 'true'
     command_name 'spec:unit'
     add_filter 'hexp/h.rb'
 
-    # add_group 'Finalizer',    'lib/data_mapper/finalizer'
-
     minimum_coverage 99.5
   end
 end
