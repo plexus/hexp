@@ -9,8 +9,16 @@ rvm:
   - jruby-19mode
   - jruby-head
   - ruby-head
-disabled:
   - rbx-19mode
+matrix:
+  include:
+    - rvm: jruby-19mode
+      env: JRUBY_OPTS="$JRUBY_OPTS --debug"
+    - rvm: jruby-head
+      env: JRUBY_OPTS="$JRUBY_OPTS --debug"
+  allow_failures:
+    - rvm: ruby-head
+    - rvm: rbx-19mode
 notifications:
   email:
     recipients:
