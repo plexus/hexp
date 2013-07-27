@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Hexp::Node, 'rewrite' do
-  subject { hexp.rewrite(&blk) }
+  subject { hexp.rewrite(&blk).to_hexp }
   let :hexp do
     H[:div, [
         [:a],
@@ -12,17 +12,18 @@ describe Hexp::Node, 'rewrite' do
   end
 
   context 'without a block' do
+    subject { hexp.rewrite(&blk) }
     let(:blk) { nil }
 
-    it 'returns an Enumerator' do
-      expect(subject).to be_instance_of(Enumerator)
+    it 'returns a Rewriter' do
+      expect(subject).to be_instance_of(Hexp::Node::Rewriter)
     end
   end
 
   context 'with a block that returns [child]' do
     let(:blk) { proc {|child, parent| [child] } }
 
-    it 'should return an identical hexp' do
+    it 'should return an identical hexpable' do
       expect(subject).to eq(hexp)
     end
   end

@@ -8,19 +8,27 @@ module Hexp
       end
 
       def to_hexp
-        H[
+        @hexp ||= H[
           @node.tag,
           @node.attributes,
-          rewrite_children
+          @block ? rewrite_children : @node.children
         ]
       end
 
       def attr(name, value)
-        Rewriter.new(@node, ->(node, parent) { node = @block.(node, parent) ; node.attr(name, value) if node } )
+        Rewriter.new(@node, ->(node, parent) {
+            node = @block.(node, parent)
+            node.attr(name, value) if node
+          }
+        )
       end
 
       def wrap(tag, attributes = {})
-        Rewriter.new(@node, ->(node, parent) { node = @block.(node, parent) ; H[tag, attributes, [node]] if node } )
+        Rewriter.new(@node, ->(node, parent) {
+            node = @block.(node, parent)
+            H[tag, attributes, [node]] if node
+          }
+        )
       end
 
       private
@@ -34,7 +42,7 @@ module Hexp
       def rewrite_children
         @node.children
           .flat_map {|child| child.rewrite &@block   }
-          .flat_map {|child| coerce_rewrite_response(@block.(child, @node)) || [child] }
+          .flat_map {|child| coerce_rewrite_response(@block.(child.to_hexp, @node)) || [child] }
       end
 
       def coerce_rewrite_response(response)

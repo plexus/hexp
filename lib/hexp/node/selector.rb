@@ -9,7 +9,11 @@ module Hexp
 
       def rewrite(&block)
         @node.rewrite do |node, parent|
-          block.(node, parent) if @select_block.(node)
+          if @select_block.(node)
+            block.(node, parent)
+          else
+            [node]
+          end
         end
       end
 
