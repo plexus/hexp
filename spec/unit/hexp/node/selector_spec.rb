@@ -38,12 +38,12 @@ describe Hexp::Node::Selector do
     let(:hexp) { H[:div] }
 
     it 'should be lazy' do
-      block.should_not_receive(:call)
+      expect(block).to_not receive(:call)
       selector
     end
 
     it 'should yield the root element when realized' do
-      block.should_receive(:call).once.with(H[:div])
+      expect(block).to receive(:call).once.with(H[:div])
       selector.each {}
     end
   end
