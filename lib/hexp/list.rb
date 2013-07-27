@@ -57,5 +57,26 @@ module Hexp
     def to_ary
       __getobj__
     end
+
+    # Value and type equality
+    #
+    # Hexp::List is mostly interchangeable with a plain Array, and so equality
+    # with `==` delegates to the underlying array, making `Hexp::List[] == []`
+    # true.
+    #
+    # If you want a stronger comparison, than this version will compare both
+    # the value (in this case : contents), and the type.
+    #
+    # @example
+    #   H[:div, [[:span]]].children == [H[:span]]             #=> true
+    #   H[:div, [[:span]]].children.eql? [H[:span]]           #=> false
+    #   H[:div, [[:span]]].children.eql? Hexp::List[H[:span]] #=> true
+    #
+    # @param other [Object] Object to compare with
+    # @return [Boolean]
+    #
+    def eql?(other)
+      self == other && self.class == other.class
+    end
   end
 end

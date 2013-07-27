@@ -1,19 +1,19 @@
 require 'spec_helper'
 
 describe Hexp::Node::Normalize, '#call' do
-  subject { Hexp::Node[*node] }
+  subject(:normalized) { Hexp::Node[*node] }
 
   describe 'with a single element' do
     let(:node) { [:div] }
 
     it 'should treat the first as the tag' do
-      subject.tag.should == :div
+      expect(normalized.tag).to eq :div
     end
     it 'should set an empty attribute list' do
-      subject.attributes.should == {}
+      expect(normalized.attributes).to eq Hash[]
     end
     it 'should set an empty children list' do
-      subject.children.should == Hexp::List[]
+      expect(normalized.children).to eql Hexp::List[]
     end
   end
 
@@ -75,7 +75,13 @@ describe Hexp::Node::Normalize, '#call' do
         Hexp::Node[:em, {}, Hexp::List["I am in your hexpz"] ]
       ]
     end
+  end
 
+  context 'with a nil in the child list' do
+    let(:node) { [:div, [nil]] }
+    it 'should raise an exception' do
+      expect{normalized}.to raise_exception(Hexp::FormatError)
+    end
   end
 
 end
