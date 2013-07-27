@@ -1,7 +1,8 @@
 require 'delegate'
 require 'forwardable'
 
-require 'nokogiri'
+require 'nokogiri' # TODO => replace with Builder
+require 'sass'
 require 'ice_nine'
 require 'equalizer'
 
@@ -84,6 +85,7 @@ require 'hexp/node/domize'
 require 'hexp/node/pp'
 require 'hexp/node/rewriter'
 require 'hexp/node/selector'
+require 'hexp/node/css_selector'
 
 require 'hexp/text_node'
 require 'hexp/list'
@@ -92,7 +94,8 @@ require 'hexp/dom'
 require 'hexp/format_error.rb'
 require 'hexp/illegal_request_error.rb'
 
-require 'hexp/nokogiri/equality'
+require 'hexp/nokogiri/equality' # TODO => replace this with equivalent-xml
+require 'hexp/sass/selector_parser'
 
 require 'hexp/h'
 
