@@ -19,7 +19,8 @@ DataClump:
   min_clump_size: 2
 DuplicateMethodCall:
   enabled: true
-  exclude: []
+  exclude:
+    - Hexp::CssSelector::Parser#rewrite_simple
   max_calls: 2
   allow_calls: []
 FeatureEnvy:
@@ -33,6 +34,8 @@ FeatureEnvy:
     - Hexp::Node::PP#pp_children
     - Hexp::Node#rewrite_children
     - Hexp::Node::Rewriter#coerce_rewrite_response
+    - Hexp::CssSelector::Parser#rewrite_simple
+    - Hexp::CssSelector::CommaSequence#matches?
 IrresponsibleModule:
   enabled: true
   exclude: []
@@ -68,7 +71,7 @@ TooManyInstanceVariables:
   enabled: true
   exclude:
     - Hexp::Node::Domize
-  max_instance_variables: 3
+  max_instance_variables: 4
 TooManyMethods:
   enabled: true
   exclude:

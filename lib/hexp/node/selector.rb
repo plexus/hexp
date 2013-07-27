@@ -28,8 +28,6 @@ module Hexp
         @node.rewrite do |node, parent|
           if @select_block.(node)
             block.(node, parent)
-          else
-            [node]
           end
         end
       end

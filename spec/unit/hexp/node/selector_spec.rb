@@ -26,10 +26,20 @@ describe Hexp::Node::Selector do
     describe 'wrap' do
       let(:hexp) { H[:ul, [[:a, href: 'foo'], [:a, href: 'bar']]] }
       let(:block) { proc {|el| el.tag == :a} }
+
       it 'should be able to wrap element' do
         expect(selector.wrap(:li).to_hexp).to eq(
            H[:ul, [[:li, H[:a, href: 'foo']], [:li, H[:a, href: 'bar']]]]
         )
+      end
+    end
+
+    describe 'rewrite' do
+      let(:hexp) { H[:ul, [[:a, href: 'foo'], [:span]]] }
+      let(:block) { proc {|el| el.tag == :a} }
+
+      it 'should work on matching elements, and skip the rest' do
+        expect(selector.rewrite{ H[:br] }.to_hexp).to eq H[:ul, [[:br], [:span]]]
       end
     end
   end
