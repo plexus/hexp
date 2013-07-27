@@ -1,5 +1,10 @@
 http://begriffs.github.io/showpiece/
 
+TODO
+====
+* Rename Hexp::Node to Hexp::Element
+* Rename Selector to Selection
+
 Issues
 ======
 

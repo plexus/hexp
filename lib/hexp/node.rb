@@ -203,8 +203,12 @@ module Hexp
     # @return [Hexp::Node] The rewritten tree
     # @api public
     #
-    def rewrite(&block)
-      Rewriter.new(self, block)
+    def rewrite(css_selector = nil, &block)
+      if css_selector
+        CssSelection.new(self, css_selector).rewrite(&block)
+      else
+        Rewriter.new(self, block)
+      end
     end
 
     def select(&block)

@@ -20,14 +20,26 @@ module Hexp
         yield @node if node_matches?
       end
 
+      def rewrite(&block)
+        new_node = H[
+          @node.tag,
+          @node.attributes,
+          @node.children.flat_map do |child|
+            self.class.new(child, next_comma_sequence).rewrite &block
+          end
+        ]
+        node_matches? ? block.call(new_node) : new_node
+      end
+
       private
 
       def comma_sequence
-        @comma_sequence ||= if @css_selector.is_a? CssSelector::CommaSequence
-                              @css_selector
-                            else
-                              CssSelector::Parser.call(@css_selector)
-                            end
+        @comma_sequence ||= coerce_to_comma_sequence(@css_selector)
+      end
+
+      def coerce_to_comma_sequence(css_selector)
+        return css_selector if css_selector.is_a? CssSelector::CommaSequence
+        CssSelector::Parser.call(@css_selector)
       end
 
       def node_matches?
