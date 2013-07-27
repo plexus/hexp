@@ -1,5 +1,10 @@
 module Hexp
   class Node
+    # Create a new Hexp node based on an existing node
+    #
+    # Rewriting in this case means iterating over the whole Hexp tree, and for
+    # each element providing zero or more elements to replace it with.
+    #
     class Rewriter
       include Hexp
 
