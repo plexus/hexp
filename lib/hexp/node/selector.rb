@@ -32,9 +32,10 @@ module Hexp
       def each(&block)
         return to_enum(:each) unless block_given?
 
-        @node.rewrite do |node|
-          yield node if @select_block.(node)
+        @node.children.each do |child|
+          child.select(&@select_block).each(&block)
         end
+        yield @node if @select_block.(@node)
       end
     end
   end

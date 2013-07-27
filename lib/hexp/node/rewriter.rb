@@ -15,22 +15,6 @@ module Hexp
         ]
       end
 
-      def attr(name, value)
-        Rewriter.new(@node, ->(node, parent) {
-            node = @block.(node, parent)
-            node.attr(name, value) if node
-          }
-        )
-      end
-
-      def wrap(tag, attributes = {})
-        Rewriter.new(@node, ->(node, parent) {
-            node = @block.(node, parent)
-            H[tag, attributes, [node]] if node
-          }
-        )
-      end
-
       private
 
       # Helper for rewrite

@@ -249,7 +249,7 @@ module Hexp
     # @api public
     #
     def class?(klz)
-      attr('class') && attr('class').split(' ').include?(klz)
+      attr('class') && attr('class').split(' ').include?(klz.to_s)
     end
 
     private

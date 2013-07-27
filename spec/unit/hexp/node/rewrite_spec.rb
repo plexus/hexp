@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Hexp::Node, 'rewrite' do
-  subject { hexp.rewrite(&blk).to_hexp }
+  subject(:rewriter) { Hexp::Node::Rewriter.new(hexp, block) }
   let :hexp do
     H[:div, [
         [:a],
@@ -12,8 +12,8 @@ describe Hexp::Node, 'rewrite' do
   end
 
   context 'without a block' do
-    subject { hexp.rewrite(&blk) }
-    let(:blk) { nil }
+    subject { hexp.rewrite(&block) }
+    let(:block) { nil }
 
     it 'returns a Rewriter' do
       expect(subject).to be_instance_of(Hexp::Node::Rewriter)
@@ -21,10 +21,10 @@ describe Hexp::Node, 'rewrite' do
   end
 
   context 'with a block that returns [child]' do
-    let(:blk) { proc {|child, parent| [child] } }
+    let(:block) { proc {|child, parent| [child] } }
 
     it 'should return an identical hexpable' do
-      expect(subject).to eq(hexp)
+      expect(subject.to_hexp).to eq(hexp)
     end
   end
 
@@ -33,7 +33,7 @@ describe Hexp::Node, 'rewrite' do
       H[:span, [super()]]
     end
 
-    let :blk do
+    let :block do
       proc do |child, parent|
         @tags << [child.tag, parent.tag]
         nil
@@ -42,13 +42,13 @@ describe Hexp::Node, 'rewrite' do
 
     it 'should traverse depth-first' do
       @tags = []
-      subject
+      rewriter.to_hexp
       expect(@tags).to eq([[:a, :div], [:p, :div], [:br, :div], [:div, :span]])
     end
   end
 
   context 'when adding nodes' do
-    let :blk do
+    let :block do
       proc do |child, parent|
         raise 'got my own node back' if child.tag == :blockquote
         # wrap paragraphs in a <blockquote>
@@ -61,7 +61,7 @@ describe Hexp::Node, 'rewrite' do
     end
 
     it 'should not pass those nodes again to the block' do
-      subject.should == H[:div, [
+      rewriter.to_hexp.should == H[:div, [
           [:a],
           [:blockquote, [
               [:p]
@@ -78,7 +78,7 @@ describe Hexp::Node, 'rewrite' do
       H[:parent, [[:child]]]
     end
 
-    let :blk do
+    let :block do
       proc do |child|
         expect(child).to eq(H[:child])
         [child]
@@ -86,32 +86,32 @@ describe Hexp::Node, 'rewrite' do
     end
 
     it 'should receive the child node as its argument' do
-      subject
+      rewriter.to_hexp
     end
   end
 
   describe 'block response types' do
     context 'when responding with a single node' do
-      let :blk do
+      let :block do
         proc do |child|
           H[:br]
         end
       end
 
       it 'should replace the existing node' do
-        expect(subject).to eq H[:div, [ [:br] ]*3 ]
+        expect(rewriter.to_hexp).to eq H[:div, [ [:br] ]*3 ]
       end
     end
 
     context 'when responding with an array that starts with a Symbol' do
-      let :blk do
+      let :block do
         proc do |child|
           [:br, {class: 'foo'} ]
         end
       end
 
       it 'should treat it as a node and replace the existing one' do
-        expect(subject).to eq H[:div, [ [:br, {'class' => 'foo'}] ]*3 ]
+        expect(rewriter.to_hexp).to eq H[:div, [ [:br, {'class' => 'foo'}] ]*3 ]
       end
     end
 
@@ -123,40 +123,40 @@ describe Hexp::Node, 'rewrite' do
         ]
       end
 
-      let :blk do
+      let :block do
         proc do |child|
           "Hello"
         end
       end
 
       it 'should convert it to a text node' do
-        expect(subject).to eq H[:div, [ Hexp::TextNode.new("Hello") ] ]
+        expect(rewriter.to_hexp).to eq H[:div, [ Hexp::TextNode.new("Hello") ] ]
       end
     end
 
 
     context 'when responding with nil' do
-      let :blk do
+      let :block do
         proc do |node|
           [] if node.tag == :a
         end
       end
 
       it 'should keep the original node' do
-        expect(subject).to eq H[:div, [ H[:p], H[:br] ]]
+        expect(rewriter.to_hexp).to eq H[:div, [ H[:p], H[:br] ]]
       end
     end
   end
 
   context 'when responding with something else than a Hexp, Array or String' do
-    let :blk do
+    let :block do
       proc do |node|
         Object.new
       end
     end
 
     it 'should raise a FormatError' do
-      expect{subject}.to raise_exception(Hexp::FormatError)
+      expect{rewriter.to_hexp}.to raise_exception(Hexp::FormatError)
     end
   end
 

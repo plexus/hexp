@@ -1,9 +1,7 @@
 module Hexp
   # A list of nodes
   #
-  #
-  class List < SimpleDelegator
-    include Equalizer.new(:__getobj__)
+  class List < DelegateClass(Array)
 
     # Create new Hexp::List
     #

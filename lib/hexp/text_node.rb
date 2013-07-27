@@ -6,7 +6,7 @@ module Hexp
   # Strings used inside Hexp literals like `H[:span, "Hi!"]` automatically get
   # converted to `TextNode` instances, so there is usually no reason to instantiate
   # these yourself.
-  class TextNode < SimpleDelegator
+  class TextNode < DelegateClass(String)
     # Inspect the TextNode
     #
     # This delegates to the underlying String, making it
@@ -162,6 +162,10 @@ module Hexp
     #
     def rewrite(&blk)
       self
+    end
+
+    def select(&block)
+      Node::Selector.new(self, block)
     end
   end
 end
