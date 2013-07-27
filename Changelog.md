@@ -1,4 +1,7 @@
 ### Development
-[full changelog](http://github.com/plexus/hexp/compare/v0.0.1...master)
+[full changelog](http://github.com/plexus/hexp/compare/v0.2.0...master)
 
-* Add Hexp.build for constructing Hexp objects with builder-like syntax
+### v0.2.0
+
+* introduce Hexp.build for creating Hexp::Node objects using Builder syntax
+* introduce CSS selectors to selectively iterate over parts of a tree
