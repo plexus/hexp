@@ -85,11 +85,15 @@ require 'hexp/node/domize'
 require 'hexp/node/pp'
 require 'hexp/node/rewriter'
 require 'hexp/node/selector'
-require 'hexp/node/css_selector'
+require 'hexp/node/css_selection'
 
 require 'hexp/text_node'
 require 'hexp/list'
 require 'hexp/dom'
+
+require 'hexp/css_selector'
+require 'hexp/css_selector/sass_parser'
+require 'hexp/css_selector/parser'
 
 require 'hexp/format_error.rb'
 require 'hexp/illegal_request_error.rb'

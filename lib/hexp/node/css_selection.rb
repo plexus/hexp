@@ -1,16 +1,16 @@
 module Hexp
   class Node
-    class CssSelector < Selector
+    class CssSelection < Selector
       attr_reader :comma_sequence
       private :comma_sequence
 
       def initialize(node, css_selector)
         @node = node
 
-        if css_selector.is_a? ::Sass::Selector::CommaSequence
+        if css_selector.is_a? CssSelector::CommaSequence
           @comma_sequence = css_selector
         else
-          @comma_sequence = Hexp::Sass::SelectorParser.call(css_selector)
+          @comma_sequence = CssSelector::Parser.call(css_selector)
         end
       end
 
@@ -24,9 +24,9 @@ module Hexp
       # returns a new commasequence with the parts removed that have been consumed by matching
       # against this node. If no part matches, return nil
       def next_comma_sequence
-        @next_comma_sequence = ::Sass::Selector::CommaSequence.new(comma_sequence.members.flat_map do |seq|
+        @next_comma_sequence = CssSelector::CommaSequence.new(comma_sequence.members.flat_map do |seq|
             if node_matches_SimpleSequence(seq.members.first)
-              [seq, ::Sass::Selector::SimpleSequence.new(seq.members.drop(1), false)]
+              [seq, CssSelector::SimpleSequence.new(seq.members.drop(1))]
             else
               [seq]
             end
@@ -51,10 +51,10 @@ module Hexp
 
       def node_matches_Simple(simple)
         case simple
-        when ::Sass::Selector::Element             # span
-          simple.name.first == @node.tag.to_s
-        when ::Sass::Selector::Class                 # .foo
-          @node.class?(simple.name.first)
+        when CssSelector::Element             # span
+          simple.name == @node.tag.to_s
+        when CssSelector::Class                 # .foo
+          @node.class?(simple.name)
 
           # when ::Sass::Selector::Id                  # #main
           # when ::Sass::Selector::Universal           # *
