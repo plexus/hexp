@@ -1,5 +1,22 @@
 module Hexp
   class Node
+    # Select nodes from a Hexp tree
+    #
+    # This is what is backing the {Hexp::Node#select} method. It serves a double
+    # purpose. At it's core it's an Enumerable for iterating over nodes that
+    # match a criterium.
+    #
+    # @example
+    #   # Loop over the nodes with class="big"
+    #   hexp.select {|el| el.class? 'big' }.each { ... }
+    #
+    # It also integrates with {Hexp::Node::Rewriter} for selective rewriting of
+    # a Hexp tree.
+    #
+    # @example
+    #   # stick all links inside a <span class="link> ... </span>
+    #   hexp.select {|el| el.tag == 'a' }.wrap(:span, class: 'link')
+    #
     class Selector
       include Enumerable
 

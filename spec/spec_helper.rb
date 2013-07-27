@@ -15,7 +15,7 @@ if ENV['COVERAGE'] == 'true'
     command_name 'spec:unit'
     add_filter 'hexp/h.rb'
 
-    minimum_coverage 99.5
+    minimum_coverage 99.0
   end
 end
 

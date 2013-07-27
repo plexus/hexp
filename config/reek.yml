@@ -32,6 +32,7 @@ FeatureEnvy:
     - Hexp::Node::PP#pp_attributes
     - Hexp::Node::PP#pp_children
     - Hexp::Node#rewrite_children
+    - Hexp::Node::Rewriter#coerce_rewrite_response
 IrresponsibleModule:
   enabled: true
   exclude: []
@@ -57,6 +58,7 @@ NilCheck:
   exclude:
     - Hexp::Node#rewrite
     - Hexp::Node#set_attr
+    - Hexp::Node::Rewriter#coerce_rewrite_response
 RepeatedConditional:
   enabled: true
   exclude:
@@ -64,21 +66,20 @@ RepeatedConditional:
   max_ifs: 1
 TooManyInstanceVariables:
   enabled: true
-  exclude: []
+  exclude:
+    - Hexp::Node::Domize
   max_instance_variables: 3
 TooManyMethods:
   enabled: true
   exclude:
     - Hexp::Node
+    - Hexp::TextNode
   max_methods: 10
 TooManyStatements:
   enabled: true
   exclude:
-    - each
-    - Hexp::Node#rewrite
-    - Hexp::Node::Normalize#normalized_children
     - Hexp::Builder#tag!
-  max_statements: 5
+  max_statements: 6
 UncommunicativeMethodName:
   enabled: true
   exclude:

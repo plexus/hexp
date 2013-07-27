@@ -20,11 +20,15 @@ describe Hexp::DSL do
     tag: :div,
     attributes: {'class' => 'prinses'},
     children: ['Liefste, Hart en woorden houden voor jou stil'],
-    to_html: "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\">\n<div class=\"prinses\">Liefste, Hart en woorden houden voor jou stil</div>\n"
   }.each do |method, result|
     it "should delegate `#{method}' to to_hexp" do
       expect(hexpable.public_send(method)).to eq(result)
     end
+  end
+
+  it "should delegate `to_html' to to_hexp" do
+      expect(hexpable.to_html).to match \
+        %r{<div class="prinses">Liefste, Hart en woorden houden voor jou stil</div>}
   end
 
   it "should delegate `attr' to to_hexp" do
