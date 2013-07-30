@@ -2,13 +2,12 @@ require 'spec_helper'
 
 describe Hexp::Node, 'rewrite' do
   subject(:rewriter) { Hexp::Node::Rewriter.new(hexp, block) }
+
   let :hexp do
     H[:div, [
         [:a],
         [:p],
-        [:br]
-      ]
-    ]
+        [:br]]]
   end
 
   context 'without a block' do
@@ -64,12 +63,8 @@ describe Hexp::Node, 'rewrite' do
       rewriter.to_hexp.should == H[:div, [
           [:a],
           [:blockquote, [
-              [:p]
-            ]
-          ],
-          [:br]
-        ]
-      ]
+              [:p]]],
+          [:br]]]
     end
   end
 
@@ -157,6 +152,15 @@ describe Hexp::Node, 'rewrite' do
 
     it 'should raise a FormatError' do
       expect{rewriter.to_hexp}.to raise_exception(Hexp::FormatError)
+    end
+  end
+
+  context 'with a css selector argument' do
+    let(:selector) { 'p.foo' }
+
+    it 'should delegate to CssSelection, rather than Rewriter' do
+      expect(Hexp::Node::CssSelection).to receive(:new).with(hexp, selector).and_return(double(:rewrite => hexp))
+      hexp.rewrite(selector)
     end
   end
 

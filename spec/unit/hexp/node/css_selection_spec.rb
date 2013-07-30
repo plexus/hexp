@@ -64,4 +64,23 @@ describe Hexp::Node::CssSelection do
       its(:to_a) { should eq %w[foo bar baz].map{|id| H[:li, id: id] } }
     end
   end
+
+  describe 'rewrite' do
+    let(:hexp) do
+      H[:ul, [
+          H[:li, [
+              H[:a, href: '/foo']]],
+          H[:a, href: '/moo']]]
+    end
+    let(:selector) { 'li a' }
+
+    it 'should only affect nodes that match the selection' do
+      expect(selection.rewrite {|node| node.add_class('selected')}).to eq(
+        H[:ul, [
+            H[:li, [
+                H[:a, href: '/foo', class: 'selected']]],
+            H[:a, href: '/moo']]]
+      )
+    end
+  end
 end

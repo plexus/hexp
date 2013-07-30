@@ -15,7 +15,7 @@ module Hexp
         return to_enum(:each) unless block_given?
 
         @node.children.each do |child|
-          self.class.new(child, next_comma_sequence).each(&block)
+          next_selection_for(child).each(&block)
         end
         yield @node if node_matches?
       end
@@ -25,7 +25,7 @@ module Hexp
           @node.tag,
           @node.attributes,
           @node.children.flat_map do |child|
-            self.class.new(child, next_comma_sequence).rewrite &block
+            next_selection_for(child).rewrite(&block)
           end
         ]
         node_matches? ? block.call(new_node) : new_node
@@ -50,6 +50,10 @@ module Hexp
       # against this node. If no part matches, return nil
       def next_comma_sequence
         @next_comma_sequence ||= CssSelector::CommaSequence.new(consume_matching_heads)
+      end
+
+      def next_selection_for(child)
+        self.class.new(child, next_comma_sequence)
       end
 
       def consume_matching_heads

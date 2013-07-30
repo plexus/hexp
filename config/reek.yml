@@ -12,6 +12,7 @@ ControlParameter:
   enabled: true
   exclude:
     - Hexp::Builder#initialize
+    - Hexp::Node#rewrite
 DataClump:
   enabled: true
   exclude: []
@@ -66,6 +67,7 @@ RepeatedConditional:
   enabled: true
   exclude:
     - Hexp::Builder
+    - Hexp::Node::CssSelection
   max_ifs: 1
 TooManyInstanceVariables:
   enabled: true
