@@ -256,6 +256,10 @@ module Hexp
       attr('class') && attr('class').split(' ').include?(klz.to_s)
     end
 
+    def add_class(klz)
+      attr('class', [attr('class'), klz].compact.join(' '))
+    end
+
     private
 
     # Set an attribute, used internally by #attr
