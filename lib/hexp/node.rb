@@ -131,7 +131,7 @@ module Hexp
     # @api public
     #
     def inspect
-      self.class.inspect_name + [tag, attributes, children ].reject(&:empty?).inspect
+      self.class.inspect_name + [tag, attributes, children].compact.reject(&:empty?).inspect
     end
 
     # Pretty print, a multiline representation with indentation
@@ -258,6 +258,22 @@ module Hexp
 
     def add_class(klz)
       attr('class', [attr('class'), klz].compact.join(' '))
+    end
+
+    def add_child(child)
+      H[
+        self.tag,
+        self.attributes,
+        self.children + [child]
+      ]
+    end
+
+    def |(attrs)
+      H[
+        self.tag,
+        self.attributes.merge(attrs),
+        self.children
+      ]
     end
 
     private
