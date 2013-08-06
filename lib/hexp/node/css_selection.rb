@@ -21,6 +21,8 @@ module Hexp
       end
 
       def rewrite(&block)
+        return @node if @node.text?
+
         new_node = H[
           @node.tag,
           @node.attributes,
