@@ -7,7 +7,12 @@ module Hexp
       :rewrite,
       :select,
       :to_html,
-      :class?
+      :class?,
+      :add_class,
+      :add_child,
+      :<<,
+      :process,
+      :%,
     ].each do |meth|
       define_method meth do |*args, &blk|
         to_hexp.public_send(meth, *args, &blk)

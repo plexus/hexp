@@ -57,6 +57,12 @@ module Hexp
     klazz.send(:include, Hexp::DSL)
   end
 
+  def self.parse(html)
+    Hexp::Nokogiri::Reader.new.call(
+      Nokogiri(html).root
+    )
+  end
+
   # Use builder syntax to create a Hexp
   #
   # (see Hexp::Builder)
@@ -99,6 +105,7 @@ require 'hexp/format_error.rb'
 require 'hexp/illegal_request_error.rb'
 
 require 'hexp/nokogiri/equality' # TODO => replace this with equivalent-xml
+require 'hexp/nokogiri/reader'
 require 'hexp/sass/selector_parser'
 
 require 'hexp/h'

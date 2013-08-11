@@ -267,13 +267,32 @@ module Hexp
         self.children + [child]
       ]
     end
+    alias :<< :add_child
 
-    def |(attrs)
+    def % attrs
       H[
         self.tag,
         self.attributes.merge(attrs),
         self.children
       ]
+    end
+
+#     def |(processor)
+#       processor.call(self)
+#     end
+
+    def process(*processors)
+      processors.empty? ? self : processors.first.(self).process(*processors.drop(1))
+    end
+
+    def [](attribute)
+      self.attributes[attribute.to_s]
+    end
+
+    def text
+      children.map do |node|
+        node.text? ? node : node.text
+      end.join
     end
 
     private

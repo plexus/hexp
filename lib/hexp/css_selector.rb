@@ -137,5 +137,47 @@ module Hexp
         element.attr('id') == name
       end
     end
+
+    class Attribute
+      include Equalizer.new(:name, :namespace, :operator, :value, :flags)
+      attr_reader :name, :namespace, :operator, :value, :flags
+
+      def initialize(name, namespace, operator, value, flags)
+        @name = name.freeze
+        @namespace = namespace.freeze
+        @operator = operator.freeze
+        @value = value.freeze
+        @flag = flags.freeze
+      end
+
+      def inspect
+        "<#{self.class.name.split('::').last} name=#{name} namespace=#{namespace.inspect} operator=#{operator.inspect} value=#{value.inspect} flags=#{flags.inspect}>"
+      end
+
+      def matches?(element)
+        return false unless element[name]
+
+        case operator
+          # CSS 2
+        when '='  # exact match
+          element[name] == value
+        when '~=' # space separated list contains
+          element[name].split(' ').include?(value)
+        when '|=' # equal to, or starts with followed by a dash
+          element[name] =~ /\A#{Regexp.escape(value)}(-|\z)/
+
+          # CSS 3
+        when '^=' # starts with
+          element[name].index_of(value) == 0
+        when '$=' # ends with
+          element[name] =~ /#{Regexp.escape(value)}\z/
+        when '*=' # contains
+          element[name] =~ /\A#{Regexp.escape(value)}(-|\z)/
+
+        else
+          raise "Unknown operator : #{operator}"
+        end
+      end
+    end
   end
 end

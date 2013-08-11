@@ -35,7 +35,7 @@ module Hexp
       end
 
       def coerce_rewrite_response(response)
-        return nil if response.nil?
+        return [] if response.nil?
 
         return [response.to_hexp] if response.respond_to? :to_hexp
         return [response.to_str]  if response.respond_to? :to_str
