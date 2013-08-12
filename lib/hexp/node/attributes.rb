@@ -79,6 +79,7 @@ module Hexp
         ]
       end
       alias :% :set_attributes
+      alias :add_attributes :set_attributes
 
       def remove_attr(name)
         H[
