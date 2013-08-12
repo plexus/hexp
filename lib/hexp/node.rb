@@ -4,6 +4,9 @@ module Hexp
     include Equalizer.new(:tag, :attributes, :children)
     extend Forwardable
 
+    include Hexp::Node::Attributes
+    include Hexp::Node::Children
+
     # The HTML tag of this node
     #
     # @example
@@ -34,16 +37,6 @@ module Hexp
     # @api public
     #
     attr_reader :children
-
-    # Is this node an empty node
-    #
-    # H[:p, class: 'foo'].empty? #=> true
-    # H[:p, [H[:span]].empty?    #=> false
-    #
-    # @return [Boolean] true if this node has no children
-    # @api public
-    #
-    def_delegators :@children, :empty?
 
     # Main entry point for creating literal hexps
     #
@@ -210,97 +203,24 @@ module Hexp
         Rewriter.new(self, block)
       end
     end
+    alias :replace :rewrite
 
     def select(&block)
       Selector.new(self, block)
     end
 
-    # Attribute getter/setter
-    #
-    # When called with one argument : return the attribute value with that name.
-    # When called with two arguments : return a new Node with the attribute set.
-    # When the second argument is nil : return a new Node with the attribute unset.
-    #
-    # @example
-    #    H[:p, class: 'hello'].attr('class')       # => "hello"
-    #    H[:p, class: 'hello'].attr('id', 'para1') # => H[:p, {"class"=>"hello", "id"=>"para1"}]
-    #    H[:p, class: 'hello'].attr('class', nil)  # => H[:p]
-    #
-    # @return [String|Hexp::Node]
-    # @api public
-    #
-    def attr(*args)
-      arity     = args.count
-      attr_name = args[0].to_s
-
-      case arity
-      when 1
-        attributes[attr_name]
-      when 2
-        set_attr(*args)
-      else
-        raise ArgumentError, "wrong number of arguments(#{arity} for 1..2)"
-      end
-    end
-
-    # Check for the presence of a class
-    #
-    # @example
-    #   H[:span, class: "banner strong"].class?("strong") #=> true
-    #
-    # @param klz [String] the name of the class to check for
-    # @return [Boolean] true if the class is present, false otherwise
-    # @api public
-    #
-    def class?(klz)
-      attr('class') && attr('class').split(' ').include?(klz.to_s)
-    end
-
-    def add_class(klz)
-      attr('class', [attr('class'), klz].compact.join(' '))
-    end
-
-    def add_child(child)
-      H[
-        self.tag,
-        self.attributes,
-        self.children + [child]
-      ]
-    end
-    alias :<< :add_child
-
-    def % attrs
-      H[
-        self.tag,
-        self.attributes.merge(attrs),
-        self.children
-      ]
-    end
-
-#     def |(processor)
-#       processor.call(self)
-#     end
-
     def process(*processors)
       processors.empty? ? self : processors.first.(self).process(*processors.drop(1))
-    end
-
-    def [](attribute)
-      self.attributes[attribute.to_s]
-    end
-
-    def text
-      children.map do |node|
-        node.text? ? node : node.text
-      end.join
     end
 
     private
 
     # Set an attribute, used internally by #attr
     #
+    # Setting an attribute to nil will delete it
+    #
     # @param name [String|Symbol]
-    # @param value [String]
+    # @param value [String|NilClass]
     # @return [Hexp::Node]
     #
     # @api private

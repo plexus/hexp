@@ -7,6 +7,17 @@ require 'ice_nine'
 require 'equalizer'
 
 module Hexp
+  # Inject the Hexp::DSL module into classes that include Hexp
+  #
+  # @param klazz [Class] The class that included Hexp
+  #
+  # @return [Class]
+  # @api private
+  #
+  def self.included(klazz)
+    klazz.send(:include, Hexp::DSL)
+  end
+
   # Deep freeze an object
   #
   # Delegates to IceNine
@@ -40,22 +51,6 @@ module Hexp
       [ arg ]
     end
   end
-end
-
-require 'hexp/version'
-require 'hexp/dsl'
-
-module Hexp
-  # Inject the Hexp::DSL module into classes that include Hexp
-  #
-  # @param klazz [Class] The class that included Hexp
-  #
-  # @return [Class]
-  # @api private
-  #
-  def self.included(klazz)
-    klazz.send(:include, Hexp::DSL)
-  end
 
   def self.parse(html)
     Hexp::Nokogiri::Reader.new.call(
@@ -83,7 +78,15 @@ module Hexp
   def self.build(*args, &block)
     Hexp::Builder.new(*args, &block)
   end
+
 end
+
+require 'hexp/version'
+require 'hexp/dsl'
+
+
+require 'hexp/node/attributes'
+require 'hexp/node/children'
 
 require 'hexp/node'
 require 'hexp/node/normalize'

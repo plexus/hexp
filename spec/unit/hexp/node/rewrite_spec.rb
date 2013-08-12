@@ -133,11 +133,11 @@ describe Hexp::Node, 'rewrite' do
     context 'when responding with nil' do
       let :block do
         proc do |node|
-          [] if node.tag == :a
+          node if [:p, :br].include? node.tag
         end
       end
 
-      it 'should keep the original node' do
+      it 'should remove the original node' do
         expect(rewriter.to_hexp).to eq H[:div, [ H[:p], H[:br] ]]
       end
     end

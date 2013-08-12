@@ -159,6 +159,8 @@ module Hexp
 
         case operator
           # CSS 2
+        when nil
+          true
         when '='  # exact match
           element[name] == value
         when '~=' # space separated list contains
