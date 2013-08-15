@@ -34,6 +34,10 @@ module Hexp
       def set_children(new_children)
         H[tag, attributes, new_children]
       end
+
+      def map_children(&blk)
+        H[tag, attributes, children.map(&blk)]
+      end
     end
   end
 end

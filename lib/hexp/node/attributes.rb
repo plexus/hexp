@@ -93,6 +93,32 @@ module Hexp
         self.attributes[attribute.to_s]
       end
 
+      # Merge attributes into this Hexp
+      #
+      # This method is analoguous with {Hash#merge}. As argument it can take a
+      # Hash, or another Hexp element, in which case that element's attributes
+      # are used.
+      #
+      # Class attributes are treated special : the class lists are merged, rather
+      # than being overwritten
+      #
+      # @param node_or_hash [#to_hexp|Hash]
+      # @return [Hexp::Node]
+      # @api public
+      #
+      def merge_attrs(node_or_hash)
+        hash = node_or_hash.respond_to?(:to_hexp) ?
+                 node_or_hash.attributes : node_or_hash
+        result = self
+        hash.each do |k,v|
+          result = if k == 'class'
+                     result.add_class(v)
+                   else
+                     result.attr(k, v)
+                   end
+        end
+        result
+      end
     end
   end
 end

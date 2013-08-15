@@ -149,6 +149,10 @@ module Hexp
       false
     end
 
+    def set_tag(tag)
+      H[tag.to_sym, attributes, children]
+    end
+
     # Rewrite a node tree
     #
     # Since nodes are immutable, this is the main entry point for deriving nodes
@@ -203,8 +207,12 @@ module Hexp
     end
     alias :replace :rewrite
 
-    def select(&block)
-      Selector.new(self, block)
+    def select(css_selector = nil, &block)
+      if css_selector
+        CssSelection.new(self, css_selector).each(&block)
+      else
+        Selector.new(self, block)
+      end
     end
 
     def process(*processors)
