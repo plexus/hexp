@@ -70,9 +70,7 @@ module Hexp
     # @api public
     #
     def initialize(*args)
-      @tag, @attributes, @children = Hexp.deep_freeze(
-        Normalize.new(args).call
-      )
+      @tag, @attributes, @children = Normalize.new(args).call
     end
 
     # Standard hexp coercion protocol, return self

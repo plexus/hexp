@@ -13,7 +13,7 @@ module Hexp
     # @api public
     #
     def initialize(nodes)
-      super Hexp.deep_freeze nodes.to_ary
+      super nodes.to_ary.freeze
     end
 
     # Convenience constructor
