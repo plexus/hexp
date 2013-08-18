@@ -155,6 +155,8 @@ module Hexp
       end
     end
 
+    # An attribute selector, like [href^="http://"]
+    #
     class Attribute
       include Equalizer.new(:name, :namespace, :operator, :value, :flags)
       attr_reader :name, :namespace, :operator, :value, :flags

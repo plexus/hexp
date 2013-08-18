@@ -130,7 +130,7 @@ module Hexp
       def remove_attr(name)
         H[
           self.tag,
-          self.attributes.reject {|k,v| k == name.to_s},
+          self.attributes.reject {|key,_| key == name.to_s},
           self.children
         ]
       end
@@ -162,11 +162,11 @@ module Hexp
         hash = node_or_hash.respond_to?(:to_hexp) ?
                  node_or_hash.to_hexp.attributes : node_or_hash
         result = self
-        hash.each do |k,v|
-          result = if k.to_s == 'class'
-                     result.add_class(v)
+        hash.each do |key,value|
+          result = if key.to_s == 'class'
+                     result.add_class(value)
                    else
-                     result.attr(k, v)
+                     result.attr(key, value)
                    end
         end
         result

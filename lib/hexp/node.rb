@@ -212,6 +212,23 @@ module Hexp
       end
     end
 
+    # Run a number of processors on this node
+    #
+    # This is pure convenience, but it helps to conceptualize the "processor"
+    # idea of a component (be it a lambda or other object), that responds to
+    # call, and transform a {Hexp::Node} tree.
+    #
+    # @example
+    #   hexp.process(
+    #     ->(node) { node.replace('.section') {|node| H[:p, class: 'big', node]} },
+    #     ->(node) { node.add_class 'foo' },
+    #     InlineAssets.new
+    #   )
+    #
+    # @param processors [Array<#call>]
+    # @return [Hexp::Node]
+    # @api public
+    #
     def process(*processors)
       processors.empty? ? self : processors.first.(self).process(*processors.drop(1))
     end
