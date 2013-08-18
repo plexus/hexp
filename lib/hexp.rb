@@ -104,8 +104,7 @@ require 'hexp/css_selector'
 require 'hexp/css_selector/sass_parser'
 require 'hexp/css_selector/parser'
 
-require 'hexp/format_error.rb'
-require 'hexp/illegal_request_error.rb'
+require 'hexp/errors'
 
 require 'hexp/nokogiri/equality' # TODO => replace this with equivalent-xml
 require 'hexp/nokogiri/reader'
