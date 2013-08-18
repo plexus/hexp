@@ -4,6 +4,9 @@ module Hexp
     include Equalizer.new(:tag, :attributes, :children)
     extend Forwardable
 
+    include Hexp::Node::Attributes
+    include Hexp::Node::Children
+
     # The HTML tag of this node
     #
     # @example
@@ -34,16 +37,6 @@ module Hexp
     # @api public
     #
     attr_reader :children
-
-    # Is this node an empty node
-    #
-    # H[:p, class: 'foo'].empty? #=> true
-    # H[:p, [H[:span]].empty?    #=> false
-    #
-    # @return [Boolean] true if this node has no children
-    # @api public
-    #
-    def_delegators :@children, :empty?
 
     # Main entry point for creating literal hexps
     #
@@ -77,9 +70,7 @@ module Hexp
     # @api public
     #
     def initialize(*args)
-      @tag, @attributes, @children = Hexp.deep_freeze(
-        Normalize.new(args).call
-      )
+      @tag, @attributes, @children = Normalize.new(args).call
     end
 
     # Standard hexp coercion protocol, return self
@@ -158,6 +149,10 @@ module Hexp
       false
     end
 
+    def set_tag(tag)
+      H[tag.to_sym, attributes, children]
+    end
+
     # Rewrite a node tree
     #
     # Since nodes are immutable, this is the main entry point for deriving nodes
@@ -204,84 +199,48 @@ module Hexp
     # @api public
     #
     def rewrite(css_selector = nil, &block)
+      return Rewriter.new(self, block) if css_selector.nil?
+      CssSelection.new(self, css_selector).rewrite(&block)
+    end
+    alias :replace :rewrite
+
+    def select(css_selector = nil, &block)
       if css_selector
-        CssSelection.new(self, css_selector).rewrite(&block)
+        CssSelection.new(self, css_selector).each(&block)
       else
-        Rewriter.new(self, block)
+        Selector.new(self, block)
       end
     end
 
-    def select(&block)
-      Selector.new(self, block)
-    end
-
-    # Attribute getter/setter
+    # Run a number of processors on this node
     #
-    # When called with one argument : return the attribute value with that name.
-    # When called with two arguments : return a new Node with the attribute set.
-    # When the second argument is nil : return a new Node with the attribute unset.
+    # This is pure convenience, but it helps to conceptualize the "processor"
+    # idea of a component (be it a lambda or other object), that responds to
+    # call, and transform a {Hexp::Node} tree.
     #
     # @example
-    #    H[:p, class: 'hello'].attr('class')       # => "hello"
-    #    H[:p, class: 'hello'].attr('id', 'para1') # => H[:p, {"class"=>"hello", "id"=>"para1"}]
-    #    H[:p, class: 'hello'].attr('class', nil)  # => H[:p]
+    #   hexp.process(
+    #     ->(node) { node.replace('.section') {|node| H[:p, class: 'big', node]} },
+    #     ->(node) { node.add_class 'foo' },
+    #     InlineAssets.new
+    #   )
     #
-    # @return [String|Hexp::Node]
+    # @param processors [Array<#call>]
+    # @return [Hexp::Node]
     # @api public
     #
-    def attr(*args)
-      arity     = args.count
-      attr_name = args[0].to_s
-
-      case arity
-      when 1
-        attributes[attr_name]
-      when 2
-        set_attr(*args)
-      else
-        raise ArgumentError, "wrong number of arguments(#{arity} for 1..2)"
-      end
-    end
-
-    # Check for the presence of a class
-    #
-    # @example
-    #   H[:span, class: "banner strong"].class?("strong") #=> true
-    #
-    # @param klz [String] the name of the class to check for
-    # @return [Boolean] true if the class is present, false otherwise
-    # @api public
-    #
-    def class?(klz)
-      attr('class') && attr('class').split(' ').include?(klz.to_s)
-    end
-
-    def add_class(klz)
-      attr('class', [attr('class'), klz].compact.join(' '))
-    end
-
-    def add_child(child)
-      H[
-        self.tag,
-        self.attributes,
-        self.children + [child]
-      ]
-    end
-
-    def |(attrs)
-      H[
-        self.tag,
-        self.attributes.merge(attrs),
-        self.children
-      ]
+    def process(*processors)
+      processors.empty? ? self : processors.first.(self).process(*processors.drop(1))
     end
 
     private
 
     # Set an attribute, used internally by #attr
     #
+    # Setting an attribute to nil will delete it
+    #
     # @param name [String|Symbol]
-    # @param value [String]
+    # @param value [String|NilClass]
     # @return [Hexp::Node]
     #
     # @api private

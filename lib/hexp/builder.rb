@@ -85,11 +85,13 @@ module Hexp
     #   end
     #
     # @param text [String] the text to add
+    # @return [Hexp::Builder] self
     # @api public
     #
     def text!(text)
       _raise_if_empty! "Hexp::Builder needs a root element to add text elements to"
       @stack.last[2] << text.to_s
+      self
     end
 
     # Add Hexp objects to the current tag
@@ -128,6 +130,13 @@ module Hexp
     end
 
     # Implement the standard Hexp coercion protocol
+    #
+    # By implementing this a Builder is interchangeable for a regular node, so
+    # you can use it inside other nodes transparently. But you can call this
+    # method if you really, really just want the plain {Hexp::Node}
+    #
+    # @example
+    #  Hexp.build { div { text! 'hello' } }.to_hexp # => H[:div, ["hello"]]
     #
     # @return [Hexp::Node]
     # @api public
@@ -171,6 +180,8 @@ module Hexp
     # @api private
     #
     class NodeBuilder
+      # Create new NodeBuilder
+      #
       # @param node [Array] (tag, attrs, children) triplet
       # @param builder [Hexp::Builder] The parent builder to delegate back
       # @api private
@@ -186,6 +197,7 @@ module Hexp
       #   # => H[:div, class: 'strong warn']
       #
       # @param sym [Symbol] the class to add
+      # @return [Hexp::Builder::NodeBuilder] self
       # @api public
       #
       def method_missing(sym, &block)
@@ -231,6 +243,12 @@ module Hexp
 
     private
 
+    # Raise an exception if nothing has been built yet
+    #
+    # @param text [String] The error message
+    # @raises {Hexp::FormatError}
+    # @api private
+    #
     def _raise_if_empty!(text = 'Hexp::Builder is lacking a root element.')
       ::Kernel.raise ::Hexp::FormatError, text if @stack.empty?
     end

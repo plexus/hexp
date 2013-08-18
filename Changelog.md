@@ -5,3 +5,5 @@
 
 * introduce Hexp.build for creating Hexp::Node objects using Builder syntax
 * introduce CSS selectors to selectively iterate over parts of a tree
+* introduce Hexp.parse to integrate with legacy tools
+* expand the API for manipulating nodes

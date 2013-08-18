@@ -65,31 +65,6 @@ module Hexp
     def tag
     end
 
-    # Combined getter/setter for attributes
-    #
-    # Text nodes don't have attributes, so when used as a getter this returns
-    # nil. When used as a setter this will raise an exception, since it's not
-    # possible to set attributes on a text node.
-    #
-    # @example
-    #   Hexp::TextNode.new("hello, world").attr('foo') #=> nil
-    #   Hexp::TextNode.new("hello, world").attr('class', 'big') #=> IllegalRequestError
-    #
-    # @return [NilClass]
-    # @api public
-    #
-    def attr(*args)
-      arity = args.count
-      case arity
-      when 1
-        nil
-      when 2
-        raise IllegalRequestError, "Setting attributes on a Hexp::TextNode is not allowed"
-      else
-        raise ArgumentError, "wrong number of arguments(#{arity} for 1..2)"
-      end
-    end
-
     # Standard conversion protocol, returns self
     #
     # @example

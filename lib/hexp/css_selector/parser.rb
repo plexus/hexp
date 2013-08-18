@@ -47,6 +47,17 @@ module Hexp
           Class.new(simple.name.first)
         when ::Sass::Selector::Id                  # #main
           Id.new(simple.name.first)
+        when ::Sass::Selector::Attribute           # [href^="http://"]
+          raise "CSS attribute selector flags are curently ignored by Hexp (not implemented)" unless simple.flags.nil?
+          raise "CSS attribute namespaces are curently ignored by Hexp (not implemented)" unless simple.namespace.nil?
+          raise "CSS attribute operator #{simple.operator} not understood by Hexp" unless %w[= ~= ^=].include?(simple.operator) || simple.operator.nil?
+          Attribute.new(
+            simple.name.first,
+            simple.namespace,
+            simple.operator,
+            simple.value ? simple.value.first : nil,
+            simple.flags
+          )
         else
           raise "CSS selectors containing #{simple.class} are not implemented in Hexp"
         end
@@ -54,7 +65,6 @@ module Hexp
         # when ::Sass::Selector::Universal           # *
         # when ::Sass::Selector::Parent              # & in Sass
         # when ::Sass::Selector::Interpolation       # #{} in Sass
-        # when ::Sass::Selector::Attribute           # [href^="http://"]
         # when ::Sass::Selector::Pseudo              # :visited, ::first-line, :nth-child(2n+1)
         # when ::Sass::Selector::SelectorPseudoClass # :not(.foo)
 

@@ -13,7 +13,7 @@ module Hexp
     # @api public
     #
     def initialize(nodes)
-      super Hexp.deep_freeze nodes.to_ary
+      super nodes.to_ary.freeze
     end
 
     # Convenience constructor
@@ -73,6 +73,7 @@ module Hexp
     #   H[:div, [[:span]]].children.eql? Hexp::List[H[:span]] #=> true
     #
     # @param other [Object] Object to compare with
+    # @api public
     # @return [Boolean]
     #
     def eql?(other)

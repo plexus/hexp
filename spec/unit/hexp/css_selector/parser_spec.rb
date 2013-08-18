@@ -35,4 +35,17 @@ describe Hexp::CssSelector::Parser do
             HC::Class.new('strong')]]]
     }
   end
+
+  context 'with an attribute selector' do
+    let(:selector) { 'div[link=href]' }
+    it {
+      should eq HC::CommaSequence[
+        HC::Sequence[
+          HC::SimpleSequence[
+            HC::Element.new('div'),
+            HC::Attribute.new('link', nil, '=', 'href', nil),
+          ]]]
+    }
+  end
+
 end
