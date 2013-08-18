@@ -36,13 +36,13 @@ module Hexp
       # This will also return true if the attribute is present but empty.
       #
       # @example
-      #   H[:option].attr?('selected') #=> false
+      #   H[:option].has_attr?('selected') #=> false
       #
       # @param name [String|Symbol] the name of the attribute
       # @return [Boolean]
       # @api public
       #
-      def attr?(name)
+      def has_attr?(name)
         attributes.has_key? name.to_s
       end
 
@@ -51,36 +51,82 @@ module Hexp
       # @example
       #   H[:span, class: "banner strong"].class?("strong") #=> true
       #
-      # @param klz [String] the name of the class to check for
+      # @param klass [String] the name of the class to check for
       # @return [Boolean] true if the class is present, false otherwise
       # @api public
       #
-      def class?(klz)
-        attr('class') && attr('class').split(' ').include?(klz.to_s)
+      def class?(klass)
+        attr('class') && attr('class').split(' ').include?(klass.to_s)
       end
 
-      def add_class(klz)
-        attr('class', [attr('class'), klz].compact.join(' '))
+      # Add a CSS class to the element
+      #
+      # @example
+      #   H[:div].add_class('foo') #=> H[:div, class: 'foo']
+      #
+      # @param klass [#to_s] The class to add
+      # @return [Hexp::Node]
+      # @api public
+      #
+      def add_class(klass)
+        attr('class', [attr('class'), klass].compact.join(' '))
       end
 
+      # The CSS classes of this element as an array
+      #
+      # Convenience method so you don't have to split the class list yourself.
+      #
+      # @return [Array<String>]
+      # @api public
+      #
       def class_list
-        attr('class').split(' ')
+        @class_list ||= (attr('class') || '').split(' ').freeze
       end
 
-      def remove_class(klz)
-        attr('class', class_list - [klz.to_s])
+      # Remove a CSS class from this element
+      #
+      # If the resulting class list is empty, the class attribute will be
+      # removed. If the class is present several times all instances will
+      # be removed. If it's not present at all, the class list will be
+      # unmodified.
+      #
+      # Calling this on a node with a class attribute that is equal to an
+      # empty string will result in the class attribute being removed.
+      #
+      # @param klass [#to_s] The class to be removed
+      # @return [Hexp::Node] A node that is identical to this one, but with
+      #                      the given class removed
+      # @api public
+      #
+      def remove_class(klass)
+        return self unless has_attr?('class')
+        new_list = class_list - [klass.to_s]
+        return remove_attr('class') if new_list.empty?
+        attr('class', new_list.join(' '))
       end
 
-      def set_attributes(attrs)
+      # Set or override multiple attributes using a hash syntax
+      #
+      # @param attrs[Hash]
+      # @return [Hexp::Node]
+      # @api public
+      #
+      def set_attrs(attrs)
         H[
           self.tag,
           self.attributes.merge(Hash[*attrs.flat_map{|k,v| [k.to_s, v]}]),
           self.children
         ]
       end
-      alias :% :set_attributes
-      alias :add_attributes :set_attributes
+      alias :% :set_attrs
+      alias :add_attributes :set_attrs
 
+      # Remove an attribute by name
+      #
+      # @param name [#to_s] The attribute to be removed
+      # @return [Hexp::Node] a new node with the attribute removed
+      # @api public
+      #
       def remove_attr(name)
         H[
           self.tag,
@@ -89,18 +135,24 @@ module Hexp
         ]
       end
 
-      def [](attribute)
-        self.attributes[attribute.to_s]
+      # Attribute accessor
+      #
+      # @param attribute_name [#to_s] The name of the attribute
+      # @return [String] The value of the attribute
+      # @api public
+      #
+      def [](attr_name)
+        self.attributes[attr_name.to_s]
       end
 
       # Merge attributes into this Hexp
       #
+      # Class attributes are treated special : the class lists are merged, rather
+      # than being overwritten. See {set_attrs} for a more basic version.
+      #
       # This method is analoguous with {Hash#merge}. As argument it can take a
       # Hash, or another Hexp element, in which case that element's attributes
       # are used.
-      #
-      # Class attributes are treated special : the class lists are merged, rather
-      # than being overwritten
       #
       # @param node_or_hash [#to_hexp|Hash]
       # @return [Hexp::Node]
@@ -108,10 +160,10 @@ module Hexp
       #
       def merge_attrs(node_or_hash)
         hash = node_or_hash.respond_to?(:to_hexp) ?
-                 node_or_hash.attributes : node_or_hash
+                 node_or_hash.to_hexp.attributes : node_or_hash
         result = self
         hash.each do |k,v|
-          result = if k == 'class'
+          result = if k.to_s == 'class'
                      result.add_class(v)
                    else
                      result.attr(k, v)

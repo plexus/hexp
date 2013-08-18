@@ -199,11 +199,8 @@ module Hexp
     # @api public
     #
     def rewrite(css_selector = nil, &block)
-      if css_selector
-        CssSelection.new(self, css_selector).rewrite(&block)
-      else
-        Rewriter.new(self, block)
-      end
+      return Rewriter.new(self, block) if css_selector.nil?
+      CssSelection.new(self, css_selector).rewrite(&block)
     end
     alias :replace :rewrite
 

@@ -8,18 +8,35 @@ module Hexp
       extend Forwardable
       def_delegator :@members, :empty?
 
+      # Member nodes
+      #
       attr_reader :members
 
+      # Shared initializer for parse tree nodes with children (members)
+      #
       def initialize(members)
         @members = Hexp.deep_freeze(members)
       end
 
-      def self.included(klz)
-        def klz.[](*members)
+      # Create a class level collection constructor
+      #
+      # @example
+      #   CommaSequence[member1, member2]
+      #
+      # @param klass [Class]
+      # @api private
+      #
+      def self.included(klass)
+        def klass.[](*members)
           new(members)
         end
       end
 
+      # Return a debugging representation
+      #
+      # @return [String]
+      # @api private
+      #
       def inspect
         "#{self.class.name.split('::').last}[#{self.members.map(&:inspect).join(', ')}]"
       end
@@ -156,25 +173,26 @@ module Hexp
 
       def matches?(element)
         return false unless element[name]
+        attribute = element[name]
 
         case operator
           # CSS 2
         when nil
           true
         when '='  # exact match
-          element[name] == value
+          attribute == value
         when '~=' # space separated list contains
-          element[name].split(' ').include?(value)
+          attribute.split(' ').include?(value)
         when '|=' # equal to, or starts with followed by a dash
-          element[name] =~ /\A#{Regexp.escape(value)}(-|\z)/
+          attribute =~ /\A#{Regexp.escape(value)}(-|\z)/
 
           # CSS 3
         when '^=' # starts with
-          element[name].index_of(value) == 0
+          attribute.index(value) == 0
         when '$=' # ends with
-          element[name] =~ /#{Regexp.escape(value)}\z/
+          attribute =~ /#{Regexp.escape(value)}\z/
         when '*=' # contains
-          element[name] =~ /\A#{Regexp.escape(value)}(-|\z)/
+          !!(attribute =~ /#{Regexp.escape(value)}/)
 
         else
           raise "Unknown operator : #{operator}"

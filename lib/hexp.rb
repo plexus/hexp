@@ -52,10 +52,23 @@ module Hexp
     end
   end
 
+  # Parse HTML to Hexp
+  #
+  # The input have a single root element. If there are multiple only the first
+  # will be converted. If there is no root element (e.g. an empty document, or
+  # only a DTD or comment) then an error is raised
+  #
+  # @example
+  #   Hexp.parse('<div>hello</div>') #=> H[:div, "hello"]
+  #
+  # @param html [String] A HTML document
+  # @return [Hexp::Node]
+  # @api public
+  #
   def self.parse(html)
-    Hexp::Nokogiri::Reader.new.call(
-      Nokogiri(html).root
-    )
+    root = Nokogiri(html).root
+    raise Hexp::ParseError, "Failed to parse HTML : no document root" if root.nil?
+    Hexp::Nokogiri::Reader.new.call(root)
   end
 
   # Use builder syntax to create a Hexp

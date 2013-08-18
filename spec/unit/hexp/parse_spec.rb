@@ -1,6 +1,14 @@
 require 'spec_helper'
 
-describe 'parsing HTML to hexp' do
+describe Hexp, 'parse' do
+  context 'with an empty document' do
+    let(:html) { '' }
+
+    it 'should raise an exception' do
+      expect{ Hexp.parse(html) }.to raise_exception Hexp::ParseError
+    end
+  end
+
   it 'should parse a single tag' do
     expect(Hexp.parse('<a>Hello!</a>')).to eq H[:a, 'Hello!']
   end
@@ -12,5 +20,4 @@ describe 'parsing HTML to hexp' do
   it 'should parse attributes' do
     expect(Hexp.parse('<a href="pretty">Ciao Bella</a>')).to eq H[:a, {href: 'pretty'}, 'Ciao Bella']
   end
-
 end

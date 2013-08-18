@@ -73,6 +73,7 @@ module Hexp
     #   H[:div, [[:span]]].children.eql? Hexp::List[H[:span]] #=> true
     #
     # @param other [Object] Object to compare with
+    # @api public
     # @return [Boolean]
     #
     def eql?(other)
