@@ -7,6 +7,17 @@ require 'ice_nine'
 require 'equalizer'
 
 module Hexp
+  # Inject the Hexp::DSL module into classes that include Hexp
+  #
+  # @param klazz [Class] The class that included Hexp
+  #
+  # @return [Class]
+  # @api private
+  #
+  def self.included(klazz)
+    klazz.send(:include, Hexp::DSL)
+  end
+
   # Deep freeze an object
   #
   # Delegates to IceNine
@@ -40,21 +51,24 @@ module Hexp
       [ arg ]
     end
   end
-end
 
-require 'hexp/version'
-require 'hexp/dsl'
-
-module Hexp
-  # Inject the Hexp::DSL module into classes that include Hexp
+  # Parse HTML to Hexp
   #
-  # @param klazz [Class] The class that included Hexp
+  # The input have a single root element. If there are multiple only the first
+  # will be converted. If there is no root element (e.g. an empty document, or
+  # only a DTD or comment) then an error is raised
   #
-  # @return [Class]
-  # @api private
+  # @example
+  #   Hexp.parse('<div>hello</div>') #=> H[:div, "hello"]
   #
-  def self.included(klazz)
-    klazz.send(:include, Hexp::DSL)
+  # @param html [String] A HTML document
+  # @return [Hexp::Node]
+  # @api public
+  #
+  def self.parse(html)
+    root = Nokogiri(html).root
+    raise Hexp::ParseError, "Failed to parse HTML : no document root" if root.nil?
+    Hexp::Nokogiri::Reader.new.call(root)
   end
 
   # Use builder syntax to create a Hexp
@@ -77,7 +91,15 @@ module Hexp
   def self.build(*args, &block)
     Hexp::Builder.new(*args, &block)
   end
+
 end
+
+require 'hexp/version'
+require 'hexp/dsl'
+
+
+require 'hexp/node/attributes'
+require 'hexp/node/children'
 
 require 'hexp/node'
 require 'hexp/node/normalize'
@@ -95,10 +117,10 @@ require 'hexp/css_selector'
 require 'hexp/css_selector/sass_parser'
 require 'hexp/css_selector/parser'
 
-require 'hexp/format_error.rb'
-require 'hexp/illegal_request_error.rb'
+require 'hexp/errors'
 
 require 'hexp/nokogiri/equality' # TODO => replace this with equivalent-xml
+require 'hexp/nokogiri/reader'
 require 'hexp/sass/selector_parser'
 
 require 'hexp/h'

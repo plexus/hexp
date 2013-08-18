@@ -8,18 +8,35 @@ module Hexp
       extend Forwardable
       def_delegator :@members, :empty?
 
+      # Member nodes
+      #
       attr_reader :members
 
+      # Shared initializer for parse tree nodes with children (members)
+      #
       def initialize(members)
         @members = Hexp.deep_freeze(members)
       end
 
-      def self.included(klz)
-        def klz.[](*members)
+      # Create a class level collection constructor
+      #
+      # @example
+      #   CommaSequence[member1, member2]
+      #
+      # @param klass [Class]
+      # @api private
+      #
+      def self.included(klass)
+        def klass.[](*members)
           new(members)
         end
       end
 
+      # Return a debugging representation
+      #
+      # @return [String]
+      # @api private
+      #
       def inspect
         "#{self.class.name.split('::').last}[#{self.members.map(&:inspect).join(', ')}]"
       end
@@ -135,6 +152,53 @@ module Hexp
 
       def matches?(element)
         element.attr('id') == name
+      end
+    end
+
+    # An attribute selector, like [href^="http://"]
+    #
+    class Attribute
+      include Equalizer.new(:name, :namespace, :operator, :value, :flags)
+      attr_reader :name, :namespace, :operator, :value, :flags
+
+      def initialize(name, namespace, operator, value, flags)
+        @name = name.freeze
+        @namespace = namespace.freeze
+        @operator = operator.freeze
+        @value = value.freeze
+        @flag = flags.freeze
+      end
+
+      def inspect
+        "<#{self.class.name.split('::').last} name=#{name} namespace=#{namespace.inspect} operator=#{operator.inspect} value=#{value.inspect} flags=#{flags.inspect}>"
+      end
+
+      def matches?(element)
+        return false unless element[name]
+        attribute = element[name]
+
+        case operator
+          # CSS 2
+        when nil
+          true
+        when '='  # exact match
+          attribute == value
+        when '~=' # space separated list contains
+          attribute.split(' ').include?(value)
+        when '|=' # equal to, or starts with followed by a dash
+          attribute =~ /\A#{Regexp.escape(value)}(-|\z)/
+
+          # CSS 3
+        when '^=' # starts with
+          attribute.index(value) == 0
+        when '$=' # ends with
+          attribute =~ /#{Regexp.escape(value)}\z/
+        when '*=' # contains
+          !!(attribute =~ /#{Regexp.escape(value)}/)
+
+        else
+          raise "Unknown operator : #{operator}"
+        end
       end
     end
   end

@@ -13,6 +13,7 @@ ControlParameter:
   exclude:
     - Hexp::Builder#initialize
     - Hexp::Node#rewrite
+    - Hexp::Node#select
 DataClump:
   enabled: true
   exclude: []
@@ -22,6 +23,7 @@ DuplicateMethodCall:
   enabled: true
   exclude:
     - Hexp::CssSelector::Parser#rewrite_simple
+    - Hexp::CssSelector::Attribute#matches?
   max_calls: 2
   allow_calls: []
 FeatureEnvy:
@@ -33,16 +35,21 @@ FeatureEnvy:
     - Hexp::Node::Normalize#normalized_children
     - Hexp::Node::PP#pp_attributes
     - Hexp::Node::PP#pp_children
+    - Hexp::Node#process
     - Hexp::Node#rewrite_children
+    - Hexp::Node::Children#text
+    - Hexp::Node::Attributes#merge_attrs
     - Hexp::Node::Rewriter#coerce_rewrite_response
     - Hexp::CssSelector::Parser#rewrite_simple
     - Hexp::CssSelector::CommaSequence#matches?
+    - Hexp::Nokogiri::Reader#call
 IrresponsibleModule:
   enabled: true
   exclude: []
 LongParameterList:
   enabled: true
-  exclude: []
+  exclude:
+    - Hexp::CssSelector::Attribute
   max_params: 2
   overrides:
     initialize:
@@ -58,11 +65,8 @@ NestedIterators:
   ignore_iterators:
     - any?
 NilCheck:
-  enabled: true
-  exclude:
-    - Hexp::Node#rewrite
-    - Hexp::Node#set_attr
-    - Hexp::Node::Rewriter#coerce_rewrite_response
+  enabled: false
+  exclude: []
 RepeatedConditional:
   enabled: true
   exclude:
@@ -73,6 +77,7 @@ TooManyInstanceVariables:
   enabled: true
   exclude:
     - Hexp::Node::Domize
+    - Hexp::CssSelector::Attribute
   max_instance_variables: 4
 TooManyMethods:
   enabled: true
@@ -84,6 +89,8 @@ TooManyStatements:
   enabled: true
   exclude:
     - Hexp::Builder#tag!
+    - Hexp::CssSelector::Attribute#matches?
+    - Hexp::CssSelector::Parser#rewrite_simple
   max_statements: 6
 UncommunicativeMethodName:
   enabled: true
@@ -111,7 +118,8 @@ UncommunicativeParameterName:
   accept: []
 UncommunicativeVariableName:
   enabled: true
-  exclude: []
+  exclude:
+    - Hexp::Node::Attributes#set_attrs
   reject:
   - !ruby/regexp /^.$/
   - !ruby/regexp /[0-9]$/

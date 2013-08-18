@@ -1,6 +1,9 @@
 module Hexp
+  Error = Class.new(StandardError)
+
   # Raised when trying to stick things inside a Hexp where they don't belong
-  class FormatError < StandardError
+  #
+  class FormatError < Error
     # Create a new FormatError
     #
     # @api private
@@ -9,4 +12,10 @@ module Hexp
       super
     end
   end
+
+  # Raised by {Hexp.parse} when the input can't be converted to a {Hexp::Node}
+  #
+  class ParseError < Error
+  end
+
 end
