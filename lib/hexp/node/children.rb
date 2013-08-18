@@ -36,6 +36,7 @@ module Hexp
       end
 
       def map_children(&blk)
+        return to_enum(:map_children) unless block_given?
         H[tag, attributes, children.map(&blk)]
       end
     end
