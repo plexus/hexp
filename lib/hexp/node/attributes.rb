@@ -137,7 +137,7 @@ module Hexp
 
       # Attribute accessor
       #
-      # @param attribute_name [#to_s] The name of the attribute
+      # @param attr_name [#to_s] The name of the attribute
       # @return [String] The value of the attribute
       # @api public
       #
@@ -148,9 +148,9 @@ module Hexp
       # Merge attributes into this Hexp
       #
       # Class attributes are treated special : the class lists are merged, rather
-      # than being overwritten. See {set_attrs} for a more basic version.
+      # than being overwritten. See {#set_attrs} for a more basic version.
       #
-      # This method is analoguous with {Hash#merge}. As argument it can take a
+      # This method is analoguous with `Hash#merge`. As argument it can take a
       # Hash, or another Hexp element, in which case that element's attributes
       # are used.
       #

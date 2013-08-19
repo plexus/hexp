@@ -1,5 +1,53 @@
 module Hexp
-  # A Hexp Node, or simply 'a hexp'
+  # A `Hexp::Node` represents a single element in a HTML syntax tree. It
+  # consists of three parts : the {#tag}, the {#attributes} and the {#children}.
+  #
+  # Instances of `Hexp::Node` are immutable. Because of this all methods that
+  # "alter" the node actually return a new instance, leaving the old one
+  # untouched.
+  #
+  # @example Immutable nodes : the old one is untouched
+  #   node = Hexp::Node.new(:div)
+  #   node2 = node.add_class('items')
+  #   p node  # => H[:div]
+  #   p node2 # => H[:div, 'class' => 'items']
+  #
+  # The `Hexp::Node` constructor takes a `Symbol`, a `Hash` and an `Array` for
+  # the {#tag}, {#attributes} and {#children} respectively. However the
+  # attributes and children can each be ommitted if they are empty.
+  #
+  # If the node contains a single child node, then it is not necessary to wrap
+  # that child node in an array. One can use `H[tag, attrs, children]` as a
+  # shorthand syntax. Finally one can use {Hexp::build} to construct nodes using
+  # Ruby blocks, not unlike the Builder or Nokogiri gems.
+  #
+  # @example Creating Hexp : syntax alternatives and optional parameters
+  #   Hexp::Node.new(:div, class: 'foo')
+  #   Hexp::Node.new(:div, {class: 'foo'}, "A text node")
+  #   Hexp::Node.new(:div, {class: 'foo'}, ["A text node"])
+  #   H[:div, {class: 'foo'}, H[:span, {class: 'big'}, "good stuff"]]
+  #   H[:div, {class: 'foo'}, [
+  #       H[:span, {class: 'big'}, "good stuff"],
+  #       H[:a, {href: '/index'}, "go home"]
+  #     ]
+  #   ]
+  #   Hexp.build { div.strong { "Hello, world!" } }
+  #
+  # Methods that read or alter the attributes Hash are defined in
+  # {Hexp::Node::Attributes}. Methods that read or alter the list of child nodes
+  # are defined in {Hexp::Node::Children}
+  #
+  # == CSS selectors
+  #
+  # When working with large trees of {Hexp::Node} objects, it is convenient to
+  # be able to target specific nodes using CSS selector syntax. Hexp supports a
+  # subset of the CSS 3 selector syntax, see {Hexp::Node::CssSelection} for info
+  # on the supported syntax.
+  #
+  # For changing, replacing or removing specific nodes based on a CSS selector
+  # string, see {Hexp::Node#replace}. To iterate over nodes, see
+  # {Hexp::Node#select}.
+  #
   class Node
     include Equalizer.new(:tag, :attributes, :children)
     extend Forwardable
@@ -153,48 +201,28 @@ module Hexp
       H[tag.to_sym, attributes, children]
     end
 
-    # Rewrite a node tree
+    # Replace nodes in a tree
     #
-    # Since nodes are immutable, this is the main entry point for deriving nodes
-    # from others.
+    # With a CSS selector string like `"form.checkout"` you specify the nodes
+    # you want to operate on. These will be passed one by one into the block.
+    # The block returns the {Hexp::Node} that will replace the old node, or it
+    # can replace an `Array` of nodes to fill the place of the old node.
     #
-    # Rewrite will pass you each node in the tree, and expects something to replace
-    # it with. A single node, multiple nodes, or no nodes (remove it).
+    # Because of this you can add one or more nodes, or remove nodes by
+    # returning an empty array.
     #
-    # Rewrite will not pass in the root node, since rewrite always returns a single
-    # node, so it doesn't allow you to replace the root node with zero or multiple
-    # nodes.
+    # If the CSS selector is ommitted, then the whole tree is traversed, and
+    # every node is passed to the block.
     #
-    # The block can take one or two parameters, the first being the node that is
-    # being replaced, the second (optional) its parent. As a response the block
-    # needs to return one of these
+    # @example Remove all script tags
+    #   tree.replace('script') {|_| [] }
     #
-    #  * a single Hexp::Node
-    #  * a Hexp::NodeList, or Array of Hexp::Node
-    #  * an Array representation of a Hexp::Node, [:tag, {attributes}, [children]]
-    #  * nil
+    # @example Wrap each `<input>` tag into a `<p>` tag
+    #   tree.replace('input') do |input|
+    #     H[:p, input]
+    #   end
     #
-    # The last case (returning nil) means "do nothing", it will simply keep the
-    # currently referenced node where it is. This is very handy when you only want
-    # to act on certain nodes, just return nothing if you want to do nothing.
-    #
-    # Some examples :
-    #
-    # Remove all script tags
-    #
-    # @example
-    #    tree.rewrite{|node| [] if node.tag == :script }
-    #
-    # Wrap each <input> tag into a <p> tag
-    #
-    # @example
-    #    tree.rewrite do |node|
-    #      if node.tag == :input
-    #        [ H[:p, [ child ] ]
-    #      end
-    #    end
-    #
-    # @param blk [Proc] The rewrite action
+    # @param block [Proc] The rewrite action
     # @return [Hexp::Node] The rewritten tree
     # @api public
     #

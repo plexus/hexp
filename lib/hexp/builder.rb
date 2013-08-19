@@ -4,16 +4,12 @@ module Hexp
   class Builder < BasicObject
     include ::Hexp
 
-    # def inspect
-    #   ::Kernel.puts ::Kernel.caller ; ::Kernel.exit
-    # end
-
     # Construct a new builder, and start building
     #
     # The recommended way to call this is through `Hexp.build`.
     #
     # @param tag [Symbol] The tag of the outermost element (optional)
-    # @param args [Array<Hash|String>] Extra arguments, a String for a text
+    # @param args [Array<Hash,String>] Extra arguments, a String for a text
     #        node, a Hash for attributes
     # @param block [Proc] The block containing builder directives, can be with
     #        or without an argument.
@@ -113,7 +109,7 @@ module Hexp
     #   end
     #   node.to_html #=> <div><button>click me!</button></div>
     #
-    # @params args [Array<:to_hexp>] Hexpable objects to add to the current tag
+    # @param args [Array<#to_hexp>] Hexpable objects to add to the current tag
     # @return [Hexp::Builder]
     #
     # @api public
@@ -246,7 +242,8 @@ module Hexp
     # Raise an exception if nothing has been built yet
     #
     # @param text [String] The error message
-    # @raises {Hexp::FormatError}
+    # @raise [Hexp::FormatError] if the builder is converted to a {Hexp::Node}
+    #            before a root element is defined.
     # @api private
     #
     def _raise_if_empty!(text = 'Hexp::Builder is lacking a root element.')
