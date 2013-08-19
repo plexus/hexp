@@ -1,0 +1,717 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Hexp
+  
+    &mdash; Documentation by YARD 0.8.6.2
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (H)</a> &raquo;
+    
+    
+    <span class="title">Hexp</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Module: Hexp
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="Hexp/Builder.html" title="Hexp::Builder (class)">Builder</a></span>, <span class='object_link'><a href="Hexp/Node/Rewriter.html" title="Hexp::Node::Rewriter (class)">Node::Rewriter</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/hexp.rb<span class="defines">,<br />
+  lib/hexp/dom.rb,<br /> lib/hexp/dsl.rb,<br /> lib/hexp/node.rb,<br /> lib/hexp/list.rb,<br /> lib/hexp/errors.rb,<br /> lib/hexp/builder.rb,<br /> lib/hexp/node/pp.rb,<br /> lib/hexp/version.rb,<br /> lib/hexp/text_node.rb,<br /> lib/hexp/node/domize.rb,<br /> lib/hexp/css_selector.rb,<br /> lib/hexp/node/selector.rb,<br /> lib/hexp/node/children.rb,<br /> lib/hexp/node/rewriter.rb,<br /> lib/hexp/node/normalize.rb,<br /> lib/hexp/node/attributes.rb,<br /> lib/hexp/nokogiri/reader.rb,<br /> lib/hexp/nokogiri/equality.rb,<br /> lib/hexp/node/css_selection.rb,<br /> lib/hexp/css_selector/parser.rb,<br /> lib/hexp/sass/selector_parser.rb,<br /> lib/hexp/css_selector/sass_parser.rb</span>
+</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Hexp/CssSelector.html" title="Hexp::CssSelector (module)">CssSelector</a></span>, <span class='object_link'><a href="Hexp/DOM.html" title="Hexp::DOM (module)">DOM</a></span>, <span class='object_link'><a href="Hexp/DSL.html" title="Hexp::DSL (module)">DSL</a></span>, <span class='object_link'><a href="Hexp/Nokogiri.html" title="Hexp::Nokogiri (module)">Nokogiri</a></span>, <span class='object_link'><a href="Hexp/Sass.html" title="Hexp::Sass (module)">Sass</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Hexp/Builder.html" title="Hexp::Builder (class)">Builder</a></span>, <span class='object_link'><a href="Hexp/FormatError.html" title="Hexp::FormatError (class)">FormatError</a></span>, <span class='object_link'><a href="Hexp/List.html" title="Hexp::List (class)">List</a></span>, <span class='object_link'><a href="Hexp/Node.html" title="Hexp::Node (class)">Node</a></span>, <span class='object_link'><a href="Hexp/ParseError.html" title="Hexp::ParseError (class)">ParseError</a></span>, <span class='object_link'><a href="Hexp/TextNode.html" title="Hexp::TextNode (class)">TextNode</a></span>
+    
+  
+</p>
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="Error-constant" class="">Error =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>StandardError</span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="VERSION-constant" class="">VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>0.2.0</span><span class='tstring_end'>&#39;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Array-class_method" title="Array (class method)">+ (Array) <strong>Array</strong>(arg) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Variant of ::Array with slightly modified semantics.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#build-class_method" title="build (class method)">+ (Hexp::Builder) <strong>build</strong>(*args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Use builder syntax to create a Hexp.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#deep_freeze-class_method" title="deep_freeze (class method)">+ (Object) <strong>deep_freeze</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Deep freeze an object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#included-class_method" title="included (class method)">+ (Class) <strong>included</strong>(klazz) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Inject the Hexp::DSL module into classes that include Hexp.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse-class_method" title="parse (class method)">+ (Hexp::Node) <strong>parse</strong>(html) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Parse HTML to Hexp.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="Array-class_method">
+  
+    + (<tt><span class='object_link'><a href="#Array-class_method" title="Hexp.Array (method)">Array</a></span></tt>) <strong>Array</strong>(arg) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>Variant of ::Array with slightly modified semantics</p>
+
+<p>Array() is often used to wrap a value in an Array, unless it&#39;s already
+an array. However if your object implements #to_a, then Array() will use
+that value. Because of this objects that aren&#39;t Array-like will get
+converted as well, such as Struct objects.</p>
+
+<p>This implementation relies on #to_ary, which signals that the Object is a
+drop-in replacement for an actual Array.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>arg</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#Array-class_method" title="Hexp.Array (method)">Array</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+47
+48
+49
+50
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp.rb', line 47</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_arg'>arg</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_arg'>arg</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='symbol'>:to_ary</span>
+    <span class='id identifier rubyid_arg'>arg</span><span class='period'>.</span><span class='id identifier rubyid_to_ary'>to_ary</span>
+  <span class='kw'>else</span>
+    <span class='lbracket'>[</span> <span class='id identifier rubyid_arg'>arg</span> <span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="build-class_method">
+  
+    + (<tt><span class='object_link'><a href="Hexp/Builder.html" title="Hexp::Builder (class)">Hexp::Builder</a></span></tt>) <strong>build</strong>(*args, &amp;block) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Use builder syntax to create a Hexp</p>
+
+<p>(see Hexp::Builder)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_list'>list</span> <span class='op'>=</span> <span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_ul'>ul</span> <span class='kw'>do</span>
+   <span class='int'>3</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+     <span class='id identifier rubyid_li'>li</span> <span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+   <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#Array-class_method" title="Hexp.Array (method)">Array</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Hexp/Builder.html" title="Hexp::Builder (class)">Hexp::Builder</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp.rb', line 91</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='const'>Hexp</span><span class='op'>::</span><span class='const'>Builder</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deep_freeze-class_method">
+  
+    + (<tt>Object</tt>) <strong>deep_freeze</strong>(*args) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>Deep freeze an object</p>
+
+<p>Delegates to IceNine</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#Array-class_method" title="Hexp.Array (method)">Array</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>arguments to pass on</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>Object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp.rb', line 29</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_deep_freeze'>deep_freeze</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='const'>IceNine</span><span class='period'>.</span><span class='id identifier rubyid_deep_freeze'>deep_freeze</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="included-class_method">
+  
+    + (<tt>Class</tt>) <strong>included</strong>(klazz) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>Inject the Hexp::DSL module into classes that include Hexp</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>klazz</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The class that included Hexp</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span><span class='lparen'>(</span><span class='id identifier rubyid_klazz'>klazz</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_klazz'>klazz</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='symbol'>:include</span><span class='comma'>,</span> <span class='const'>Hexp</span><span class='op'>::</span><span class='const'>DSL</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parse-class_method">
+  
+    + (<tt><span class='object_link'><a href="Hexp/Node.html" title="Hexp::Node (class)">Hexp::Node</a></span></tt>) <strong>parse</strong>(html) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Parse HTML to Hexp</p>
+
+<p>The input have a single root element. If there are multiple only the first
+will be converted. If there is no root element (e.g. an empty document, or
+only a DTD or comment) then an error is raised</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;div&gt;hello&lt;/div&gt;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='comment'>#=&gt; H[:div, &quot;hello&quot;]</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>html</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A HTML document</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Hexp/Node.html" title="Hexp::Node (class)">Hexp::Node</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Hexp/ParseError.html" title="Hexp::ParseError (class)">Hexp::ParseError</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+68
+69
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp.rb', line 68</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_html'>html</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_root'>root</span> <span class='op'>=</span> <span class='const'>Nokogiri</span><span class='lparen'>(</span><span class='id identifier rubyid_html'>html</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>Hexp</span><span class='op'>::</span><span class='const'>ParseError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Failed to parse HTML : no document root</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='const'>Hexp</span><span class='op'>::</span><span class='const'>Nokogiri</span><span class='op'>::</span><span class='const'>Reader</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_root'>root</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Mon Aug 19 23:18:23 2013 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.6.2 (ruby-2.0.0).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Hexp::List
+  
+    &mdash; Documentation by YARD 0.8.6.2
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (L)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Hexp.html" title="Hexp (module)">Hexp</a></span></span>
+     &raquo; 
+    <span class="title">List</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Hexp::List
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="../Hexp.html#Array-class_method" title="Hexp.Array (method)">Array</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Hexp::List</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/hexp/list.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A list of nodes</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%5B%5D-class_method" title="[] (class method)">+ (Hexp::List) <strong>[]</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Convenience constructor.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#eql%3F-instance_method" title="#eql? (instance method)">- (Boolean) <strong>eql?</strong>(other) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Value and type equality.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (List) <strong>initialize</strong>(nodes) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create new Hexp::List.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inspect-instance_method" title="#inspect (instance method)">- (Object) <strong>inspect</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>String representation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_ary-instance_method" title="#to_ary (instance method)">- (Array&lt;Hexp::Node&gt;) <strong>to_ary</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Internal coercion to Array.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Hexp::List (class)">List</a></span></tt>) <strong>initialize</strong>(nodes) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create new Hexp::List</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='const'>Hexp</span><span class='op'>::</span><span class='const'>List</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:p</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:div</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>nodes</span>
+      
+      
+        <span class='type'>(<tt>#to_ary</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>List of nodes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/list.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_nodes'>nodes</span><span class='rparen'>)</span>
+  <span class='kw'>super</span> <span class='id identifier rubyid_nodes'>nodes</span><span class='period'>.</span><span class='id identifier rubyid_to_ary'>to_ary</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="[]-class_method">
+  
+    + (<tt><span class='object_link'><a href="" title="Hexp::List (class)">Hexp::List</a></span></tt>) <strong>[]</strong>(*args) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Convenience constructor</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='const'>Hexp</span><span class='op'>::</span><span class='const'>List</span><span class='lbracket'>[</span>
+  <span class='const'>Hexp</span><span class='op'>::</span><span class='const'>Node</span><span class='lbracket'>[</span><span class='symbol'>:marquee</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Try Hexp for instanst satisfaction!</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='const'>Hexp</span><span class='op'>::</span><span class='const'>Node</span><span class='lbracket'>[</span><span class='symbol'>:hr</span><span class='rbracket'>]</span><span class='comma'>,</span>
+<span class='rbracket'>]</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Hexp.html#Array-class_method" title="Hexp.Array (method)">Array</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>individual nodes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Hexp::List (class)">Hexp::List</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/list.rb', line 32</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='op'>[]</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="eql?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>eql?</strong>(other) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Value and type equality</p>
+
+<p>Hexp::List is mostly interchangeable with a plain Array, and so equality
+with `==` delegates to the underlying array, making `Hexp::List[] == []`
+true.</p>
+
+<p>If you want a stronger comparison, than this version will compare both the
+value (in this case : contents), and the type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:div</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='lbracket'>[</span><span class='symbol'>:span</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_children'>children</span> <span class='op'>==</span> <span class='lbracket'>[</span><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:span</span><span class='rbracket'>]</span><span class='rbracket'>]</span>             <span class='comment'>#=&gt; true
+</span><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:div</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='lbracket'>[</span><span class='symbol'>:span</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_children'>children</span><span class='period'>.</span><span class='id identifier rubyid_eql?'>eql?</span> <span class='lbracket'>[</span><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:span</span><span class='rbracket'>]</span><span class='rbracket'>]</span>           <span class='comment'>#=&gt; false
+</span><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:div</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='lbracket'>[</span><span class='symbol'>:span</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_children'>children</span><span class='period'>.</span><span class='id identifier rubyid_eql?'>eql?</span> <span class='const'>Hexp</span><span class='op'>::</span><span class='const'>List</span><span class='lbracket'>[</span><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:span</span><span class='rbracket'>]</span><span class='rbracket'>]</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>other</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Object to compare with</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/list.rb', line 79</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_eql?'>eql?</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
+  <span class='kw'>self</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span> <span class='op'>&amp;&amp;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="inspect-instance_method">
+  
+    - (<tt>Object</tt>) <strong>inspect</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>String representation</p>
+
+<p>This delegates to the underlying array, so it&#39;s not obvious from the
+output that this is a wrapping class. This is convenient when inspecting
+nested hexps, but probably something we want to solve differently.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/list.rb', line 45</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
+  <span class='id identifier rubyid___getobj__'>__getobj__</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_ary-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Hexp.html#Array-class_method" title="Hexp.Array (method)">Array</a></span>&lt;<span class='object_link'><a href="Node.html" title="Hexp::Node (class)">Hexp::Node</a></span>&gt;</tt>) <strong>to_ary</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Internal coercion to Array</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='const'>Hexp</span><span class='op'>::</span><span class='const'>List</span><span class='lbracket'>[</span> <span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:p</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:span</span><span class='rbracket'>]</span> <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_ary'>to_ary</span> <span class='comment'>#=&gt; [H[:p], H[:span]]</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Hexp.html#Array-class_method" title="Hexp.Array (method)">Array</a></span>&lt;<span class='object_link'><a href="Node.html" title="Hexp::Node (class)">Hexp::Node</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/list.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_ary'>to_ary</span>
+  <span class='id identifier rubyid___getobj__'>__getobj__</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Mon Aug 19 23:18:23 2013 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.6.2 (ruby-2.0.0).
+</div>
+
+  </body>
+</html>

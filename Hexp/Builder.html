@@ -1,0 +1,1224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Hexp::Builder
+  
+    &mdash; Documentation by YARD 0.8.6.2
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Hexp.html" title="Hexp (module)">Hexp</a></span></span>
+     &raquo; 
+    <span class="title">Builder</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Hexp::Builder
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">BasicObject</span>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="../Hexp.html" title="Hexp (module)">Hexp</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/hexp/builder.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Build Hexps using the builder pattern</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Builder/NodeBuilder.html" title="Hexp::Builder::NodeBuilder (class)">NodeBuilder</a></span>
+    
+  
+</p>
+
+  <h2>Constant Summary</h2>
+  
+
+
+
+  <h2>Constant Summary</h2>
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="../Hexp.html" title="Hexp (module)">Hexp</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Hexp.html#Error-constant" title="Hexp::Error (constant)">Error</a></span>, <span class='object_link'><a href="../Hexp.html#VERSION-constant" title="Hexp::VERSION (constant)">VERSION</a></span></p>
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%3C%3C-instance_method" title="#&lt;&lt; (instance method)">- (Hexp::Builder) <strong>&lt;&lt;</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add Hexp objects to the current tag.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_process-instance_method" title="#_process (instance method)">- (NilClass) <strong>_process</strong>(&amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Call the block, with a specific value of &#39;self&#39;.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Builder) <strong>initialize</strong>(tag = nil, *args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Construct a new builder, and start building.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inspect-instance_method" title="#inspect (instance method)">- (String) <strong>inspect</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return a debugging representation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tag%21-instance_method" title="#tag! (instance method)">- (NilClass) <strong>tag!</strong>(tag, *args, &amp;block) </a>
+    
+
+    
+      (also: #method_missing)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add a tag (HTML element).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text%21-instance_method" title="#text! (instance method)">- (Hexp::Builder) <strong>text!</strong>(text) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add a text node to the tree.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_hexp-instance_method" title="#to_hexp (instance method)">- (Hexp::Node) <strong>to_hexp</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Implement the standard Hexp coercion protocol.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Hexp.html" title="Hexp (module)">Hexp</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Hexp.html#Array-class_method" title="Hexp.Array (method)">Array</a></span>, <span class='object_link'><a href="../Hexp.html#build-class_method" title="Hexp.build (method)">build</a></span>, <span class='object_link'><a href="../Hexp.html#deep_freeze-class_method" title="Hexp.deep_freeze (method)">deep_freeze</a></span>, <span class='object_link'><a href="../Hexp.html#included-class_method" title="Hexp.included (method)">included</a></span>, <span class='object_link'><a href="../Hexp.html#parse-class_method" title="Hexp.parse (method)">parse</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Hexp::Builder (class)">Builder</a></span></tt>) <strong>initialize</strong>(tag = nil, *args, &amp;block) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>Construct a new builder, and start building</p>
+
+<p>The recommended way to call this is through `Hexp.build`.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tag</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The tag of the outermost element (optional)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Hexp.html#Array-class_method" title="Hexp.Array (method)">Array</a></span>&lt;Hash,String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Extra arguments, a String for a text node, a Hash for attributes</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The block containing builder directives, can be with or without an
+argument.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19
+20
+21
+22
+23
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/builder.rb', line 19</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_tag'>tag</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='ivar'>@stack</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_tag'>tag</span>
+    <span class='id identifier rubyid_tag!'>tag!</span><span class='lparen'>(</span><span class='id identifier rubyid_tag'>tag</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid__process'>_process</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+<div id="method_missing_details" class="method_details_list">
+  <h2>Dynamic Method Handling</h2>
+  <p class="notice this">
+    This class handles dynamic methods through the <tt>method_missing</tt> method
+    
+  </p>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="method_missing-instance_method">
+  
+    - (<tt>NilClass</tt>) <strong>method_missing</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add a tag (HTML element)</p>
+
+<p>Typically this is called implicitly through method missing, but in case of
+name clashes or dynamically generated tags you can call this directly.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_hexp'>hexp</span> <span class='op'>=</span> <span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span> <span class='symbol'>:div</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_tag!'>tag!</span><span class='lparen'>(</span><span class='symbol'>:p</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Oh the code, such sweet joy it brings</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span>
+<span class='id identifier rubyid_hexp'>hexp</span><span class='period'>.</span><span class='id identifier rubyid_to_html'>to_html</span> <span class='comment'>#=&gt; &quot;&lt;div&gt;&lt;p&gt;Oh the code, such sweet joy it brings&lt;/p&gt;&lt;/div&gt;&quot;</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tag</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The tag name, like &#39;div&#39; or &#39;head&#39;</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Hexp.html#Array-class_method" title="Hexp.Array (method)">Array</a></span>&lt;Hash|String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash of attributes, or a string to use inside the tag, or both. Multiple
+occurences of each can be specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Builder directives for the contents of the tag</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>NilClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/builder.rb', line 72</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tag!'>tag!</span><span class='lparen'>(</span><span class='id identifier rubyid_tag'>tag</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_arg'>arg</span><span class='op'>|</span>
+    <span class='kw'>case</span> <span class='id identifier rubyid_arg'>arg</span>
+    <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Hash</span>
+      <span class='id identifier rubyid_attributes'>attributes</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_arg'>arg</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='op'>::</span><span class='const'>String</span>
+      <span class='id identifier rubyid_text'>text</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+      <span class='id identifier rubyid_text'>text</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_arg'>arg</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@stack</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_tag'>tag</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='comma'>,</span> <span class='id identifier rubyid_text'>text</span> <span class='op'>?</span> <span class='lbracket'>[</span><span class='id identifier rubyid_text'>text</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span>
+    <span class='id identifier rubyid__process'>_process</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>1</span>
+    <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_pop'>pop</span>
+    <span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_node'>node</span>
+    <span class='const'>NodeBuilder</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='const'>NodeBuilder</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="<<-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Hexp::Builder (class)">Hexp::Builder</a></span></tt>) <strong>&lt;&lt;</strong>(*args) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add Hexp objects to the current tag</p>
+
+<p>Any Hexp::Node or other object implementing to_hexp can be added with this
+operator. Multiple objects can be specified in one call.</p>
+
+<p>Nokogiri and Builder allow inserting of strings containing HTML through
+this operator. Since this would violate the core philosophy of Hexp, and
+open the door for XSS vulnerabilities, we do not support that usage.</p>
+
+<p>If you really want to insert HTML that is already in serialized form,
+consider parsing it to Hexps first</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_widget'>widget</span> <span class='op'>=</span> <span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:button</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>click me!</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span> <span class='symbol'>:div</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_h'>h</span><span class='op'>|</span>
+  <span class='id identifier rubyid_h'>h</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_widget'>widget</span>
+<span class='kw'>end</span>
+<span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_to_html'>to_html</span> <span class='comment'>#=&gt; &lt;div&gt;&lt;button&gt;click me!&lt;/button&gt;&lt;/div&gt;</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Hexp.html#Array-class_method" title="Hexp.Array (method)">Array</a></span>&lt;#to_hexp&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hexpable objects to add to the current tag</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Hexp::Builder (class)">Hexp::Builder</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/builder.rb', line 117</span>
+
+<span class='kw'>def</span> <span class='op'>&lt;&lt;</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_arg'>arg</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_arg'>arg</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:to_hexp</span><span class='rparen'>)</span>
+      <span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_arg'>arg</span>
+      <span class='kw'>self</span>
+    <span class='kw'>else</span>
+      <span class='op'>::</span><span class='const'>Kernel</span><span class='period'>.</span><span class='id identifier rubyid_raise'>raise</span> <span class='op'>::</span><span class='const'>Hexp</span><span class='op'>::</span><span class='const'>FormatError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Inserting literal HTML into a builder with &lt;&lt; is deliberately not supported by Hexp</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="_process-instance_method">
+  
+    - (<tt>NilClass</tt>) <strong>_process</strong>(&amp;block) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>Call the block, with a specific value of &#39;self&#39;</p>
+
+<p>If the block takes an argument, then we pass ourselves (the builder) to the
+block, and call it as a closure. This way &#39;self&#39; refers to the
+calling object, and it can reference its own methods and ivars.</p>
+
+<p>If the block does not take an argument, then we evaluate it in the context
+of ourselves (the builder), so unqualified method calls are seen as builder
+calls.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>NilClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+159
+160
+161
+162
+163
+164
+165</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/builder.rb', line 159</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__process'>_process</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_arity'>arity</span> <span class='op'>==</span> <span class='int'>1</span>
+    <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_instance_eval'>instance_eval</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="inspect-instance_method">
+  
+    - (<tt>String</tt>) <strong>inspect</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Return a debugging representation</p>
+
+<p>Hexp is intended for HTML, so it shouldn&#39;t be a problem that this is an
+actual method. It really helps for debugging or when playing around in irb.
+If you really want an `&lt;inspect&gt;` tag, use `tag!(:inspect)`.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_p'>p</span> <span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_div'>div</span> <span class='rbrace'>}</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+219
+220
+221</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/builder.rb', line 219</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#&lt;Hexp::Builder </span><span class='embexpr_beg'>#{</span><span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>[]</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span><span class='id identifier rubyid_to_hexp'>to_hexp</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tag!-instance_method">
+  
+    - (<tt>NilClass</tt>) <strong>tag!</strong>(tag, *args, &amp;block) 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='method_missing-instance_method'>method_missing</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add a tag (HTML element)</p>
+
+<p>Typically this is called implicitly through method missing, but in case of
+name clashes or dynamically generated tags you can call this directly.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_hexp'>hexp</span> <span class='op'>=</span> <span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span> <span class='symbol'>:div</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_tag!'>tag!</span><span class='lparen'>(</span><span class='symbol'>:p</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Oh the code, such sweet joy it brings</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span>
+<span class='id identifier rubyid_hexp'>hexp</span><span class='period'>.</span><span class='id identifier rubyid_to_html'>to_html</span> <span class='comment'>#=&gt; &quot;&lt;div&gt;&lt;p&gt;Oh the code, such sweet joy it brings&lt;/p&gt;&lt;/div&gt;&quot;</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>tag</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The tag name, like &#39;div&#39; or &#39;head&#39;</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Hexp.html#Array-class_method" title="Hexp.Array (method)">Array</a></span>&lt;Hash|String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash of attributes, or a string to use inside the tag, or both. Multiple
+occurences of each can be specified</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Builder directives for the contents of the tag</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>NilClass</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/builder.rb', line 48</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tag!'>tag!</span><span class='lparen'>(</span><span class='id identifier rubyid_tag'>tag</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_arg'>arg</span><span class='op'>|</span>
+    <span class='kw'>case</span> <span class='id identifier rubyid_arg'>arg</span>
+    <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Hash</span>
+      <span class='id identifier rubyid_attributes'>attributes</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_arg'>arg</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='op'>::</span><span class='const'>String</span>
+      <span class='id identifier rubyid_text'>text</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+      <span class='id identifier rubyid_text'>text</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_arg'>arg</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@stack</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_tag'>tag</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='comma'>,</span> <span class='id identifier rubyid_text'>text</span> <span class='op'>?</span> <span class='lbracket'>[</span><span class='id identifier rubyid_text'>text</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span>
+    <span class='id identifier rubyid__process'>_process</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>1</span>
+    <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_pop'>pop</span>
+    <span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_node'>node</span>
+    <span class='const'>NodeBuilder</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='const'>NodeBuilder</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="text!-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Hexp::Builder (class)">Hexp::Builder</a></span></tt>) <strong>text!</strong>(text) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add a text node to the tree</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_hexp'>hexp</span> <span class='op'>=</span> <span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_span'>span</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_text!'>text!</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Not all who wander are lost</span><span class='tstring_end'>&#39;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the text to add</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Hexp::Builder (class)">Hexp::Builder</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>self</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/builder.rb', line 87</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_text!'>text!</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid__raise_if_empty!'>_raise_if_empty!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hexp::Builder needs a root element to add text elements to</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_hexp-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Node.html" title="Hexp::Node (class)">Hexp::Node</a></span></tt>) <strong>to_hexp</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Implement the standard Hexp coercion protocol</p>
+
+<p>By implementing this a Builder is interchangeable for a regular node, so
+you can use it inside other nodes transparently. But you can call this
+method if you really, really just want the plain <span class='object_link'><a href="Node.html" title="Hexp::Node (class)">Node</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_div'>div</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_text!'>text!</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>hello</span><span class='tstring_end'>&#39;</span></span> <span class='rbrace'>}</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_to_hexp'>to_hexp</span> <span class='comment'># =&gt; H[:div, [&quot;hello&quot;]]</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Node.html" title="Hexp::Node (class)">Hexp::Node</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+140
+141
+142
+143</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/builder.rb', line 140</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_hexp'>to_hexp</span>
+  <span class='id identifier rubyid__raise_if_empty!'>_raise_if_empty!</span>
+  <span class='op'>::</span><span class='const'>Hexp</span><span class='op'>::</span><span class='const'>Node</span><span class='lbracket'>[</span><span class='op'>*</span><span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Mon Aug 19 23:18:24 2013 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.6.2 (ruby-2.0.0).
+</div>
+
+  </body>
+</html>

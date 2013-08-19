@@ -1,0 +1,508 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Hexp::Node::Selector
+  
+    &mdash; Documentation by YARD 0.8.6.2
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../../';
+  framesUrl = "../../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Hexp.html" title="Hexp (module)">Hexp</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Node.html" title="Hexp::Node (class)">Node</a></span></span>
+     &raquo; 
+    <span class="title">Selector</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Hexp::Node::Selector
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Hexp::Node::Selector</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2">Enumerable</dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/hexp/node/selector.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Select nodes from a Hexp tree</p>
+
+<p>This is what is backing the <span class='object_link'><a href="../Node.html#select-instance_method" title="Hexp::Node#select (method)">#select</a></span> method. It serves a double
+purpose. At it&#39;s core it&#39;s an Enumerable for iterating over nodes
+that match a criterium.</p>
+
+<p>It also integrates with <span class='object_link'><a href="Rewriter.html" title="Hexp::Node::Rewriter (class)">Rewriter</a></span> for selective rewriting of a
+Hexp tree.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code># Loop over the nodes with class=&quot;big&quot;
+hexp.select {|el| el.class? &#39;big&#39; }.each { ... }</code></pre>
+    
+      
+      <pre class="example code"><code><span class='comment'># stick all links inside a &lt;span class=&quot;link&gt; ... &lt;/span&gt;
+</span><span class='id identifier rubyid_hexp'>hexp</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_el'>el</span><span class='op'>|</span> <span class='id identifier rubyid_el'>el</span><span class='period'>.</span><span class='id identifier rubyid_tag'>tag</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>a</span><span class='tstring_end'>&#39;</span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_wrap'>wrap</span><span class='lparen'>(</span><span class='symbol'>:span</span><span class='comma'>,</span> <span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>link</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="CssSelection.html" title="Hexp::Node::CssSelection (class)">CssSelection</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attr-instance_method" title="#attr (instance method)">- (Object) <strong>attr</strong>(name, value) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each-instance_method" title="#each (instance method)">- (Object) <strong>each</strong> {|@node| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Selector) <strong>initialize</strong>(node, block) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of Selector.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rewrite-instance_method" title="#rewrite (instance method)">- (Object) <strong>rewrite</strong>(&amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wrap-instance_method" title="#wrap (instance method)">- (Object) <strong>wrap</strong>(tag, attributes = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Hexp::Node::Selector (class)">Selector</a></span></tt>) <strong>initialize</strong>(node, block) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of Selector</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/node/selector.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='ivar'>@node</span><span class='comma'>,</span> <span class='ivar'>@select_block</span> <span class='op'>=</span> <span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_block'>block</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="attr-instance_method">
+  
+    - (<tt>Object</tt>) <strong>attr</strong>(name, value) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+37
+38
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/node/selector.rb', line 37</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_rewrite'>rewrite</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_node'>node</span><span class='op'>|</span>
+    <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="each-instance_method">
+  
+    - (<tt>Object</tt>) <strong>each</strong> {|@node| ... }
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>@node</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51
+52
+53
+54
+55
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/node/selector.rb', line 49</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_to_enum'>to_enum</span><span class='lparen'>(</span><span class='symbol'>:each</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+
+  <span class='ivar'>@node</span><span class='period'>.</span><span class='id identifier rubyid_children'>children</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_child'>child</span><span class='op'>|</span>
+    <span class='id identifier rubyid_child'>child</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='ivar'>@select_block</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>yield</span> <span class='ivar'>@node</span> <span class='kw'>if</span> <span class='ivar'>@select_block</span><span class='period'>.</span><span class='lparen'>(</span><span class='ivar'>@node</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rewrite-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rewrite</strong>(&amp;block) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/node/selector.rb', line 27</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rewrite'>rewrite</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='ivar'>@node</span><span class='period'>.</span><span class='id identifier rubyid_rewrite'>rewrite</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_parent'>parent</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='ivar'>@select_block</span><span class='period'>.</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_block'>block</span><span class='period'>.</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_parent'>parent</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_node'>node</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wrap-instance_method">
+  
+    - (<tt>Object</tt>) <strong>wrap</strong>(tag, attributes = {}) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+43
+44
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/node/selector.rb', line 43</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_wrap'>wrap</span><span class='lparen'>(</span><span class='id identifier rubyid_tag'>tag</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_rewrite'>rewrite</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_node'>node</span><span class='op'>|</span>
+    <span class='const'>H</span><span class='lbracket'>[</span><span class='id identifier rubyid_tag'>tag</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='id identifier rubyid_node'>node</span><span class='rbracket'>]</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Mon Aug 19 23:18:25 2013 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.6.2 (ruby-2.0.0).
+</div>
+
+  </body>
+</html>

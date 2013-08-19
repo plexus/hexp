@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Hexp::Builder::NodeBuilder
+  
+    &mdash; Documentation by YARD 0.8.6.2
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../../';
+  framesUrl = "../../frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (N)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Hexp.html" title="Hexp (module)">Hexp</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Builder.html" title="Hexp::Builder (class)">Builder</a></span></span>
+     &raquo; 
+    <span class="title">NodeBuilder</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Hexp::Builder::NodeBuilder
+  
+  
+  <span class="private note title">Private</span>
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Hexp::Builder::NodeBuilder</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/hexp/builder.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This class is part of a private API.</strong>
+  You should avoid using this class if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>Allow setting HTML classes through method calls</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_div'>div</span><span class='period'>.</span><span class='id identifier rubyid_miraculous'>miraculous</span><span class='period'>.</span><span class='id identifier rubyid_wondrous'>wondrous</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_hr'>hr</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (NodeBuilder) <strong>initialize</strong>(node, builder) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create new NodeBuilder.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#method_missing-instance_method" title="#method_missing (instance method)">- (Hexp::Builder::NodeBuilder) <strong>method_missing</strong>(sym, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Used for specifying CSS class names.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Hexp::Builder::NodeBuilder (class)">NodeBuilder</a></span></tt>) <strong>initialize</strong>(node, builder) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>Create new NodeBuilder</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>node</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Hexp.html#Array-class_method" title="Hexp.Array (method)">Array</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>(tag, attrs, children) triplet</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>builder</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Builder.html" title="Hexp::Builder (class)">Hexp::Builder</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The parent builder to delegate back</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+185
+186
+187</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/builder.rb', line 185</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_builder'>builder</span><span class='rparen'>)</span>
+  <span class='ivar'>@node</span><span class='comma'>,</span> <span class='ivar'>@builder</span> <span class='op'>=</span> <span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_builder'>builder</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+<div id="method_missing_details" class="method_details_list">
+  <h2>Dynamic Method Handling</h2>
+  <p class="notice this">
+    This class handles dynamic methods through the <tt>method_missing</tt> method
+    
+  </p>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="method_missing-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Hexp::Builder::NodeBuilder (class)">Hexp::Builder::NodeBuilder</a></span></tt>) <strong>method_missing</strong>(sym, &amp;block) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Used for specifying CSS class names</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_div'>div</span><span class='period'>.</span><span class='id identifier rubyid_strong'>strong</span><span class='period'>.</span><span class='id identifier rubyid_warn'>warn</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_to_hexp'>to_hexp</span>
+<span class='comment'># =&gt; H[:div, class: &#39;strong warn&#39;]</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sym</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the class to add</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Hexp::Builder::NodeBuilder (class)">Hexp::Builder::NodeBuilder</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>self</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+199
+200
+201
+202
+203
+204</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/hexp/builder.rb', line 199</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_sym'>sym</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_attrs'>attrs</span> <span class='op'>=</span> <span class='ivar'>@node</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
+  <span class='ivar'>@node</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_attrs'>attrs</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span> <span class='label'>class:</span> <span class='lbracket'>[</span><span class='id identifier rubyid_attrs'>attrs</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_sym'>sym</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@builder</span><span class='period'>.</span><span class='id identifier rubyid__process'>_process</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+</div>
+
+    <div id="footer">
+  Generated on Mon Aug 19 23:18:24 2013 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.6.2 (ruby-2.0.0).
+</div>
+
+  </body>
+</html>

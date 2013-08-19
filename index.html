@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.8.6.2
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'><p><a href="https://rubygems.org/gems/hexp"><img src="https://badge.fury.io/rb/hexp.png" alt="Gem Version"></a>
+<a href="https://travis-ci.org/plexus/hexp"><img src="https://secure.travis-ci.org/plexus/hexp.png?branch=master" alt="Build Status"></a>
+<a href="https://gemnasium.com/plexus/hexp"><img src="https://gemnasium.com/plexus/hexp.png" alt="Dependency Status"></a>
+<a href="https://codeclimate.com/github/plexus/hexp"><img src="https://codeclimate.com/github/plexus/hexp.png" alt="Code Climate"></a>
+<a href="https://coveralls.io/r/plexus/hexp"><img src="https://coveralls.io/repos/plexus/hexp/badge.png?branch=master" alt="Coverage Status"></a></p>
+
+<h2>A bit about hexps</h2>
+
+<p><strong>What on earth is a Hexp?</strong></p>
+
+<p>Hexps are basically snippets of HTML written in nothing but Ruby, here&#39;s an example.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='ivar'>@message</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hexps are fun for the whole family, from 9 to 99 years old.</span><span class='tstring_end'>&quot;</span></span>
+<span class='ivar'>@hexp</span> <span class='op'>=</span> <span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:div</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>hexp-intro</span><span class='tstring_end'>&#39;</span></span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='lbracket'>[</span>
+    <span class='lbracket'>[</span><span class='symbol'>:p</span><span class='comma'>,</span> <span class='ivar'>@message</span><span class='rbracket'>]</span>
+  <span class='rbracket'>]</span>
+<span class='rbracket'>]</span>
+</code></pre>
+
+<p><strong>Don&#39;t people use templates for this kind of thing?</strong></p>
+
+<p>They do, this is an alternative approach. With templates you need to think about which parts need to be HTML-escaped, or you can make errors like forgetting a closing tag. With hexps you no longer need to think about escaping.</p>
+
+<p><strong>Wait how is that?</strong></p>
+
+<p>With traditional approaches you can insert plain text in your template, or snippets of HTML. The first must be escaped, the second should not. For your template they are all just strings, so you, the programmer, need to distinguish between the two in a way. For example by using <code>html_escape</code> on one (explicit escaping), or <code>html_safe</code> on the other (implicit escaping).</p>
+
+<p>When using hexps you never deal with strings that actually contain HTML. Helper methods would return hexps instead, and you can combine those into bigger hexps. Strings inside a hexp are always just that, so they will always be escaped without you thinking about it.</p>
+
+<p><strong>So that&#39;s it, easier escaping?</strong></p>
+
+<p>Well that&#39;s not all, by having a simple lightweight representation of HTML that is <em>a real data structure</em>, you can really start programming your HTML. If you have an object that responds to <code>to_hexp</code>, you can use that object inside a hexp, so you can use Object Orientation for your user interface. Like so</p>
+
+<pre class="code ruby"><code class="ruby">class ProfileLink &lt; Struct.new(:user)
+  def to_hexp
+    H[:a, {class: &quot;profile-link&quot;, href: &quot;/user/#{user.id}&quot;}, user.name]
+  end
+end
+
+class Layout &lt; Struct.new(:content)
+  def to_hexp
+    H[:html, [
+      [:body, [content]]
+    ]
+  end
+end
+
+render inline: Layout.new(ProfileLink.new(@user)).to_html
+</code></pre>
+
+<p><strong>Does it get any better?</strong></p>
+
+<p>It does! The really neat part is having filters that process this HTML tree before it gets serialized to text. This could be good for</p>
+
+<ul>
+<li>populating form fields</li>
+<li>adding extra admin buttons when logged in</li>
+<li>cleanly separate aspects of your app (e.g. discount codes) from &#39;core&#39; implementation</li>
+<li>becoming filthy rich and/or ridiculously happy</li>
+</ul>
+
+<p><strong>What&#39;s up with the funny name?</strong></p>
+
+<p>Hexp stands for HTML expressions. It&#39;s a reference to s-expressions as they are known in LISP languages, a simple way to represent data as nested lists.</p>
+
+<h2>How to use it</h2>
+
+<p>Hexp objects come in two flavors : <code>Hexp::Node</code> and <code>Hexp::List</code>. A <code>Node</code> consists of three parts : its <code>tag</code>, <code>attributes</code> and <code>children</code>. A <code>List</code> is just that, a list (of nodes).</p>
+
+<p>To construct a <code>Node</code> use <code>H[tag, attributes, children]</code>. Use a <code>Symbol</code> for the <code>tag</code>, a <code>Hash</code> for the <code>attributes</code>, and an <code>Array</code> for the <code>children</code>. Attributes or children can be omitted when they are empty.</p>
+
+<p>The list of children will automatically be converted to <code>Hexp::List</code>, similarly for any nested nodes you can simply use <code>[tag, attributes, children]</code> without the <code>H</code>, all nodes in the tree will be converted to proper <code>Hexp::Node</code> objects.</p>
+
+<p>The entire API is centered around these two classes, and one of them you can think of as essentially just an <code>Array</code>, in other words Hexp is super easy to learn. Try it out in <code>irb</code>, have a look at the examples, and <em>build cool stuff</em>!</p>
+
+<h2>A note on immutability</h2>
+
+<p>All Hexp objects are deep frozen on creation, you can never alter them afterwards. Operations always return a new <code>Hexp::Node</code> rather than working in place.</p>
+
+<p>This might seem stringent when you are not used to this style of coding, but it&#39;s a pattern that generally promotes good code.</p>
+
+<h2>Can I already use it</h2>
+
+<p>Hold your horses, this is <em>very</em> alpha level code! Feedback is very much appreciated, so try it out, and let me know what you think. Basic functionality is there, but it&#39;s far from finished, and the API will probably still change based on feedback. You have been warned.</p>
+
+<h2>Is it any good?</h2>
+
+<p>Yes</p>
+
+<h2>How to install</h2>
+
+<p>At this point you&#39;re best off grabbing the Git repo, e.g. with bundler</p>
+
+<pre class="code sh"><code class="sh"># Gemfile
+
+gem &#39;hexp&#39;, github: &#39;plexus/hexp&#39;
+</code></pre>
+
+<h2>Who is behind this</h2>
+
+<p>Hexp is conceived and created by <a href="http://arnebrasseur.net">Arne Brasseur</a></p>
+</div></div>
+
+    <div id="footer">
+  Generated on Mon Aug 19 23:18:22 2013 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.6.2 (ruby-2.0.0).
+</div>
+
+  </body>
+</html>
