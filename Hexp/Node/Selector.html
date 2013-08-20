@@ -109,8 +109,8 @@
 <p>Select nodes from a Hexp tree</p>
 
 <p>This is what is backing the <span class='object_link'><a href="../Node.html#select-instance_method" title="Hexp::Node#select (method)">#select</a></span> method. It serves a double
-purpose. At it&#39;s core it&#39;s an Enumerable for iterating over nodes
-that match a criterium.</p>
+purpose. At it's core it's an Enumerable for iterating over nodes that
+match a criterium.</p>
 
 <p>It also integrates with <span class='object_link'><a href="Rewriter.html" title="Hexp::Node::Rewriter (class)">Rewriter</a></span> for selective rewriting of a
 Hexp tree.</p>
@@ -125,11 +125,11 @@ Hexp tree.</p>
     
       
       <pre class="example code"><code># Loop over the nodes with class=&quot;big&quot;
-hexp.select {|el| el.class? &#39;big&#39; }.each { ... }</code></pre>
+hexp.select {|el| el.class? 'big' }.each { ... }</code></pre>
     
       
       <pre class="example code"><code><span class='comment'># stick all links inside a &lt;span class=&quot;link&gt; ... &lt;/span&gt;
-</span><span class='id identifier rubyid_hexp'>hexp</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_el'>el</span><span class='op'>|</span> <span class='id identifier rubyid_el'>el</span><span class='period'>.</span><span class='id identifier rubyid_tag'>tag</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>a</span><span class='tstring_end'>&#39;</span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_wrap'>wrap</span><span class='lparen'>(</span><span class='symbol'>:span</span><span class='comma'>,</span> <span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>link</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span></code></pre>
+</span><span class='id identifier rubyid_hexp'>hexp</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_el'>el</span><span class='op'>|</span> <span class='id identifier rubyid_el'>el</span><span class='period'>.</span><span class='id identifier rubyid_tag'>tag</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a</span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_wrap'>wrap</span><span class='lparen'>(</span><span class='symbol'>:span</span><span class='comma'>,</span> <span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>link</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span></code></pre>
     
   </div>
 
@@ -499,9 +499,9 @@ hexp.select {|el| el.class? &#39;big&#39; }.each { ... }</code></pre>
 </div>
 
     <div id="footer">
-  Generated on Tue Aug 20 11:44:38 2013 by
+  Generated on Tue Aug 20 23:36:14 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.6.2 (ruby-2.0.0).
+  0.8.6.2 (ruby-1.9.3).
 </div>
 
   </body>

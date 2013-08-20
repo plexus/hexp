@@ -182,7 +182,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Call the block, with a specific value of &#39;self&#39;.</p>
+<p>Call the block, with a specific value of 'self'.</p>
 </div></span>
   
 </li>
@@ -495,7 +495,7 @@ name clashes or dynamically generated tags you can call this directly.</p>
       
         &mdash;
         <div class='inline'>
-<p>The tag name, like &#39;div&#39; or &#39;head&#39;</p>
+<p>The tag name, like ‘div’ or ‘head’</p>
 </div>
       
     </li>
@@ -589,7 +589,7 @@ occurences of each can be specified</p>
     <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Hash</span>
       <span class='id identifier rubyid_attributes'>attributes</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_arg'>arg</span><span class='rparen'>)</span>
     <span class='kw'>when</span> <span class='op'>::</span><span class='const'>String</span>
-      <span class='id identifier rubyid_text'>text</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+      <span class='id identifier rubyid_text'>text</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
       <span class='id identifier rubyid_text'>text</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_arg'>arg</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
@@ -743,11 +743,11 @@ consider parsing it to Hexps first</p>
   You should avoid using this method if possible, as it may be removed or be changed in the future.
 </p>
 
-<p>Call the block, with a specific value of &#39;self&#39;</p>
+<p>Call the block, with a specific value of 'self'</p>
 
 <p>If the block takes an argument, then we pass ourselves (the builder) to the
-block, and call it as a closure. This way &#39;self&#39; refers to the
-calling object, and it can reference its own methods and ivars.</p>
+block, and call it as a closure. This way 'self' refers to the calling
+object, and it can reference its own methods and ivars.</p>
 
 <p>If the block does not take an argument, then we evaluate it in the context
 of ourselves (the builder), so unqualified method calls are seen as builder
@@ -830,7 +830,7 @@ calls.</p>
     
 <p>Return a debugging representation</p>
 
-<p>Hexp is intended for HTML, so it shouldn&#39;t be a problem that this is an
+<p>Hexp is intended for HTML, so it shouldn't be a problem that this is an
 actual method. It really helps for debugging or when playing around in irb.
 If you really want an `&lt;inspect&gt;` tag, use `tag!(:inspect)`.</p>
 
@@ -875,7 +875,7 @@ If you really want an `&lt;inspect&gt;` tag, use `tag!(:inspect)`.</p>
       <pre class="code"><span class="info file"># File 'lib/hexp/builder.rb', line 219</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#&lt;Hexp::Builder </span><span class='embexpr_beg'>#{</span><span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>[]</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span><span class='id identifier rubyid_to_hexp'>to_hexp</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#&lt;Hexp::Builder </span><span class='embexpr_beg'>#{</span><span class='ivar'>@stack</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>[]</span><span class='tstring_end'>'</span></span> <span class='op'>:</span> <span class='id identifier rubyid_to_hexp'>to_hexp</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='rbrace'>}</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -932,7 +932,7 @@ name clashes or dynamically generated tags you can call this directly.</p>
       
         &mdash;
         <div class='inline'>
-<p>The tag name, like &#39;div&#39; or &#39;head&#39;</p>
+<p>The tag name, like ‘div’ or ‘head’</p>
 </div>
       
     </li>
@@ -1026,7 +1026,7 @@ occurences of each can be specified</p>
     <span class='kw'>when</span> <span class='op'>::</span><span class='const'>Hash</span>
       <span class='id identifier rubyid_attributes'>attributes</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_arg'>arg</span><span class='rparen'>)</span>
     <span class='kw'>when</span> <span class='op'>::</span><span class='const'>String</span>
-      <span class='id identifier rubyid_text'>text</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+      <span class='id identifier rubyid_text'>text</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
       <span class='id identifier rubyid_text'>text</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_arg'>arg</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
@@ -1072,7 +1072,7 @@ occurences of each can be specified</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_hexp'>hexp</span> <span class='op'>=</span> <span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span> <span class='kw'>do</span>
   <span class='id identifier rubyid_span'>span</span> <span class='kw'>do</span>
-    <span class='id identifier rubyid_text!'>text!</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Not all who wander are lost</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_text!'>text!</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Not all who wander are lost</span><span class='tstring_end'>'</span></span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></code></pre>
     
@@ -1169,7 +1169,7 @@ method if you really, really just want the plain <span class='object_link'><a hr
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_div'>div</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_text!'>text!</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>hello</span><span class='tstring_end'>&#39;</span></span> <span class='rbrace'>}</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_to_hexp'>to_hexp</span> <span class='comment'># =&gt; H[:div, [&quot;hello&quot;]]</span></code></pre>
+      <pre class="example code"><code><span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_div'>div</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_text!'>text!</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>hello</span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_to_hexp'>to_hexp</span> <span class='comment'># =&gt; H[:div, [&quot;hello&quot;]]</span></code></pre>
     
   </div>
 
@@ -1215,9 +1215,9 @@ method if you really, really just want the plain <span class='object_link'><a hr
 </div>
 
     <div id="footer">
-  Generated on Tue Aug 20 11:44:37 2013 by
+  Generated on Tue Aug 20 23:36:13 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.6.2 (ruby-2.0.0).
+  0.8.6.2 (ruby-1.9.3).
 </div>
 
   </body>

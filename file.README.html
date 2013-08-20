@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII" />
 <title>
   File: README
   
@@ -61,28 +61,29 @@
 
     <iframe id="search_frame"></iframe>
 
-    <div id="content"><div id='filecontents'><p><a href="https://rubygems.org/gems/hexp"><img src="https://badge.fury.io/rb/hexp.png" alt="Gem Version"></a>
-<a href="https://travis-ci.org/plexus/hexp"><img src="https://secure.travis-ci.org/plexus/hexp.png?branch=master" alt="Build Status"></a>
-<a href="https://gemnasium.com/plexus/hexp"><img src="https://gemnasium.com/plexus/hexp.png" alt="Dependency Status"></a>
-<a href="https://codeclimate.com/github/plexus/hexp"><img src="https://codeclimate.com/github/plexus/hexp.png" alt="Code Climate"></a>
-<a href="https://coveralls.io/r/plexus/hexp"><img src="https://coveralls.io/repos/plexus/hexp/badge.png?branch=master" alt="Coverage Status"></a></p>
+    <div id="content"><div id='filecontents'><p><a href="https://rubygems.org/gems/hexp"><img src="https://badge.fury.io/rb/hexp.png" alt="Gem Version" /></a>
+<a href="https://travis-ci.org/plexus/hexp"><img src="https://secure.travis-ci.org/plexus/hexp.png?branch=master" alt="Build Status" /></a>
+<a href="https://gemnasium.com/plexus/hexp"><img src="https://gemnasium.com/plexus/hexp.png" alt="Dependency Status" /></a>
+<a href="https://codeclimate.com/github/plexus/hexp"><img src="https://codeclimate.com/github/plexus/hexp.png" alt="Code Climate" /></a>
+<a href="https://coveralls.io/r/plexus/hexp"><img src="https://coveralls.io/repos/plexus/hexp/badge.png?branch=master" alt="Coverage Status" /></a></p>
 
-<h2>A bit about hexps</h2>
+<h2 id="a-bit-about-hexps">A bit about hexps</h2>
 
 <p><strong>What on earth is a Hexp?</strong></p>
 
-<p>Hexps are basically snippets of HTML written in nothing but Ruby, here&#39;s an example.</p>
+<p>Hexps are basically snippets of HTML written in nothing but Ruby, here&#8217;s an example.</p>
 
-<pre class="code ruby"><code class="ruby"><span class='ivar'>@message</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hexps are fun for the whole family, from 9 to 99 years old.</span><span class='tstring_end'>&quot;</span></span>
-<span class='ivar'>@hexp</span> <span class='op'>=</span> <span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:div</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>hexp-intro</span><span class='tstring_end'>&#39;</span></span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='lbracket'>[</span>
-    <span class='lbracket'>[</span><span class='symbol'>:p</span><span class='comma'>,</span> <span class='ivar'>@message</span><span class='rbracket'>]</span>
-  <span class='rbracket'>]</span>
-<span class='rbracket'>]</span>
-</code></pre>
+<p><code>ruby
+@message = "Hexps are fun for the whole family, from 9 to 99 years old."
+@hexp = H[:div, {class: 'hexp-intro'}, [
+    [:p, @message]
+  ]
+]
+</code></p>
 
 <p>For more info to get you up and running have a look at the API documentation for <a href="http://plexus.github.io/hexp/Hexp/Node.html">Hexp::Node</a>.</p>
 
-<p><strong>Don&#39;t people use templates for this kind of thing?</strong></p>
+<p><strong>Don&#8217;t people use templates for this kind of thing?</strong></p>
 
 <p>They do, this is an alternative approach. With templates you need to think about which parts need to be HTML-escaped, or you can make errors like forgetting a closing tag. With hexps you no longer need to think about escaping.</p>
 
@@ -92,43 +93,44 @@
 
 <p>When using hexps you never deal with strings that actually contain HTML. Helper methods would return hexps instead, and you can combine those into bigger hexps. Strings inside a hexp are always just that, so they will always be escaped without you thinking about it.</p>
 
-<p><strong>So that&#39;s it, easier escaping?</strong></p>
+<p><strong>So that&#8217;s it, easier escaping?</strong></p>
 
-<p>Well that&#39;s not all, by having a simple lightweight representation of HTML that is <em>a real data structure</em>, you can really start programming your HTML. If you have an object that responds to <code>to_hexp</code>, you can use that object inside a hexp, so you can use Object Orientation for your user interface. Like so</p>
+<p>Well that&#8217;s not all, by having a simple lightweight representation of HTML that is <em>a real data structure</em>, you can really start programming your HTML. If you have an object that responds to <code>to_hexp</code>, you can use that object inside a hexp, so you can use Object Orientation for your user interface. Like so</p>
 
-<pre class="code ruby"><code class="ruby">class ProfileLink &lt; Struct.new(:user)
+<p>````ruby
+class ProfileLink &lt; Struct.new(:user)
   def to_hexp
-    H[:a, {class: &quot;profile-link&quot;, href: &quot;/user/#{user.id}&quot;}, user.name]
+    H[:a, &#8220;profile-link&#8221;, href: &#8220;/user/#{user.id&#8221;}, user.name]
   end
-end
+end</p>
 
-class Layout &lt; Struct.new(:content)
+<p>class Layout &lt; Struct.new(:content)
   def to_hexp
     H[:html, [
       [:body, [content]]
     ]
   end
-end
+end</p>
 
-render inline: Layout.new(ProfileLink.new(@user)).to_html
-</code></pre>
+<p>render inline: Layout.new(ProfileLink.new(@user)).to_html
+````</p>
 
 <p><strong>Does it get any better?</strong></p>
 
 <p>It does! The really neat part is having filters that process this HTML tree before it gets serialized to text. This could be good for</p>
 
 <ul>
-<li>populating form fields</li>
-<li>adding extra admin buttons when logged in</li>
-<li>cleanly separate aspects of your app (e.g. discount codes) from &#39;core&#39; implementation</li>
-<li>becoming filthy rich and/or ridiculously happy</li>
+  <li>populating form fields</li>
+  <li>adding extra admin buttons when logged in</li>
+  <li>cleanly separate aspects of your app (e.g. discount codes) from &#8216;core&#8217; implementation</li>
+  <li>becoming filthy rich and/or ridiculously happy</li>
 </ul>
 
-<p><strong>What&#39;s up with the funny name?</strong></p>
+<p><strong>What&#8217;s up with the funny name?</strong></p>
 
-<p>Hexp stands for HTML expressions. It&#39;s a reference to s-expressions as they are known in LISP languages, a simple way to represent data as nested lists.</p>
+<p>Hexp stands for HTML expressions. It&#8217;s a reference to s-expressions as they are known in LISP languages, a simple way to represent data as nested lists.</p>
 
-<h2>How to use it</h2>
+<h2 id="how-to-use-it">How to use it</h2>
 
 <p>Hexp objects come in two flavors : <code>Hexp::Node</code> and <code>Hexp::List</code>. A <code>Node</code> consists of three parts : its <code>tag</code>, <code>attributes</code> and <code>children</code>. A <code>List</code> is just that, a list (of nodes).</p>
 
@@ -138,38 +140,39 @@ render inline: Layout.new(ProfileLink.new(@user)).to_html
 
 <p>The entire API is centered around these two classes, and one of them you can think of as essentially just an <code>Array</code>, in other words Hexp is super easy to learn. Try it out in <code>irb</code>, have a look at the examples, and <em>build cool stuff</em>!</p>
 
-<h2>A note on immutability</h2>
+<h2 id="a-note-on-immutability">A note on immutability</h2>
 
 <p>All Hexp objects are deep frozen on creation, you can never alter them afterwards. Operations always return a new <code>Hexp::Node</code> rather than working in place.</p>
 
-<p>This might seem stringent when you are not used to this style of coding, but it&#39;s a pattern that generally promotes good code.</p>
+<p>This might seem stringent when you are not used to this style of coding, but it&#8217;s a pattern that generally promotes good code.</p>
 
-<h2>Can I already use it</h2>
+<h2 id="can-i-already-use-it">Can I already use it</h2>
 
-<p>Hold your horses, this is <em>very</em> alpha level code! Feedback is very much appreciated, so try it out, and let me know what you think. Basic functionality is there, but it&#39;s far from finished, and the API will probably still change based on feedback. You have been warned.</p>
+<p>Hold your horses, this is <em>very</em> alpha level code! Feedback is very much appreciated, so try it out, and let me know what you think. Basic functionality is there, but it&#8217;s far from finished, and the API will probably still change based on feedback. You have been warned.</p>
 
-<h2>Is it any good?</h2>
+<h2 id="is-it-any-good">Is it any good?</h2>
 
 <p>Yes</p>
 
-<h2>How to install</h2>
+<h2 id="how-to-install">How to install</h2>
 
-<p>At this point you&#39;re best off grabbing the Git repo, e.g. with bundler</p>
+<p>At this point you&#8217;re best off grabbing the Git repo, e.g. with bundler</p>
 
-<pre class="code sh"><code class="sh"># Gemfile
+<p>````sh
+# Gemfile</p>
 
-gem &#39;hexp&#39;, github: &#39;plexus/hexp&#39;
-</code></pre>
+<p>gem &#8216;hexp&#8217;, github: &#8216;plexus/hexp&#8217;
+````</p>
 
-<h2>Who is behind this</h2>
+<h2 id="who-is-behind-this">Who is behind this</h2>
 
 <p>Hexp is being actively developed by <a href="http://arnebrasseur.net">Arne Brasseur</a>. You can <a href="https://www.gittip.com/plexus">supportme on Gittip!</a></p>
 </div></div>
 
     <div id="footer">
-  Generated on Tue Aug 20 11:44:36 2013 by
+  Generated on Tue Aug 20 23:36:13 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.6.2 (ruby-2.0.0).
+  0.8.6.2 (ruby-1.9.3).
 </div>
 
   </body>

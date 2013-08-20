@@ -310,7 +310,7 @@
     
       
       <pre class="example code"><code><span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_div'>div</span><span class='period'>.</span><span class='id identifier rubyid_strong'>strong</span><span class='period'>.</span><span class='id identifier rubyid_warn'>warn</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_to_hexp'>to_hexp</span>
-<span class='comment'># =&gt; H[:div, class: &#39;strong warn&#39;]</span></code></pre>
+<span class='comment'># =&gt; H[:div, class: 'strong warn']</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -371,8 +371,8 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_sym'>sym</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_attrs'>attrs</span> <span class='op'>=</span> <span class='ivar'>@node</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
-  <span class='ivar'>@node</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_attrs'>attrs</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span> <span class='label'>class:</span> <span class='lbracket'>[</span><span class='id identifier rubyid_attrs'>attrs</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_sym'>sym</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
-  <span class='ivar'>@builder</span><span class='period'>.</span><span class='id identifier rubyid__process'>_process</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span>
+  <span class='ivar'>@node</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_attrs'>attrs</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span> <span class='label'>class:</span> <span class='lbracket'>[</span><span class='id identifier rubyid_attrs'>attrs</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_sym'>sym</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@builder</span><span class='period'>.</span><span class='id identifier rubyid__process'>_process</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span>
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -386,9 +386,9 @@
 </div>
 
     <div id="footer">
-  Generated on Tue Aug 20 11:44:37 2013 by
+  Generated on Tue Aug 20 23:36:13 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.6.2 (ruby-2.0.0).
+  0.8.6.2 (ruby-1.9.3).
 </div>
 
   </body>

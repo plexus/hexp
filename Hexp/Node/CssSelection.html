@@ -92,11 +92,15 @@
     
   
     
+      <dt class="r2">Includes:</dt>
+      <dd class="r2">Enumerable</dd>
+      
+    
   
   
   
-    <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/hexp/node/css_selection.rb</dd>
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/hexp/node/css_selection.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -106,11 +110,47 @@
     
 <p>Select nodes using CSS selectors</p>
 
+<p>The main interface to this is <span class='object_link'><a href="../Node.html#select-instance_method" title="Hexp::Node#select (method)">#select</a></span>, although there's nothing
+stopping you from using this class directly.</p>
+
+<p>This class is <tt>Enumerable</tt>, and calling <span class='object_link'><a href="#each-instance_method" title="Hexp::Node::CssSelection#each (method)">#each</a></span> without a block will
+give you an <tt>Enumerator</tt>, so you have all Ruby's tasty list
+operations at your disposal.</p>
+
+<p>Only a subset of the <a href="http://www.w3.org/TR/css3-selectors/" target="_parent" title="CSS 3 selector syntax">CSS 3 selector syntax</a> is supported. Parsing a selector that contains unsupported elements
+should raise an exception.</p>
+<ul><li>
+<p>tag selector : <tt>div</tt>, <tt>a</tt>, <tt>section</tt></p>
+</li><li>
+<p>class selector : <tt>.big</tt>, <tt>.user_profile</tt></p>
+</li><li>
+<p>id selector : <tt>#main_content</tt>, <tt>#sidebar</tt></p>
+</li><li>
+<p>attribute selectors : <tt>[href]</tt>, <tt>[class~=foo]</tt>, <tt>[lang|=en]</tt></p>
+</li></ul>
+
+<p>Attribute selectors support
+<a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors" target="_parent" title="all the operators of the CSS 3 spec">all the operators of the CSS 3 spec</a> , so have a look there for more details.</p>
+
+<p>Of course you can combine all these.</p>
+
 
   </div>
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_link'>link</span> <span class='op'>=</span> <span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:a</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>foo bar</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>lang:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>fr-be</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>href:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>http://example.com</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello, World</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:div</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>wrap</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_link'>link</span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>div.wrap a.foo.bar[lang|=fr][href^=http]</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_a'>a</span><span class='op'>|</span>
+  <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_a'>a</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
 
 </div>
 
@@ -130,7 +170,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#each-instance_method" title="#each (instance method)">- (Object) <strong>each</strong> {|@node| ... }</a>
+      <a href="#each-instance_method" title="#each (instance method)">- (Enumerator, CssSelection) <strong>each</strong>(&amp;block) {|@node| ... }</a>
     
 
     
@@ -144,7 +184,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Iterate over the nodes that match.</p>
+</div></span>
   
 </li>
 
@@ -169,7 +211,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>A new instance of CssSelection.</p>
+<p>Create a new CssSelection based on a root node and a selector.</p>
 </div></span>
   
 </li>
@@ -178,7 +220,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#inspect-instance_method" title="#inspect (instance method)">- (Object) <strong>inspect</strong> </a>
+      <a href="#inspect-instance_method" title="#inspect (instance method)">- (String) <strong>inspect</strong> </a>
     
 
     
@@ -192,7 +234,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Debugging representation.</p>
+</div></span>
   
 </li>
 
@@ -214,7 +258,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Replace / alter each node that matches.</p>
+</div></span>
   
 </li>
 
@@ -223,6 +269,7 @@
   
 
 
+  
   
   
   
@@ -249,13 +296,53 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>A new instance of CssSelection</p>
+<p>Create a new CssSelection based on a root node and a selector</p>
+
+<p>The selector can be unparsed (a plain <tt>String</tt>), or parsed. This
+class works recursively by passing a subset of the parsed selector to a
+subset of the tree, hence why this matters.</p>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>node</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Node.html" title="Hexp::Node (class)">Hexp::Node</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Root node of the tree</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>css_selector</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt><span class='object_link'><a href="../CssSelector/CommaSequence.html" title="Hexp::CssSelector::CommaSequence (class)">Hexp::CssSelector::CommaSequence</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>CSS selector</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -263,15 +350,15 @@
       <pre class="lines">
 
 
-6
-7
-8</pre>
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/hexp/node/css_selection.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/hexp/node/css_selection.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_css_selector'>css_selector</span><span class='rparen'>)</span>
-  <span class='ivar'>@node</span><span class='comma'>,</span> <span class='ivar'>@css_selector</span> <span class='op'>=</span> <span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_css_selector'>css_selector</span>
+  <span class='ivar'>@node</span><span class='comma'>,</span> <span class='ivar'>@css_selector</span> <span class='op'>=</span> <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_to_hexp'>to_hexp</span><span class='comma'>,</span> <span class='id identifier rubyid_css_selector'>css_selector</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -288,7 +375,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="each-instance_method">
   
-    - (<tt>Object</tt>) <strong>each</strong> {|@node| ... }
+    - (<tt>Enumerator</tt>, <tt><span class='object_link'><a href="" title="Hexp::Node::CssSelection (class)">CssSelection</a></span></tt>) <strong>each</strong>(&amp;block) {|@node| ... }
   
 
   
@@ -297,11 +384,33 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Iterate over the nodes that match</p>
+
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a block that receives each matching nodes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Yields:</p>
 <ul class="yield">
   
@@ -315,6 +424,24 @@
     </li>
   
 </ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Enumerator</tt>, <tt><span class='object_link'><a href="" title="Hexp::Node::CssSelection (class)">CssSelection</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>enumerator if no block is given, or self</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -322,17 +449,18 @@
       <pre class="lines">
 
 
-14
-15
-16
-17
-18
-19
-20
-21</pre>
+65
+66
+67
+68
+69
+70
+71
+72
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/hexp/node/css_selection.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/hexp/node/css_selection.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_to_enum'>to_enum</span><span class='lparen'>(</span><span class='symbol'>:each</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -341,6 +469,7 @@
     <span class='id identifier rubyid_next_selection_for'>next_selection_for</span><span class='lparen'>(</span><span class='id identifier rubyid_child'>child</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
   <span class='kw'>yield</span> <span class='ivar'>@node</span> <span class='kw'>if</span> <span class='id identifier rubyid_node_matches?'>node_matches?</span>
+  <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -350,27 +479,51 @@
       <div class="method_details ">
   <h3 class="signature " id="inspect-instance_method">
   
-    - (<tt>Object</tt>) <strong>inspect</strong> 
+    - (<tt>String</tt>) <strong>inspect</strong> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Debugging representation</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-10
-11
-12</pre>
+57
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/hexp/node/css_selection.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/hexp/node/css_selection.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#&lt;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'> @node=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@node</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_content'> @css_selector=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@css_selector</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_content'> matches=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_node_matches?'>node_matches?</span><span class='embexpr_end'>}</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#&lt;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rbrace'>}</span><span class='tstring_content'> @node=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@node</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='rbrace'>}</span><span class='tstring_content'> @css_selector=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@css_selector</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='rbrace'>}</span><span class='tstring_content'> matches=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_node_matches?'>node_matches?</span><span class='rbrace'>}</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -386,27 +539,38 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Replace / alter each node that matches</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34</pre>
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/hexp/node/css_selection.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/hexp/node/css_selection.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rewrite'>rewrite</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='ivar'>@node</span> <span class='kw'>if</span> <span class='ivar'>@node</span><span class='period'>.</span><span class='id identifier rubyid_text?'>text?</span>
@@ -430,9 +594,9 @@
 </div>
 
     <div id="footer">
-  Generated on Tue Aug 20 11:44:38 2013 by
+  Generated on Tue Aug 20 23:36:14 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.6.2 (ruby-2.0.0).
+  0.8.6.2 (ruby-1.9.3).
 </div>
 
   </body>

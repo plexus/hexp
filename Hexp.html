@@ -115,7 +115,7 @@
         <dt id="VERSION-constant" class="">VERSION =
           
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>0.2.0</span><span class='tstring_end'>&#39;</span></span></pre></dd>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>0.2.0</span><span class='tstring_end'>'</span></span></pre></dd>
       
     </dl>
   
@@ -281,10 +281,10 @@
 
 <p>Variant of ::Array with slightly modified semantics</p>
 
-<p>Array() is often used to wrap a value in an Array, unless it&#39;s already
-an array. However if your object implements #to_a, then Array() will use
-that value. Because of this objects that aren&#39;t Array-like will get
-converted as well, such as Struct objects.</p>
+<p>Array() is often used to wrap a value in an Array, unless it's already an
+array. However if your object implements #to_a, then Array() will use that
+value. Because of this objects that aren't Array-like will get converted as
+well, such as Struct objects.</p>
 
 <p>This implementation relies on #to_ary, which signals that the Object is a
 drop-in replacement for an actual Array.</p>
@@ -627,7 +627,7 @@ only a DTD or comment) then an error is raised</p>
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;div&gt;hello&lt;/div&gt;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='comment'>#=&gt; H[:div, &quot;hello&quot;]</span></code></pre>
+      <pre class="example code"><code><span class='const'>Hexp</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>&lt;div&gt;hello&lt;/div&gt;</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='comment'>#=&gt; H[:div, &quot;hello&quot;]</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -708,9 +708,9 @@ only a DTD or comment) then an error is raised</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Aug 20 11:44:36 2013 by
+  Generated on Tue Aug 20 23:36:13 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.6.2 (ruby-2.0.0).
+  0.8.6.2 (ruby-1.9.3).
 </div>
 
   </body>

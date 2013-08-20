@@ -467,7 +467,7 @@
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:div</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_add_class'>add_class</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='comment'>#=&gt; H[:div, class: &#39;foo&#39;]</span></code></pre>
+      <pre class="example code"><code><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:div</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_add_class'>add_class</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>foo</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='comment'>#=&gt; H[:div, class: 'foo']</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -519,7 +519,7 @@
       <pre class="code"><span class="info file"># File 'lib/hexp/node/attributes.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_class'>add_class</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>class</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>class</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_klass'>klass</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>class</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>class</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_klass'>klass</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -558,9 +558,9 @@ unset.</p>
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:p</span><span class='comma'>,</span> <span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>hello</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>class</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>       <span class='comment'># =&gt; &quot;hello&quot;
-</span><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:p</span><span class='comma'>,</span> <span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>hello</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>para1</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='comment'># =&gt; H[:p, {&quot;class&quot;=&gt;&quot;hello&quot;, &quot;id&quot;=&gt;&quot;para1&quot;}]
-</span><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:p</span><span class='comma'>,</span> <span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>hello</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>class</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>  <span class='comment'># =&gt; H[:p]</span></code></pre>
+      <pre class="example code"><code><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:p</span><span class='comma'>,</span> <span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>hello</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>class</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>       <span class='comment'># =&gt; &quot;hello&quot;
+</span><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:p</span><span class='comma'>,</span> <span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>hello</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>id</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>para1</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='comment'># =&gt; H[:p, {&quot;class&quot;=&gt;&quot;hello&quot;, &quot;id&quot;=&gt;&quot;para1&quot;}]
+</span><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:p</span><span class='comma'>,</span> <span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>hello</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>class</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>  <span class='comment'># =&gt; H[:p]</span></code></pre>
     
   </div>
 
@@ -611,7 +611,7 @@ unset.</p>
   <span class='kw'>when</span> <span class='int'>2</span>
     <span class='id identifier rubyid_set_attr'>set_attr</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>else</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>wrong number of arguments(</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_arity'>arity</span><span class='embexpr_end'>}</span><span class='tstring_content'> for 1..2)</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>wrong number of arguments(</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_arity'>arity</span><span class='rbrace'>}</span><span class='tstring_content'> for 1..2)</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -699,7 +699,7 @@ unset.</p>
       <pre class="code"><span class="info file"># File 'lib/hexp/node/attributes.rb', line 58</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_class?'>class?</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>class</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>class</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>class</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>class</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -720,7 +720,7 @@ unset.</p>
     
 <p>The CSS classes of this element as an array</p>
 
-<p>Convenience method so you don&#39;t have to split the class list yourself.</p>
+<p>Convenience method so you don't have to split the class list yourself.</p>
 
 
   </div>
@@ -755,7 +755,7 @@ unset.</p>
       <pre class="code"><span class="info file"># File 'lib/hexp/node/attributes.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_class_list'>class_list</span>
-  <span class='ivar'>@class_list</span> <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>class</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+  <span class='ivar'>@class_list</span> <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>class</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -787,7 +787,7 @@ unset.</p>
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:option</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_has_attr?'>has_attr?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>selected</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='comment'>#=&gt; false</span></code></pre>
+      <pre class="example code"><code><span class='const'>H</span><span class='lbracket'>[</span><span class='symbol'>:option</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_has_attr?'>has_attr?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>selected</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='comment'>#=&gt; false</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -864,8 +864,8 @@ unset.</p>
 than being overwritten. See <span class='object_link'><a href="#set_attrs-instance_method" title="Hexp::Node::Attributes#set_attrs (method)">#set_attrs</a></span> for a more basic version.</p>
 
 <p>This method is analoguous with `Hash#merge`. As argument it can take a
-Hash, or another Hexp element, in which case that element&#39;s attributes
-are used.</p>
+Hash, or another Hexp element, in which case that element's attributes are
+used.</p>
 
 
   </div>
@@ -929,7 +929,7 @@ are used.</p>
            <span class='id identifier rubyid_node_or_hash'>node_or_hash</span><span class='period'>.</span><span class='id identifier rubyid_to_hexp'>to_hexp</span><span class='period'>.</span><span class='id identifier rubyid_attributes'>attributes</span> <span class='op'>:</span> <span class='id identifier rubyid_node_or_hash'>node_or_hash</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='kw'>self</span>
   <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
-    <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>class</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>class</span><span class='tstring_end'>'</span></span>
                <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_add_class'>add_class</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
              <span class='kw'>else</span>
                <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
@@ -1045,7 +1045,7 @@ are used.</p>
 
 <p>If the resulting class list is empty, the class attribute will be removed.
 If the class is present several times all instances will be removed. If
-it&#39;s not present at all, the class list will be unmodified.</p>
+it's not present at all, the class list will be unmodified.</p>
 
 <p>Calling this on a node with a class attribute that is equal to an empty
 string will result in the class attribute being removed.</p>
@@ -1111,10 +1111,10 @@ string will result in the class attribute being removed.</p>
       <pre class="code"><span class="info file"># File 'lib/hexp/node/attributes.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_class'>remove_class</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='kw'>self</span> <span class='kw'>unless</span> <span class='id identifier rubyid_has_attr?'>has_attr?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>class</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>self</span> <span class='kw'>unless</span> <span class='id identifier rubyid_has_attr?'>has_attr?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>class</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_new_list'>new_list</span> <span class='op'>=</span> <span class='id identifier rubyid_class_list'>class_list</span> <span class='op'>-</span> <span class='lbracket'>[</span><span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_remove_attr'>remove_attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>class</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_new_list'>new_list</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
-  <span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>class</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_new_list'>new_list</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_remove_attr'>remove_attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>class</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_new_list'>new_list</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_attr'>attr</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>class</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id identifier rubyid_new_list'>new_list</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1207,9 +1207,9 @@ string will result in the class attribute being removed.</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Aug 20 11:44:36 2013 by
+  Generated on Tue Aug 20 23:36:13 2013 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.6.2 (ruby-2.0.0).
+  0.8.6.2 (ruby-1.9.3).
 </div>
 
   </body>
