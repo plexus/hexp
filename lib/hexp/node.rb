@@ -17,8 +17,11 @@ module Hexp
   # attributes and children can each be ommitted if they are empty.
   #
   # If the node contains a single child node, then it is not necessary to wrap
-  # that child node in an array. One can use +H[tag, attrs, children]+ as a
-  # shorthand syntax. Finally one can use {Hexp::build} to construct nodes using
+  # that child node in an array. Just put the single node in place of the list
+  # of children.
+  #
+  # One can use +H[tag, attrs, children]+ as a
+  # shorthand syntax. Finally one can use {Hexp.build Hexp.build} to construct nodes using
   # Ruby blocks, not unlike the Builder or Nokogiri gems.
   #
   # @example Creating Hexp : syntax alternatives and optional parameters
@@ -197,6 +200,15 @@ module Hexp
       false
     end
 
+    # Return a new node, with a different tag
+    #
+    # @example
+    #   H[:div, class: 'foo'].set_tag(:bar)
+    #   # => H[:bar, class: 'foo']
+    #
+    # @param tag [#to_sym] The new tag
+    # @return [Hexp::Node]
+    #
     def set_tag(tag)
       H[tag.to_sym, attributes, children]
     end
@@ -210,9 +222,6 @@ module Hexp
     #
     # Because of this you can add one or more nodes, or remove nodes by
     # returning an empty array.
-    #
-    # If the CSS selector is ommitted, then the whole tree is traversed, and
-    # every node is passed to the block.
     #
     # @example Remove all script tags
     #   tree.replace('script') {|_| [] }
@@ -232,6 +241,8 @@ module Hexp
     end
     alias :replace :rewrite
 
+    # Select nodes based on a css selector
+    #
     def select(css_selector = nil, &block)
       if css_selector
         CssSelection.new(self, css_selector).each(&block)
