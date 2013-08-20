@@ -112,4 +112,4 @@ gem 'hexp', github: 'plexus/hexp'
 Who is behind this
 ------------------
 
-Hexp is conceived and created by [Arne Brasseur](http://arnebrasseur.net)
+Hexp is being actively developed by [Arne Brasseur](http://arnebrasseur.net). You can [supportme on Gittip!](https://www.gittip.com/plexus)
