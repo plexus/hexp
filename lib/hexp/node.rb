@@ -1,8 +1,8 @@
 module Hexp
-  # A `Hexp::Node` represents a single element in a HTML syntax tree. It
+  # A +Hexp::Node+ represents a single element in a HTML syntax tree. It
   # consists of three parts : the {#tag}, the {#attributes} and the {#children}.
   #
-  # Instances of `Hexp::Node` are immutable. Because of this all methods that
+  # Instances of +Hexp::Node+ are immutable. Because of this all methods that
   # "alter" the node actually return a new instance, leaving the old one
   # untouched.
   #
@@ -12,12 +12,12 @@ module Hexp
   #   p node  # => H[:div]
   #   p node2 # => H[:div, 'class' => 'items']
   #
-  # The `Hexp::Node` constructor takes a `Symbol`, a `Hash` and an `Array` for
+  # The +Hexp::Node+ constructor takes a +Symbol+, a +Hash+ and an +Array+ for
   # the {#tag}, {#attributes} and {#children} respectively. However the
   # attributes and children can each be ommitted if they are empty.
   #
   # If the node contains a single child node, then it is not necessary to wrap
-  # that child node in an array. One can use `H[tag, attrs, children]` as a
+  # that child node in an array. One can use +H[tag, attrs, children]+ as a
   # shorthand syntax. Finally one can use {Hexp::build} to construct nodes using
   # Ruby blocks, not unlike the Builder or Nokogiri gems.
   #
@@ -203,10 +203,10 @@ module Hexp
 
     # Replace nodes in a tree
     #
-    # With a CSS selector string like `"form.checkout"` you specify the nodes
+    # With a CSS selector string like +"form.checkout"+ you specify the nodes
     # you want to operate on. These will be passed one by one into the block.
     # The block returns the {Hexp::Node} that will replace the old node, or it
-    # can replace an `Array` of nodes to fill the place of the old node.
+    # can replace an +Array+ of nodes to fill the place of the old node.
     #
     # Because of this you can add one or more nodes, or remove nodes by
     # returning an empty array.
@@ -217,7 +217,7 @@ module Hexp
     # @example Remove all script tags
     #   tree.replace('script') {|_| [] }
     #
-    # @example Wrap each `<input>` tag into a `<p>` tag
+    # @example Wrap each +<input>+ tag into a +<p>+ tag
     #   tree.replace('input') do |input|
     #     H[:p, input]
     #   end
