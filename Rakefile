@@ -29,3 +29,19 @@ task :push => :gem do
   sh "git push --tags"
   sh "gem push pkg/hexp-#{Hexp::VERSION}.gem"
 end
+
+desc "update gh-pages"
+task :doc2gh do
+  sh "git diff-files --quiet || exit 1"
+  sh "git diff-index --quiet --cached HEAD || exit 1"
+  sh "yardoc"
+  sh "[ -d /tmp/doc ] && rm -rf /tmp/doc"
+  sh "mv doc /tmp"
+  sh "git co gh-pages"
+  sh "rm -rf *"
+  sh "cp -r /tmp/doc/* ."
+  sh "git add ."
+  sh "git commit -m 'Update gh-pages with YARD docs'"
+  sh "git push origin gh-pages"
+  sh "git co master"
+end
