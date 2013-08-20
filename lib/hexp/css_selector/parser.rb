@@ -50,7 +50,7 @@ module Hexp
         when ::Sass::Selector::Attribute           # [href^="http://"]
           raise "CSS attribute selector flags are curently ignored by Hexp (not implemented)" unless simple.flags.nil?
           raise "CSS attribute namespaces are curently ignored by Hexp (not implemented)" unless simple.namespace.nil?
-          raise "CSS attribute operator #{simple.operator} not understood by Hexp" unless %w[= ~= ^=].include?(simple.operator) || simple.operator.nil?
+          raise "CSS attribute operator #{simple.operator} not understood by Hexp" unless %w[= ~= ^= |= $= *=].include?(simple.operator) || simple.operator.nil?
           Attribute.new(
             simple.name.first,
             simple.namespace,
