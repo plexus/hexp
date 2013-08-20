@@ -25,6 +25,8 @@ Hexps are basically snippets of HTML written in nothing but Ruby, here's an exam
 ]
 ````
 
+For more info to get you up and running have a look at the API documentation for [Hexp::Node](http://plexus.github.io/hexp/Hexp/Node.html).
+
 **Don't people use templates for this kind of thing?**
 
 They do, this is an alternative approach. With templates you need to think about which parts need to be HTML-escaped, or you can make errors like forgetting a closing tag. With hexps you no longer need to think about escaping.
