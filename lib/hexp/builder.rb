@@ -199,7 +199,7 @@ module Hexp
       def method_missing(sym, &block)
         attrs = @node[1]
         @node[1] = attrs.merge class: [attrs[:class], sym.to_s].compact.join(' ')
-        @builder._process &block if block
+        @builder._process(&block) if block
         self
       end
     end
@@ -217,7 +217,7 @@ module Hexp
     # @api public
     #
     def inspect
-      "#<Hexp::Builder #{@stack.empty? ? '[]' :to_hexp.inspect}>"
+      "#<Hexp::Builder #{@stack.empty? ? '[]' : to_hexp.inspect}>"
     end
 
     # Gratefully borrowed from Builder.

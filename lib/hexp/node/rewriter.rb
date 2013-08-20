@@ -30,7 +30,7 @@ module Hexp
       #
       def rewrite_children
         @node.children
-          .flat_map {|child| child.rewrite &@block   }
+          .flat_map {|child| child.rewrite(&@block)   }
           .flat_map {|child| coerce_rewrite_response(@block.(child.to_hexp, @node)) || [child] }
       end
 
