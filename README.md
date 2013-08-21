@@ -102,7 +102,11 @@ This might seem stringent when you are not used to this style of coding, but it'
 Can I already use it
 --------------------
 
-Hold your horses, this is *very* alpha level code! Feedback is very much appreciated, so try it out, and let me know what you think. Basic functionality is there, but it's far from finished, and the API will probably still change based on feedback. You have been warned.
+Yes, but there are some things to keep in mind.
+
+For the 0.x line of versions Hexp is not restricted to [semantic versioning](http://semver.org). We are still designing the API, and small backwards incompatible changes may occur. However given that the project's aim is to only provide the lowest level of DOM manipulation upon which others can built, it is already quite feature complete. It shouldn't be too long before we release a 1.0.0, after which we will commit to semantic versioning.
+
+Another thing is that Hexp is young. It hasn't been battle tested yet, and the ecosystem which will make this approach truly attractive is yet to emerge. Therefore better try it out on smaller, non-critical projects first, and give us your feedback.
 
 Is it any good?
 ---------------
