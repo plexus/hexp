@@ -10,10 +10,19 @@
 [codeclimate]: https://codeclimate.com/github/plexus/hexp
 [coveralls]: https://coveralls.io/r/plexus/hexp
 
-A bit about hexps
------------------
+# Hexp
 
-**What on earth is a Hexp?**
+**Hexp** (pronounced [ˈɦækspi:]) is a Ruby API for creating and manipulating HTML syntax trees. It enables a web application architecture where HTML is only ever represented as structured data, rather than as plain text.
+
+Only when the data needs to be serialized and sent over the network is it converted to a string representation. This has a number of advantages.
+
+* Single responsibility : HTML generation is not mixed with business logic
+* Security : Protection from XSS (cross-site scripting)
+* Productivity : components that create or alter fragments of a HTML become generic, reusable parts
+
+For a more in-depth explanation please see the slides of talk [Web Linguistics, Towards Higher Fluency](http://arnebrasseur.net/talks/eurucamp2013/presentation.html) given at Eurucamp 2013. (the video is not available yet.)
+
+**Creating Hexps**
 
 Hexps are basically snippets of HTML written in nothing but Ruby, here's an example.
 
@@ -86,7 +95,7 @@ The entire API is centered around these two classes, and one of them you can thi
 A note on immutability
 ----------------------
 
-All Hexp objects are deep frozen on creation, you can never alter them afterwards. Operations always return a new `Hexp::Node` rather than working in place.
+All Hexp objects are frozen on creation, you can never alter them afterwards. Operations always return a new `Hexp::Node` rather than working in place.
 
 This might seem stringent when you are not used to this style of coding, but it's a pattern that generally promotes good code.
 
@@ -114,4 +123,4 @@ gem 'hexp', github: 'plexus/hexp'
 Who is behind this
 ------------------
 
-Hexp is being actively developed by [Arne Brasseur](http://arnebrasseur.net). You can [supportme on Gittip!](https://www.gittip.com/plexus)
+Hexp is being actively developed by [Arne Brasseur](http://arnebrasseur.net). You can [support me on Gittip!](https://www.gittip.com/plexus)
