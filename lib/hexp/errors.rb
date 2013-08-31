@@ -1,4 +1,6 @@
 module Hexp
+  # Base class for exceptions raised by Hexp
+  #
   Error = Class.new(StandardError)
 
   # Raised when trying to stick things inside a Hexp where they don't belong
@@ -7,7 +9,6 @@ module Hexp
     # Create a new FormatError
     #
     # @api private
-    #
     def initialize(msg = 'You have illegal contents in your Hexp')
       super
     end
@@ -17,5 +18,4 @@ module Hexp
   #
   class ParseError < Error
   end
-
 end

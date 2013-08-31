@@ -10,35 +10,75 @@ module Hexp
     #
     # The classes that make up the parse tree largely mimic the ones from SASS,
     # like CommaSequence, SimpleSequence, Class, Id, etc. By having them in our
-    # own namespace however we can easily add Hexp-specific helper functions.
+    # own namespace however we can easily add Hexp-specific functionality to them.
     #
     class Parser
+      # Initialize the parser with the selector to parse
+      #
+      # @param [String] selector
+      #
+      # @api private
       def initialize(selector)
         @selector = selector.freeze
       end
 
+      # Parse the selector
+      #
+      # @return [Hexp::CssSelector::CommaSequence]
+      #
+      # @api private
       def parse
         rewrite_comma_sequence(SassParser.call(@selector))
       end
 
+      # Parse a CSS selector in one go
+      #
+      # @param [String] selector
+      # @return [Hexp::CssSelector::CommaSequence]
+      #
+      # @api private
       def self.call(selector)
         new(selector).parse
       end
 
       private
 
+      # Map CommaSequence from the SASS namespace to our own
+      #
+      # @param [Sass::Selector::CommaSequence] comma_sequence
+      # @return [Hexp::CssSelector::CommaSequence]
+      #
+      # @api private
       def rewrite_comma_sequence(comma_sequence)
         CommaSequence.new(comma_sequence.members.map{|sequence| rewrite_sequence(sequence)})
       end
 
+      # Map Sequence from the SASS namespace to our own
+      #
+      # @param [Sass::Selector::Sequence] comma_sequence
+      # @return [Hexp::CssSelector::Sequence]
+      #
+      # @api private
       def rewrite_sequence(sequence)
         Sequence.new(sequence.members.map{|simple_sequence| rewrite_simple_sequence(simple_sequence)})
       end
 
+      # Map SimpleSequence from the SASS namespace to our own
+      #
+      # @param [Sass::Selector::SimpleSequence] comma_sequence
+      # @return [Hexp::CssSelector::SimpleSequence]
+      #
+      # @api private
       def rewrite_simple_sequence(simple_sequence)
         SimpleSequence.new(simple_sequence.members.map{|simple| rewrite_simple(simple)})
       end
 
+      # Map Simple from the SASS namespace to our own
+      #
+      # @param [Sass::Selector::Simple] comma_sequence
+      # @return [Hexp::CssSelector::Simple]
+      #
+      # @api private
       def rewrite_simple(simple)
         case simple
         when ::Sass::Selector::Element             # span
@@ -62,6 +102,7 @@ module Hexp
           raise "CSS selectors containing #{simple.class} are not implemented in Hexp"
         end
 
+        # As of yet unimplemented
         # when ::Sass::Selector::Universal           # *
         # when ::Sass::Selector::Parent              # & in Sass
         # when ::Sass::Selector::Interpolation       # #{} in Sass

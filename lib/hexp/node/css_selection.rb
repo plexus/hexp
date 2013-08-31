@@ -41,10 +41,13 @@ module Hexp
       # works recursively by passing a subset of the parsed selector to a subset
       # of the tree, hence why this matters.
       #
-      # @param node [Hexp::Node] Root node of the tree
-      # @param css_selector [String,Hexp::CssSelector::CommaSequence] CSS selector
-      # @api public
+      # @param [Hexp::Node] node
+      #   Root node of the tree
       #
+      # @param [String,Hexp::CssSelector::CommaSequence] css_selector
+      #   CSS selector
+      #
+      # @api public
       def initialize(node, css_selector)
         @node, @css_selector = node.to_hexp, css_selector.freeze
       end
@@ -52,16 +55,21 @@ module Hexp
       # Debugging representation
       #
       # @return [String]
-      # @api public
       #
+      # @api public
       def inspect
         "#<#{self.class} @node=#{@node.inspect} @css_selector=#{@css_selector.inspect} matches=#{node_matches?}>"
       end
 
       # Iterate over the nodes that match
       #
-      # @param block [Proc] a block that receives each matching nodes
-      # @return [Enumerator,CssSelection] enumerator if no block is given, or self
+      # @yieldparam [Hexp::Node]
+      #   Each matching node
+      #
+      # @return [Enumerator,CssSelection]
+      #   Enumerator if no block is given, or self
+      #
+      # @api public
       def each(&block)
         return to_enum(:each) unless block_given?
 
@@ -74,8 +82,12 @@ module Hexp
 
       # Replace / alter each node that matches
       #
-      # @api private (might still take this out)
+      # @yieldparam [Hexp::Node]
+      #   Each matching node
       #
+      # @return [Hexp::Node]
+      #
+      # @api private (might still take this out)
       def rewrite(&block)
         return @node if @node.text?
 
@@ -91,29 +103,67 @@ module Hexp
 
       private
 
+      # The CSS selector, parsed to a comma sequence
+      #
+      # @return [Hexp::CssSelector::CommaSequence]
+      #
+      # @api private
       def comma_sequence
-        @comma_sequence ||= coerce_to_comma_sequence
+        @comma_sequence ||= parse_selector
       end
 
-      def coerce_to_comma_sequence
+      # Parse the CSS selector, if it isn't in a parsed form already
+      #
+      # @return [Hexp::CssSelector::CommaSequence]
+      #
+      # @api private
+      def parse_selector
         return @css_selector if @css_selector.is_a? CssSelector::CommaSequence
         CssSelector::Parser.call(@css_selector)
       end
 
+      # Is the current node part of the selection
+      #
+      # @return [true,false]
+      #
+      # @api private
       def node_matches?
         comma_sequence.matches?(@node)
       end
 
-      # returns a new commasequence with the parts removed that have been consumed by matching
-      # against this node. If no part matches, return nil
+      # Consume the matching part of the comma sequence, return the rest
+      #
+      # Returns a new comma sequence with the parts removed that have been
+      # consumed by matching against this node. If no part matches, returns nil.
+      #
+      # @return [Hexp::CssSelector::CommaSequence]
+      #
+      # @api private
       def next_comma_sequence
         @next_comma_sequence ||= CssSelector::CommaSequence.new(consume_matching_heads)
       end
 
+      # Recurse down a child down, passing in the remaining part of the selector
+      #
+      # @param [Hexp::Node] child
+      #   One of the children of the node in this selection object
+      #
+      # @return [Hexp::Node::CssSelection]
+      #
+      # @api private
       def next_selection_for(child)
         self.class.new(child, next_comma_sequence)
       end
 
+      # For each sequence in the comma sequence, remove the head if it matches
+      #
+      # For example, if this node is a `H[:div]`, and the selector is
+      # `span.foo, div a[:href]`, then the result of this method will be
+      # `span.foo, a[:href]`. This can then be used to match any child nodes.
+      #
+      # @return [Hexp::CssSelector::CommaSequence]
+      #
+      # @api private
       def consume_matching_heads
         comma_sequence.members.flat_map do |sequence|
           if sequence.head_matches? @node

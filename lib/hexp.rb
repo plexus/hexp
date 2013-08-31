@@ -9,11 +9,12 @@ require 'equalizer'
 module Hexp
   # Inject the Hexp::DSL module into classes that include Hexp
   #
-  # @param klazz [Class] The class that included Hexp
+  # @param [Class] klazz
+  #   The class that included Hexp
   #
   # @return [Class]
-  # @api private
   #
+  # @api private
   def self.included(klazz)
     klazz.send(:include, Hexp::DSL)
   end
@@ -22,28 +23,30 @@ module Hexp
   #
   # Delegates to IceNine
   #
-  # @param args [Array] arguments to pass on
-  # @return Object
-  # @api private
+  # @param [Array] args
+  #   arguments to pass on
+  # @return [Object]
   #
+  # @api private
   def self.deep_freeze(*args)
     IceNine.deep_freeze(*args)
   end
 
   # Variant of ::Array with slightly modified semantics
   #
-  # Array() is often used to wrap a value in an Array, unless it's already
-  # an array. However if your object implements #to_a, then Array() will use
+  # `Array()` is often used to wrap a value in an Array, unless it's already
+  # an array. However if your object implements `#to_a`, then `Array()` will use
   # that value. Because of this objects that aren't Array-like will get
   # converted as well, such as Struct objects.
   #
   # This implementation relies on #to_ary, which signals that the Object is
   # a drop-in replacement for an actual Array.
   #
-  # @param arg [Object]
-  # @return [Array]
-  # @api private
+  # @param [Object] arg
   #
+  # @return [Array]
+  #
+  # @api private
   def self.Array(arg)
     if arg.respond_to? :to_ary
       arg.to_ary
@@ -61,10 +64,12 @@ module Hexp
   # @example
   #   Hexp.parse('<div>hello</div>') #=> H[:div, "hello"]
   #
-  # @param html [String] A HTML document
-  # @return [Hexp::Node]
-  # @api public
+  # @param [String] html
+  #   A HTML document
   #
+  # @return [Hexp::Node]
+  #
+  # @api public
   def self.parse(html)
     root = Nokogiri(html).root
     raise Hexp::ParseError, "Failed to parse HTML : no document root" if root.nil?
@@ -73,7 +78,7 @@ module Hexp
 
   # Use builder syntax to create a Hexp
   #
-  # (see Hexp::Builder)
+  # @see Hexp::Builder
   #
   # @example
   #   list = Hexp.build do
@@ -84,10 +89,13 @@ module Hexp
   #     end
   #   end
   #
-  # @param args [Array]
-  # @return [Hexp::Builder]
-  # @api public
+  # @param [Array] args
   #
+  # @yieldparam [Hexp::Builder]
+  #
+  # @return [Hexp::Builder]
+  #
+  # @api public
   def self.build(*args, &block)
     Hexp::Builder.new(*args, &block)
   end
@@ -95,13 +103,13 @@ module Hexp
 end
 
 require 'hexp/version'
-require 'hexp/dsl'
-
 
 require 'hexp/node/attributes'
 require 'hexp/node/children'
-
 require 'hexp/node'
+
+require 'hexp/dsl'
+
 require 'hexp/node/normalize'
 require 'hexp/node/domize'
 require 'hexp/node/pp'
