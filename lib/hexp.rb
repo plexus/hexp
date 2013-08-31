@@ -95,13 +95,13 @@ module Hexp
 end
 
 require 'hexp/version'
-require 'hexp/dsl'
-
 
 require 'hexp/node/attributes'
 require 'hexp/node/children'
-
 require 'hexp/node'
+
+require 'hexp/dsl'
+
 require 'hexp/node/normalize'
 require 'hexp/node/domize'
 require 'hexp/node/pp'
