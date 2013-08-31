@@ -91,6 +91,7 @@ TooManyStatements:
     - Hexp::Builder#tag!
     - Hexp::CssSelector::Attribute#matches?
     - Hexp::CssSelector::Parser#rewrite_simple
+    - Hexp::Node::Normalize#normalized_children
   max_statements: 6
 UncommunicativeMethodName:
   enabled: true

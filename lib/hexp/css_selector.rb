@@ -10,10 +10,14 @@ module Hexp
 
       # Member nodes
       #
+      # @return [Array]
+      #
+      # @api private
       attr_reader :members
 
       # Shared initializer for parse tree nodes with children (members)
       #
+      # @api private
       def initialize(members)
         @members = Hexp.deep_freeze(members)
       end
@@ -23,9 +27,9 @@ module Hexp
       # @example
       #   CommaSequence[member1, member2]
       #
-      # @param klass [Class]
-      # @api private
+      # @param [Class] klass
       #
+      # @api private
       def self.included(klass)
         def klass.[](*members)
           new(members)
@@ -35,8 +39,8 @@ module Hexp
       # Return a debugging representation
       #
       # @return [String]
-      # @api private
       #
+      # @api private
       def inspect
         "#{self.class.name.split('::').last}[#{self.members.map(&:inspect).join(', ')}]"
       end
@@ -46,12 +50,29 @@ module Hexp
     #
     module Named
       include Equalizer.new(:name)
+
+      # The name of this element
+      #
+      # @return [String]
+      #
+      # @api private
       attr_reader :name
 
+      # Shared constructor that sets a name
+      #
+      # @param [String] name
+      #   the name of the element
+      #
+      # @api private
       def initialize(name)
         @name = name.freeze
       end
 
+      # Return a representation convenient for debugging
+      #
+      # @return [String]
+      #
+      # @api private
       def inspect
         "<#{self.class.name.split('::').last} name=#{name}>"
       end
@@ -61,14 +82,10 @@ module Hexp
     #
     # Contains a number of {Sequence} objects
     #
-    # For example : `span .big, a'
+    # For example : 'span .big, a'
     #
     class CommaSequence
       include Members
-
-      # def inspect
-      #   members.map(&:inspect).join(', ')
-      # end
 
       # Does any sequence in this comma sequence fully match the given element
       #
@@ -76,9 +93,11 @@ module Hexp
       # this CommaSequence with a length of one can fully match the given
       # element.
       #
-      # @param element [Hexp::Node]
+      # @param [Hexp::Node] element
+      #
       # @return [Boolean]
       #
+      # @api private
       def matches?(element)
         members.any? do |sequence|
           sequence.members.count == 1 &&
@@ -90,20 +109,29 @@ module Hexp
     # A single CSS sequence like 'div span .foo'
     #
     class Sequence
-
       include Members
 
+      # Does the first element of this sequence match the element
+      #
+      # @param [Hexp::Node] element
+      #
+      # @return [true, false]
+      #
+      # @api private
       def head_matches?(element)
         members.first.matches?(element)
       end
 
+      # Drop the first element of this Sequence
+      #
+      # This returns a new Sequence, with one member less.
+      #
+      # @return [Hexp::CssSelector::Sequence]
+      #
+      # @api private
       def drop_head
         self.class.new(members.drop(1))
       end
-
-      # def inspect
-      #   members.map(&:inspect).join(' ')
-      # end
     end
 
     # A CSS sequence that relates to a single element, like 'div.caption:first'
@@ -111,28 +139,34 @@ module Hexp
     class SimpleSequence
       include Members
 
+      # Does the element match all parts of this SimpleSequence
+      #
+      # @params [Hexp::Node] element
+      #
+      # @return [true, false]
+      #
+      # @api private
       def matches?(element)
         members.all? do |simple|
           simple.matches?(element)
         end
       end
-
-      # def inspect
-      #   members.map(&:inspect).join
-      # end
     end
 
     # A CSS element declaration, like 'div'
     class Element
       include Named
 
+      # Does the node match this element selector
+      #
+      # @param [Hexp::Node] element
+      #
+      # @return [true, false]
+      #
+      # @api private
       def matches?(element)
         element.tag.to_s == name
       end
-
-      # def inspect
-      #   name
-      # end
     end
 
     # A CSS class declaration, like '.foo'
@@ -140,6 +174,13 @@ module Hexp
     class Class
       include Named
 
+      # Does the node match this class selector
+      #
+      # @param [Hexp::Node] element
+      #
+      # @return [true, false]
+      #
+      # @api private
       def matches?(element)
         element.class?(name)
       end
@@ -150,6 +191,13 @@ module Hexp
     class Id
       include Named
 
+      # Does the node match this id selector
+      #
+      # @param [Hexp::Node] element
+      #
+      # @return [true, false]
+      #
+      # @api private
       def matches?(element)
         element.attr('id') == name
       end
@@ -157,22 +205,66 @@ module Hexp
 
     # An attribute selector, like [href^="http://"]
     #
+    # @!attribute [r] name
+    #   @return [String] The attribute name
+    # @!attribute [r] namespace
+    #   @return [String]
+    # @!attribute [r] operator
+    #   @return [String] The operator that works on an attribute value
+    # @!attribute [r] value
+    #   @return [String] The value to match against
+    # @!attribute [r] flags
+    #   @return [String]
+    #
+    # @api private
     class Attribute
       include Equalizer.new(:name, :namespace, :operator, :value, :flags)
+
       attr_reader :name, :namespace, :operator, :value, :flags
 
+      # Construct a new Attribute selector
+      #
+      # The attributes directly mimic those returned from the SASS parser, even
+      # though we don't use all of them.
+      #
+      # @param [String] name
+      #   Name of the attribute, like 'href'
+      # @param [String] namespace
+      #   unused
+      # @param [nil, String] operator
+      #   Operator like '~=', '^=', ... Use blank to simply test attribute
+      #   presence.
+      # @param [String] value
+      #   Value to test for, operator dependent
+      # @param [Object] flags
+      #   unused
+      #
+      # @api private
       def initialize(name, namespace, operator, value, flags)
-        @name = name.freeze
+        @name      = name.freeze
         @namespace = namespace.freeze
-        @operator = operator.freeze
-        @value = value.freeze
-        @flag = flags.freeze
+        @operator  = operator.freeze
+        @value     = value.freeze
+        @flag      = flags.freeze
       end
 
+      # Debugging representation
+      #
+      # @return [String]
+      #
+      # @api private
       def inspect
         "<#{self.class.name.split('::').last} name=#{name} namespace=#{namespace.inspect} operator=#{operator.inspect} value=#{value.inspect} flags=#{flags.inspect}>"
       end
 
+      # Does the node match this attribute selector
+      #
+      # @param [Hexp::Node] element
+      #   node to test against
+      #
+      # @return [true, false]
+      #
+      # @api private
       def matches?(element)
         return false unless element[name]
         attribute = element[name]

@@ -20,10 +20,28 @@ module Hexp
     class Selector
       include Enumerable
 
+      # Initialize a selector with the root node, and the selection block
+      #
+      # @param [Hexp::Node] node
+      #   The root of the tree to select in
+      #
+      # @param [Proc] block
+      #   A block that for a given node returns a truthy or falsey value
+      #
+      # @api private
       def initialize(node, block)
         @node, @select_block = node, block
       end
 
+      # Replace matching nodes
+      #
+      # Analogues to the main {Hexp::Node#rewrite} operation.
+      #
+      # @yieldparam [Hexp::Node]
+      #
+      # @return [Hexp::Node]
+      #
+      # @api public
       def rewrite(&block)
         @node.rewrite do |node, parent|
           if @select_block.(node)
@@ -34,18 +52,45 @@ module Hexp
         end
       end
 
+      # Set an attribute on all matching nodes
+      #
+      # @param [#to_s] name
+      #   The attribute name
+      # @param [#to_s] value
+      #   The attribute value
+      #
+      # @return [Hexp::Node]
+      #   The new tree
+      #
+      # @api public
       def attr(name, value)
         rewrite do |node|
           node.attr(name, value)
         end
       end
 
+      # Wrap each matching node in a specific node
+      #
+      # @param [Symbol] tag
+      #   The tag of the wrapping node
+      # @paeam [Hash] attributes
+      #   The attributes of the node
+      #
+      # @return [Hexp::Node]
+      #   The new tree of nodes
+      #
+      # @api public
       def wrap(tag, attributes = {})
         rewrite do |node|
           H[tag, attributes, [node]]
         end
       end
 
+      # Yield each matching node
+      #
+      # @yieldparam [Hexp::Node]
+      #
+      # @api public
       def each(&block)
         return to_enum(:each) unless block_given?
 

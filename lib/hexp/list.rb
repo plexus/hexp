@@ -8,10 +8,10 @@ module Hexp
     # @example
     #   Hexp::List.new([H[:p], H[:div]])
     #
-    # @param nodes [#to_ary] List of nodes
+    # @param [#to_ary] nodes
+    #   List of nodes
     #
     # @api public
-    #
     def initialize(nodes)
       super nodes.to_ary.freeze
     end
@@ -24,11 +24,12 @@ module Hexp
     #     Hexp::Node[:hr],
     #   ]
     #
-    # @param args [Array] individual nodes
+    # @param [Array] args
+    #   individual nodes
     #
     # @return [Hexp::List]
-    # @api public
     #
+    # @api public
     def self.[](*args)
       new(args)
     end
@@ -39,21 +40,21 @@ module Hexp
     # that this is a wrapping class. This is convenient when inspecting nested
     # hexps, but probably something we want to solve differently.
     #
-    # @api private
-    # @return string
+    # @return [String]
     #
+    # @api private
     def inspect
       __getobj__.inspect
     end
 
-    # Internal coercion to Array
+    # Implicit conversion to Array
     #
     # @example
     #   Hexp::List[ H[:p], H[:span] ].to_ary #=> [H[:p], H[:span]]
     #
     # @return [Array<Hexp::Node>]
-    # @api public
     #
+    # @api public
     def to_ary
       __getobj__
     end
@@ -72,10 +73,12 @@ module Hexp
     #   H[:div, [[:span]]].children.eql? [H[:span]]           #=> false
     #   H[:div, [[:span]]].children.eql? Hexp::List[H[:span]] #=> true
     #
-    # @param other [Object] Object to compare with
-    # @api public
-    # @return [Boolean]
+    # @param [Object] other
+    #   Object to compare with
     #
+    # @return [true,false]
+    #
+    # @api public
     def eql?(other)
       self == other && self.class == other.class
     end

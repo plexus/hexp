@@ -6,13 +6,22 @@ module Hexp
 
     # Construct a new builder, and start building
     #
-    # The recommended way to call this is through `Hexp.build`.
+    # The recommended way to call this is through `Hexp.build`. If the block
+    # takes an argument, then builder methods need to be called on that variable.
     #
-    # @param tag [Symbol] The tag of the outermost element (optional)
-    # @param args [Array<Hash,String>] Extra arguments, a String for a text
-    #        node, a Hash for attributes
-    # @param block [Proc] The block containing builder directives, can be with
-    #        or without an argument.
+    # @example With an explicit builder
+    #   hi = Hexp.build {|html| html.span "Hello" ; html.span " World"}
+    #
+    # @example Without a builder object
+    #   hi = Hexp.build { span "Hello" ; span " World"}
+    #
+    # @param [Symbol] tag
+    #   The tag of the outermost element (optional)
+    # @param [Array<Hash,String>] args
+    #   Extra arguments, a String for a text node, a Hash for attributes
+    #
+    # @yieldparam [Hexp::Builder]
+    #   If the block takes an argument it will receive the builder object
     #
     # @api private
     #
@@ -36,15 +45,17 @@ module Hexp
     #   end
     #   hexp.to_html #=> "<div><p>Oh the code, such sweet joy it brings</p></div>"
     #
-    # @param tag [Symbol] The tag name, like 'div' or 'head'
-    # @param args [Array<Hash|String>] A hash of attributes, or a string to use
-    #        inside the tag, or both. Multiple occurences of each can be
-    #        specified
-    # @param block [Proc] Builder directives for the contents of the tag
-    # @return [NilClass]
+    # @param [Symbol] tag
+    #   The tag name, like 'div' or 'head'
+    # @param [Array<Hash|String>] args
+    #   A hash of attributes, or a string to use inside the tag, or both. Multiple
+    #   occurences of each can be specified
+    # @param [Proc] block
+    #   Builder directives for the contents of the tag
+    #
+    # @return [nil]
     #
     # @api public
-    #
     def tag!(tag, *args, &block)
       text, attributes = nil, {}
       args.each do |arg|
@@ -80,10 +91,12 @@ module Hexp
     #     end
     #   end
     #
-    # @param text [String] the text to add
-    # @return [Hexp::Builder] self
-    # @api public
+    # @param [String] text
+    #   the text to add
     #
+    # @return [Hexp::Builder] self
+    #
+    # @api public
     def text!(text)
       _raise_if_empty! "Hexp::Builder needs a root element to add text elements to"
       @stack.last[2] << text.to_s
@@ -109,7 +122,9 @@ module Hexp
     #   end
     #   node.to_html #=> <div><button>click me!</button></div>
     #
-    # @param args [Array<#to_hexp>] Hexpable objects to add to the current tag
+    # @param [Array<#to_hexp>] args
+    #   Hexpable objects to add to the current tag
+    #
     # @return [Hexp::Builder]
     #
     # @api public
@@ -135,8 +150,8 @@ module Hexp
     #  Hexp.build { div { text! 'hello' } }.to_hexp # => H[:div, ["hello"]]
     #
     # @return [Hexp::Node]
-    # @api public
     #
+    # @api public
     def to_hexp
       _raise_if_empty!
       ::Hexp::Node[*@stack.last]
@@ -153,9 +168,10 @@ module Hexp
     # builder calls.
     #
     # @param block [Proc]
-    # @return [NilClass]
-    # @api private
     #
+    # @return [nil]
+    #
+    # @api private
     def _process(&block)
       if block.arity == 1
         block.call(self)
@@ -174,14 +190,15 @@ module Hexp
     #   end
     #
     # @api private
-    #
     class NodeBuilder
       # Create new NodeBuilder
       #
-      # @param node [Array] (tag, attrs, children) triplet
-      # @param builder [Hexp::Builder] The parent builder to delegate back
-      # @api private
+      # @param [Array] node
+      #   (tag, attrs, children) triplet
+      # @param [Hexp::Builder] builder
+      #   The parent builder to delegate back
       #
+      # @api private
       def initialize(node, builder)
         @node, @builder = node, builder
       end
@@ -192,10 +209,12 @@ module Hexp
       #   Hexp.build { div.strong.warn }.to_hexp
       #   # => H[:div, class: 'strong warn']
       #
-      # @param sym [Symbol] the class to add
-      # @return [Hexp::Builder::NodeBuilder] self
-      # @api public
+      # @param [Symbol] sym
+      #   the class to add
       #
+      # @return [Hexp::Builder::NodeBuilder] self
+      #
+      # @api public
       def method_missing(sym, &block)
         attrs = @node[1]
         @node[1] = attrs.merge class: [attrs[:class], sym.to_s].compact.join(' ')
@@ -214,8 +233,8 @@ module Hexp
     #   p Hexp.build { div }
     #
     # @return [String]
-    # @api public
     #
+    # @api public
     def inspect
       "#<Hexp::Builder #{@stack.empty? ? '[]' : to_hexp.inspect}>"
     end
@@ -241,11 +260,14 @@ module Hexp
 
     # Raise an exception if nothing has been built yet
     #
-    # @param text [String] The error message
-    # @raise [Hexp::FormatError] if the builder is converted to a {Hexp::Node}
-    #            before a root element is defined.
-    # @api private
+    # @param [String] text
+    #   The error message
     #
+    # @raise [Hexp::FormatError]
+    #   if the builder is converted to a {Hexp::Node} before a root element is
+    #   defined.
+    #
+    # @api private
     def _raise_if_empty!(text = 'Hexp::Builder is lacking a root element.')
       ::Kernel.raise ::Hexp::FormatError, text if @stack.empty?
     end

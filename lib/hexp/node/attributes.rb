@@ -14,9 +14,10 @@ module Hexp
       #    H[:p, class: 'hello'].attr('id', 'para1') # => H[:p, {"class"=>"hello", "id"=>"para1"}]
       #    H[:p, class: 'hello'].attr('class', nil)  # => H[:p]
       #
+      # @param [Array<#to_s>] args
       # @return [String|Hexp::Node]
-      # @api private
       #
+      # @api private
       def attr(*args)
         arity     = args.count
         attr_name = args[0].to_s
@@ -38,10 +39,12 @@ module Hexp
       # @example
       #   H[:option].has_attr?('selected') #=> false
       #
-      # @param name [String|Symbol] the name of the attribute
-      # @return [Boolean]
-      # @api public
+      # @param [String|Symbol] name
+      #   The name of the attribute
       #
+      # @return [true,false]
+      #
+      # @api public
       def has_attr?(name)
         attributes.has_key? name.to_s
       end
@@ -51,10 +54,13 @@ module Hexp
       # @example
       #   H[:span, class: "banner strong"].class?("strong") #=> true
       #
-      # @param klass [String] the name of the class to check for
-      # @return [Boolean] true if the class is present, false otherwise
-      # @api public
+      # @param [String] klass
+      #   The name of the class to check for
       #
+      # @return [Boolean]
+      #   True if the class is present, false otherwise
+      #
+      # @api public
       def class?(klass)
         attr('class') && attr('class').split(' ').include?(klass.to_s)
       end
@@ -64,10 +70,12 @@ module Hexp
       # @example
       #   H[:div].add_class('foo') #=> H[:div, class: 'foo']
       #
-      # @param klass [#to_s] The class to add
-      # @return [Hexp::Node]
-      # @api public
+      # @param [#to_s] klass
+      #   The class to add
       #
+      # @return [Hexp::Node]
+      #
+      # @api public
       def add_class(klass)
         attr('class', [attr('class'), klass].compact.join(' '))
       end
@@ -77,8 +85,8 @@ module Hexp
       # Convenience method so you don't have to split the class list yourself.
       #
       # @return [Array<String>]
-      # @api public
       #
+      # @api public
       def class_list
         @class_list ||= (attr('class') || '').split(' ').freeze
       end
@@ -93,11 +101,12 @@ module Hexp
       # Calling this on a node with a class attribute that is equal to an
       # empty string will result in the class attribute being removed.
       #
-      # @param klass [#to_s] The class to be removed
-      # @return [Hexp::Node] A node that is identical to this one, but with
-      #                      the given class removed
-      # @api public
+      # @param [#to_s] klass
+      #   The class to be removed
+      # @return [Hexp::Node]
+      #   A node that is identical to this one, but with the given class removed
       #
+      # @api public
       def remove_class(klass)
         return self unless has_attr?('class')
         new_list = class_list - [klass.to_s]
@@ -107,10 +116,11 @@ module Hexp
 
       # Set or override multiple attributes using a hash syntax
       #
-      # @param attrs[Hash]
-      # @return [Hexp::Node]
-      # @api public
+      # @param [Hash<#to_s,#to_s>] attrs
       #
+      # @return [Hexp::Node]
+      #
+      # @api public
       def set_attrs(attrs)
         H[
           self.tag,
@@ -123,10 +133,13 @@ module Hexp
 
       # Remove an attribute by name
       #
-      # @param name [#to_s] The attribute to be removed
-      # @return [Hexp::Node] a new node with the attribute removed
-      # @api public
+      # @param [#to_s] name
+      #   The attribute to be removed
       #
+      # @return [Hexp::Node]
+      #   A new node with the attribute removed
+      #
+      # @api public
       def remove_attr(name)
         H[
           self.tag,
@@ -137,10 +150,13 @@ module Hexp
 
       # Attribute accessor
       #
-      # @param attr_name [#to_s] The name of the attribute
-      # @return [String] The value of the attribute
-      # @api public
+      # @param_name [#to_s] attr
+      #   The name of the attribute
       #
+      # @return [String]
+      #   The value of the attribute
+      #
+      # @api public
       def [](attr_name)
         self.attributes[attr_name.to_s]
       end
@@ -154,10 +170,11 @@ module Hexp
       # Hash, or another Hexp element, in which case that element's attributes
       # are used.
       #
-      # @param node_or_hash [#to_hexp|Hash]
-      # @return [Hexp::Node]
-      # @api public
+      # @param_or_hash [#to_hexp|Hash] node
       #
+      # @return [Hexp::Node]
+      #
+      # @api public
       def merge_attrs(node_or_hash)
         hash = node_or_hash.respond_to?(:to_hexp) ?
                  node_or_hash.to_hexp.attributes : node_or_hash

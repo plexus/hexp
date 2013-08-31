@@ -9,16 +9,18 @@ module Hexp
       # The resulting DOM Document
       #
       # @return [Nokogiri::HTML::Document]
-      # @api private
       #
+      # @api private
       attr_reader :dom
 
       # Instanitiate a Domizer
       #
-      # @param hexp [Hexp::Node]
-      # @param options [Hash] :include_doctype defaults to true
-      # @api private
+      # @param [Hexp::Node] hexp
       #
+      # @param [Hash] options
+      # @options options [true,false] :include_doctype Defaults to true
+      #
+      # @api private
       def initialize(hexp, options = {})
         @dom     = Hexp::DOM
         @raw     = hexp
@@ -28,8 +30,8 @@ module Hexp
       # Turn the hexp into a DOM
       #
       # @return [Nokogiri::HTML::Document]
-      # @api private
       #
+      # @api private
       def call
         @doc  = dom::Document.new
         @root = domize(@raw)
@@ -46,10 +48,11 @@ module Hexp
 
       # Turn a Hexp::Node into a Document
       #
-      # @param hexp [Hexp::Node]
-      # @return [Nokogiri::HTML::Document]
-      # @api private
+      # @param [Hexp::Node] hexp
       #
+      # @return [Nokogiri::HTML::Document]
+      #
+      # @api private
       def domize(hexp)
         dom::Node.new(hexp.tag.to_s, @doc).tap do |node|
           set_attributes(node, hexp.attributes)
@@ -59,11 +62,12 @@ module Hexp
 
       # Set attributes on a DOM node
       #
-      # @param node [Nokogiri::XML::Element]
-      # @param attributes [Hash]
-      # @return [void]
-      # @api private
+      # @param [Nokogiri::XML::Element] node
+      # @param [Hash] attributes
       #
+      # @return [void]
+      #
+      # @api private
       def set_attributes(node, attributes)
         attributes.each do |key,value|
           node[key] = value
@@ -72,11 +76,12 @@ module Hexp
 
       # Set children on the DOM node
       #
-      # @param node [Nokogiri::XML::Element]
-      # @param children [Hexp::List]
-      # @return [void]
-      # @api private
+      # @param [Nokogiri::XML::Element] node
+      # @param [Hexp::List] children
       #
+      # @return [void]
+      #
+      # @api private
       def set_children(node, children)
         children.each do |child|
           if child.instance_of?(TextNode)

@@ -209,6 +209,7 @@ module Hexp
     # @param tag [#to_sym] The new tag
     # @return [Hexp::Node]
     #
+    # @api public
     def set_tag(tag)
       H[tag.to_sym, attributes, children]
     end
@@ -231,10 +232,15 @@ module Hexp
     #     H[:p, input]
     #   end
     #
-    # @param block [Proc] The rewrite action
-    # @return [Hexp::Node] The rewritten tree
-    # @api public
+    # @param [String] css_selector
     #
+    # @yieldparam [Hexp::Node]
+    #   The matching nodes
+    #
+    # @return [Hexp::Node]
+    #   The rewritten tree
+    #
+    # @api public
     def rewrite(css_selector = nil, &block)
       return Rewriter.new(self, block) if css_selector.nil?
       CssSelection.new(self, css_selector).rewrite(&block)
@@ -243,6 +249,12 @@ module Hexp
 
     # Select nodes based on a css selector
     #
+    # @param [String] css_selector
+    # @yieldparam [Hexp::Node]
+    #
+    # @return [Hexp::Selector,Hexp::CssSelector]
+    #
+    # @api public
     def select(css_selector = nil, &block)
       if css_selector
         CssSelection.new(self, css_selector).each(&block)
