@@ -20,3 +20,6 @@ doc/
 
 #yardstick report
 measurements/report.txt
+
+# Automatic Ruby switching
+.ruby-version
