@@ -1,5 +1,6 @@
 ---
-threshold: 92.7
+threshold: 99.2
+require_exact_threshold: false
 rules:
   ApiTag::Presence:
     enabled: true
@@ -25,7 +26,11 @@ rules:
       - Hexp::Nokogiri::Equality#equal_text?
   ReturnTag:
     enabled: true
-    exclude: []
+    exclude:
+      - Hexp::CssSelector::Members#initialize
+      - Hexp::CssSelector::Members.included
+      - Hexp::CssSelector::Named#initialize
+      - Hexp::Builder#_raise_if_empty!
   Summary::Presence:
     enabled: true
     exclude: []

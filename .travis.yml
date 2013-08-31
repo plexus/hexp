@@ -16,9 +16,7 @@ matrix:
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"
   allow_failures:
     - rvm: ruby-head
-    - rvm: rbx-19mode
     - rvm: jruby-head
-    - rvm: jruby-19mode
 notifications:
   email:
     recipients:

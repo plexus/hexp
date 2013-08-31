@@ -11,7 +11,6 @@ module Hexp
       #     Hexp::Node::Normalize.new([:p, {class:'foo'}])
       #
       # @api public
-      #
       def initialize(node)
         @raw = node
       end
@@ -21,7 +20,6 @@ module Hexp
       # @return [Array] strict hexp node
       #
       # @api private
-      #
       def call
         [@raw.first, normalized_attributes, normalized_children]
       end
@@ -33,7 +31,6 @@ module Hexp
       # @return [Hash] the attributes hash
       #
       # @api private
-      #
       def attributes
         attrs = @raw[1]
         return attrs if attrs.instance_of?(Hash)
@@ -45,7 +42,6 @@ module Hexp
       # @return [Hash]
       #
       # @api private
-      #
       def normalized_attributes
         Hash[*
           attributes.flat_map do |key, value|
@@ -59,7 +55,6 @@ module Hexp
       # @return [Array] the list of child hexps, non-strict
       #
       # @api private
-      #
       def children
         last = @raw.last
         if last.respond_to? :to_ary
@@ -76,18 +71,17 @@ module Hexp
       # @return [Array] list of normalized hexps
       #
       # @api private
-      #
       def normalized_children
         Hexp::List[*
           children.map do |child|
             case child
-            when Hexp::Node
+            when Hexp::Node, Hexp::TextNode
               child
-            when String, TextNode
+            when String
               Hexp::TextNode.new(child)
             when ->(ch) { ch.respond_to? :to_hexp }
               response = child.to_hexp
-              raise FormatError, "to_hexp must return a Hexp::Node, got #{response.inspect}" unless response.instance_of?(Hexp::Node)
+              raise FormatError, "to_hexp must return a Hexp::Node, got #{response.inspect}" unless response.instance_of?(Hexp::Node) || response.instance_of?(Hexp::TextNode)
               response
             when Array
               Hexp::Node[*child.map(&:freeze)]

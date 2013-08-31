@@ -4,9 +4,10 @@ module Hexp
     class PP
       # Create a new pretty-printer
       #
-      # @param node [Hexp::Node] The node to represent
-      # @api private
+      # @param [Hexp::Node] node
+      #   The node to represent
       #
+      # @api private
       def initialize(node)
         @node = node
       end
@@ -14,8 +15,8 @@ module Hexp
       # Perform the pretty-printing
       #
       # @return [String] The pp output
-      # @api private
       #
+      # @api private
       def call
         [
           @node.class.inspect_name,
@@ -27,8 +28,8 @@ module Hexp
       # Format the node tag
       #
       # @return [String]
-      # @api private
       #
+      # @api private
       def pp_tag
         "[#{@node.tag.inspect}"
       end
@@ -36,8 +37,8 @@ module Hexp
       # Format the node attributes
       #
       # @return [String]
-      # @api private
       #
+      # @api private
       def pp_attributes
         attrs = @node.attributes
         return '' if attrs.empty?
@@ -47,8 +48,8 @@ module Hexp
       # Format the node children
       #
       # @return [String]
-      # @api private
       #
+      # @api private
       def pp_children
         children = @node.children
         return ']' if children.empty?
@@ -57,11 +58,14 @@ module Hexp
 
       # Indent a multiline string with a number of spaces
       #
-      # @param string [String] The string to indent
-      # @param indent [Integer] The number of spaces to use for indentation
-      # @return [String]
-      # @api private
+      # @param [String] string
+      #   The string to indent
+      # @param [Integer] indent
+      #   The number of spaces to use for indentation
       #
+      # @return [String]
+      #
+      # @api private
       def self.indent(string, indent = 2)
         string.lines.map {|line|  " "*indent + line}.join
       end
