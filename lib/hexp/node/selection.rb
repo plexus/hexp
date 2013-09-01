@@ -1,6 +1,6 @@
 module Hexp
   class Node
-    # Select nodes from a Hexp tree
+    # Subset of nodes from a Hexp tree
     #
     # This is what is backing the {Hexp::Node#select} method. It serves a double
     # purpose. At it's core it's an Enumerable for iterating over nodes that
@@ -17,10 +17,11 @@ module Hexp
     #   # stick all links inside a <span class="link> ... </span>
     #   hexp.select {|el| el.tag == 'a' }.wrap(:span, class: 'link')
     #
-    class Selector
+    class Selection
       include Enumerable
 
-      # Initialize a selector with the root node, and the selection block
+      # Initialize a selection with the root node, and the selection block used
+      # as the filtering criterion
       #
       # @param [Hexp::Node] node
       #   The root of the tree to select in

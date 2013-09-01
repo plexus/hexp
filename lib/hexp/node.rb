@@ -259,7 +259,7 @@ module Hexp
       if css_selector
         CssSelection.new(self, css_selector).each(&block)
       else
-        Selector.new(self, block)
+        Selection.new(self, block)
       end
     end
 

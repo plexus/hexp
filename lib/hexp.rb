@@ -114,7 +114,7 @@ require 'hexp/node/normalize'
 require 'hexp/node/domize'
 require 'hexp/node/pp'
 require 'hexp/node/rewriter'
-require 'hexp/node/selector'
+require 'hexp/node/selection'
 require 'hexp/node/css_selection'
 
 require 'hexp/text_node'
