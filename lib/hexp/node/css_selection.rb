@@ -32,7 +32,7 @@ module Hexp
     #     p a.text
     #   end
     #
-    class CssSelection < Selector
+    class CssSelection < Selection
       include Enumerable
 
       # Create a new CssSelection based on a root node and a selector

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Hexp::Node::Selector do
-  subject(:selector) { Hexp::Node::Selector.new(hexp, block) }
+describe Hexp::Node::Selection do
+  subject(:selection) { Hexp::Node::Selection.new(hexp, block) }
   let(:yielded_elements) { [] }
   let(:block) { proc {|el| yielded_elements << el } }
   let(:hexp) { H[:div, [[:span]]] }
@@ -10,7 +10,7 @@ describe Hexp::Node::Selector do
     let(:block) { proc {|el| el.tag == :span} }
 
     it 'should enumerate elements for which the block returns trueish' do
-      expect(selector.to_a).to eq [H[:span]]
+      expect(selection.to_a).to eq [H[:span]]
     end
   end
 
@@ -18,7 +18,7 @@ describe Hexp::Node::Selector do
     let(:block) { proc {|el| el.tag == :span} }
 
     it 'should perform them on elements that match' do
-      expect(selector.attr('class', 'matched').to_hexp).to eq(
+      expect(selection.attr('class', 'matched').to_hexp).to eq(
         H[:div, [[:span, {class: 'matched'}]]]
       )
     end
@@ -28,7 +28,7 @@ describe Hexp::Node::Selector do
       let(:block) { proc {|el| el.tag == :a} }
 
       it 'should be able to wrap element' do
-        expect(selector.wrap(:li).to_hexp).to eq(
+        expect(selection.wrap(:li).to_hexp).to eq(
            H[:ul, [[:li, H[:a, href: 'foo']], [:li, H[:a, href: 'bar']]]]
         )
       end
@@ -39,7 +39,7 @@ describe Hexp::Node::Selector do
       let(:block) { proc {|el| el.tag == :a} }
 
       it 'should work on matching elements, and skip the rest' do
-        expect(selector.rewrite{ H[:br] }.to_hexp).to eq H[:ul, [[:br], [:span]]]
+        expect(selection.rewrite{ H[:br] }.to_hexp).to eq H[:ul, [[:br], [:span]]]
       end
     end
   end
@@ -49,12 +49,12 @@ describe Hexp::Node::Selector do
 
     it 'should be lazy' do
       expect(block).to_not receive(:call)
-      selector
+      selection
     end
 
     it 'should yield the root element when realized' do
       expect(block).to receive(:call).once.with(H[:div])
-      selector.each {}
+      selection.each {}
     end
   end
 
@@ -65,7 +65,7 @@ describe Hexp::Node::Selector do
           [:span, "world"]]]}
 
     it 'should traverse the whole tree once, depth-first' do
-      selector.each {}
+      selection.each {}
       expect(yielded_elements).to eq [
         Hexp::TextNode.new("hello"),
         H[:span, "hello"],

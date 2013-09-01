@@ -140,7 +140,7 @@ module Hexp
     end
 
     def select(&block)
-      Node::Selector.new(self, block)
+      Node::Selection.new(self, block)
     end
   end
 end
