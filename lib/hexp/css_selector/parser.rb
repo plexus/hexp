@@ -98,6 +98,8 @@ module Hexp
             simple.value ? simple.value.first : nil,
             simple.flags
           )
+        when ::Sass::Selector::Universal           # *
+          Universal.new
         else
           raise "CSS selectors containing #{simple.class} are not implemented in Hexp"
         end

@@ -169,6 +169,13 @@ module Hexp
       end
     end
 
+    # Match any element, '*'
+    class Universal
+      def matches?(element)
+        true
+      end
+    end
+
     # A CSS class declaration, like '.foo'
     #
     class Class
