@@ -10,7 +10,7 @@ module Hexp
       # @api public
       #
       def call(node)
-        return node.text if node.text?
+        return node.text if node.text? || node.cdata?
 
         unless node.attributes.empty?
           attrs = node.attributes.map do |key, value|

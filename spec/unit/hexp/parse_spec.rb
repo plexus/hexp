@@ -20,4 +20,14 @@ describe Hexp, 'parse' do
   it 'should parse attributes' do
     expect(Hexp.parse('<a href="pretty">Ciao Bella</a>')).to eq H[:a, {href: 'pretty'}, 'Ciao Bella']
   end
+
+  it 'should parse style tags' do
+    expect(Hexp.parse('<html><head><style type="text/css">h1 {font-weigth: 400;}</style></head></html>')).to eq(
+      H[:html,
+        H[:head,
+          H[:style, {type: 'text/css'}, 'h1 {font-weigth: 400;}']
+        ]
+      ]
+    )
+  end
 end
