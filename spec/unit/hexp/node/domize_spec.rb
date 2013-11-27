@@ -63,4 +63,16 @@ describe Hexp::Node::Domize do
 
     it { should_not dom_eq(dom) }
   end
+
+  context 'with the :html5 option' do
+    let(:hexp) { Hexp::Node[:html] }
+
+    it 'should set a HTML5 style doctype' do
+      dtd = hexp.to_dom(html5: true).children.first
+      expect(dtd).to be_a Nokogiri::XML::DTD
+      expect(dtd.name).to be_nil
+      expect(dtd.external_id).to be_nil
+      expect(dtd.system_id).to be_nil
+    end
+  end
 end

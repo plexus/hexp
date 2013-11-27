@@ -34,6 +34,10 @@ module Hexp
       # @api private
       def call
         @doc  = dom::Document.new
+        if @options[:html5]
+          @doc.children = dom::NodeSet.new(@doc, [])
+          @doc.create_internal_subset(nil, nil, nil)
+        end
         @root = domize(@raw)
         @doc << @root
 
