@@ -123,8 +123,3 @@ At this point you're best off grabbing the Git repo, e.g. with bundler
 
 gem 'hexp', github: 'plexus/hexp'
 ````
-
-Who is behind this
-------------------
-
-Hexp is being actively developed by [Arne Brasseur](http://arnebrasseur.net). You can [support me on Gittip!](https://www.gittip.com/plexus)
