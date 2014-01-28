@@ -138,3 +138,8 @@ UtilityFunction:
     - Hexp::TextNode#attributes
     - Hexp::TextNode#children
   max_helper_calls: 0
+PrimaDonnaMethod:
+  exclude:
+    - Hexp::Builder#_raise_if_missing!
+    - Hexp::Builder#tag!
+    - Hexp::Builder#text!

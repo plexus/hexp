@@ -13,8 +13,8 @@ namespace :ci do
     metrics:yardstick:verify
     metrics:flog
     metrics:flay
-    metrics:reek
   ]
+  # metrics:reek
   # metrics:rubocop
 end
 
