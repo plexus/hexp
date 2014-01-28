@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.version     = Hexp::VERSION
   gem.authors     = [ 'Arne Brasseur' ]
   gem.email       = [ 'arne@arnebrasseur.net' ]
-  gem.description = 'HTML expressions'
+  gem.description = 'Generate and manipulate HTML documents and nodes.'
   gem.summary     = gem.description
   gem.homepage    = 'https://github.com/plexus/hexp'
   gem.license     = 'MIT'
