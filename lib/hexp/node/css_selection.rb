@@ -87,7 +87,7 @@ module Hexp
       #
       # @return [Hexp::Node]
       #
-      # @api private (might still take this out)
+      # @api private
       def rewrite(&block)
         return @node if @node.text?
 
