@@ -14,7 +14,7 @@ GIT
 PATH
   remote: .
   specs:
-    hexp (0.3.0)
+    hexp (0.3.1)
       equalizer (~> 0.0)
       ice_nine (~> 0.9)
       nokogiri (~> 1.6)
@@ -80,8 +80,6 @@ GEM
     mini_portile (0.5.2)
     multi_json (1.8.4)
     nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
-    nokogiri (1.6.1-java)
       mini_portile (~> 0.5.0)
     parser (2.0.0)
       ast (~> 1.1)
