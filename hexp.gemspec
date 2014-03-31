@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.test_files       = `git ls-files -- spec`.split($/)
   gem.extra_rdoc_files = %w[README.md]
 
-  gem.add_runtime_dependency 'sass', '~> 3.2'
+  gem.add_runtime_dependency 'sass', '~> 3.2.0'
   gem.add_runtime_dependency 'nokogiri', '~> 1.6'
   gem.add_runtime_dependency 'ice_nine', '~> 0.9'
   gem.add_runtime_dependency 'equalizer', '~> 0.0'
