@@ -9,7 +9,9 @@ module Hexp
       #
       # @api private
       def initialize(selector)
-        super(selector, '')
+        # TODO this is a private API and has before changed in minor versions,
+        # see if there is a more robust call.
+        super(selector, '', 0)
       end
 
       # Parse the selector
