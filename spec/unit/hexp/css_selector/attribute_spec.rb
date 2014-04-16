@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe Hexp::CssSelector::Attribute do
   subject(:selector) { described_class.new(name, namespace, operator, value, flags) }
   let(:name)      { nil }
@@ -134,4 +136,15 @@ describe Hexp::CssSelector::Attribute do
     end
   end
 
+  describe '$= with quoted string values' do
+    subject(:selector) { Hexp::CssSelector::Parser.new('[src$="foo/bar.js"]').parse }
+
+    it 'should match correctly' do
+      expect(selector.matches? H[:script, src: "/tmp/foo/bar.js"]).to be_true
+    end
+
+    it 'should only match at the end' do
+      expect(selector.matches? H[:script, src: "/tmp/foo/bar.jsx"]).to be_false
+    end
+  end
 end

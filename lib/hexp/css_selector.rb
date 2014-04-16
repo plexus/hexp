@@ -276,6 +276,12 @@ module Hexp
         return false unless element[name]
         attribute = element[name]
 
+        # TODO: check the spec with regards to IDENTIFIERS vs STRINGS as value
+        #       see if we can lett SASS parse the string instead of unwrapping
+        #       it ourselves
+        value = self.value
+        value = $1.gsub('\"', '"') if value =~ /\A"?(.*?)"?\z/
+
         case operator
           # CSS 2
         when nil
