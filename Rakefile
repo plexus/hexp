@@ -1,22 +1,19 @@
-require 'devtools'
 require 'rubygems/package_task'
-
-Devtools.init_rake_tasks
 
 # Redefine rake:ci:metrics to disable rubocop, will tackle that laundry list
 # some other time
-namespace :ci do
-  desc 'Run metrics (except mutant, rubocop) and spec'
-  task travis: %w[
-    metrics:coverage
-    spec:integration
-    metrics:yardstick:verify
-    metrics:flog
-    metrics:flay
-  ]
-  # metrics:reek
-  # metrics:rubocop
-end
+# namespace :ci do
+#   desc 'Run metrics (except mutant, rubocop) and spec'
+#   task travis: %w[
+#     metrics:coverage
+#     spec:integration
+#     metrics:yardstick:verify
+#     metrics:flog
+#     metrics:flay
+#   ]
+#   # metrics:reek
+#   # metrics:rubocop
+# end
 
 
 spec = Gem::Specification.load(File.expand_path('../hexp.gemspec', __FILE__))
@@ -44,4 +41,13 @@ task :doc2gh do
   sh "git commit -m 'Update gh-pages with YARD docs'"
   sh "git push origin gh-pages"
   sh "git co master"
+end
+
+require 'mutant'
+task :default => :mutant
+
+task :mutant do
+  pattern = ENV.fetch('PATTERN', 'Hexp*')
+  result  = Mutant::CLI.run(%w[-Ilib -rhexp --use rspec --score 100] + [pattern])
+  fail unless result == Mutant::CLI::EXIT_SUCCESS
 end
