@@ -23,3 +23,4 @@ measurements/report.txt
 
 # Automatic Ruby switching
 .ruby-version
+Gemfile.lock
