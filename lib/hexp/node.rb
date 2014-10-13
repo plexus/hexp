@@ -146,7 +146,7 @@ module Hexp
     # @api public
     #
     def to_html(options = {})
-      to_dom(options).to_html
+      Unparser.new(options).call(self)
     end
 
     # Convert this node into a Nokogiri Document

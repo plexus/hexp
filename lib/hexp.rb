@@ -137,3 +137,4 @@ require 'hexp/sass/selector_parser'
 require 'hexp/h'
 
 require 'hexp/builder'
+require 'hexp/unparser'
