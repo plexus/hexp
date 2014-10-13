@@ -23,12 +23,16 @@ module Hexp
     ESCAPE_ATTR_QUOT_REGEX = Regexp.new("[#{ESCAPE_ATTR_QUOT.keys.join}]")
     ESCAPE_TEXT_REGEX      = Regexp.new("[#{ESCAPE_TEXT.keys.join}]")
 
+    DEFAULT_OPTIONS = {
+      encoding: Encoding.default_external
+    }
+
     def initialize(options)
-      @options = options
+      @options = DEFAULT_OPTIONS.merge(options)
     end
 
     def call(node)
-      @buffer = String.new
+      @buffer = String.new.force_encoding(@options[:encoding])
       add_node(node)
       @buffer.freeze
     end
