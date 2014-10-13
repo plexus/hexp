@@ -4,6 +4,7 @@ module Hexp
     #
     module Members
       include Equalizer.new(:members)
+      include Adamantium
 
       extend Forwardable
       def_delegator :@members, :empty?
@@ -19,7 +20,7 @@ module Hexp
       #
       # @api private
       def initialize(members)
-        @members = Hexp.deep_freeze(members)
+        @members = members
       end
 
       # Create a class level collection constructor

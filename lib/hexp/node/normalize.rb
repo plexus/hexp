@@ -84,7 +84,7 @@ module Hexp
               raise FormatError, "to_hexp must return a Hexp::Node, got #{response.inspect}" unless response.instance_of?(Hexp::Node) || response.instance_of?(Hexp::TextNode)
               response
             when Array
-              Hexp::Node[*child.map(&:freeze)]
+              Hexp::Node[*child]
             else
               raise FormatError, "Invalid value in Hexp literal : #{child.inspect} (#{child.class}) does not implement #to_hexp ; #{children.inspect}"
             end

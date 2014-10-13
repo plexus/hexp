@@ -4,7 +4,7 @@ require 'pathname'
 
 require 'nokogiri' # TODO => replace with Builder
 require 'sass'
-require 'ice_nine'
+require 'adamantium'
 require 'equalizer'
 
 module Hexp
@@ -20,19 +20,6 @@ module Hexp
   # @api private
   def self.included(klazz)
     klazz.send(:include, Hexp::DSL)
-  end
-
-  # Deep freeze an object
-  #
-  # Delegates to IceNine
-  #
-  # @param [Array] args
-  #   arguments to pass on
-  # @return [Object]
-  #
-  # @api private
-  def self.deep_freeze(*args)
-    IceNine.deep_freeze(*args)
   end
 
   # Variant of ::Array with slightly modified semantics

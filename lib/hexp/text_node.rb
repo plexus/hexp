@@ -7,6 +7,8 @@ module Hexp
   # converted to `TextNode` instances, so there is usually no reason to instantiate
   # these yourself.
   class TextNode < DelegateClass(String)
+    include Adamantium
+
     # Inspect the TextNode
     #
     # This delegates to the underlying String, making it

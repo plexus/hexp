@@ -53,6 +53,7 @@ module Hexp
   #
   class Node
     include Equalizer.new(:tag, :attributes, :children)
+    include Adamantium
     extend Forwardable
 
     include Hexp::Node::Attributes
