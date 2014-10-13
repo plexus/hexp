@@ -1,5 +1,6 @@
 require 'delegate'
 require 'forwardable'
+require 'pathname'
 
 require 'nokogiri' # TODO => replace with Builder
 require 'sass'
@@ -7,6 +8,8 @@ require 'ice_nine'
 require 'equalizer'
 
 module Hexp
+  ROOT = Pathname(__FILE__).dirname.parent
+
   # Inject the Hexp::DSL module into classes that include Hexp
   #
   # @param [Class] klazz

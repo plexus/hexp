@@ -200,6 +200,10 @@ module Hexp
       false
     end
 
+    def tag?(tag)
+      self.tag == tag
+    end
+
     # Return a new node, with a different tag
     #
     # @example
