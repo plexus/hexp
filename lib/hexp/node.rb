@@ -59,6 +59,8 @@ module Hexp
     include Hexp::Node::Attributes
     include Hexp::Node::Children
 
+    memoize :class_list
+
     # The HTML tag of this node
     #
     # @example
