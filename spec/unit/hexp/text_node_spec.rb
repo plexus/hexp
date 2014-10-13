@@ -12,13 +12,13 @@ describe Hexp::TextNode do
   end
 
   describe 'DSL methods' do
-    its(:text?)   { should be_true }
+    its(:text?)   { should be true }
     its(:rewrite) { should eq(subject) }
     its(:to_hexp) { should eq(subject) }
 
     describe 'class?' do
       it 'should always return false' do
-        expect(subject.class?('strong')).to be_false
+        expect(subject.class?('strong')).to be false
       end
     end
   end

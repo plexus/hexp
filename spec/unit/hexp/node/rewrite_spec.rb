@@ -60,7 +60,7 @@ describe Hexp::Node, 'rewrite' do
     end
 
     it 'should not pass those nodes again to the block' do
-      rewriter.to_hexp.should == H[:div, [
+      expect(rewriter.to_hexp).to eql H[:div, [
           [:a],
           [:blockquote, [
               [:p]]],

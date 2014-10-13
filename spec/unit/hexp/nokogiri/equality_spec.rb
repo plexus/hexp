@@ -5,7 +5,7 @@ describe Hexp::Nokogiri::Equality do
 
   context 'two empty documents' do
     it 'should be equal' do
-      described_class.new(Nokogiri::HTML::Document.new, Nokogiri::HTML::Document.new).call.should be_true
+      expect(described_class.new(Nokogiri::HTML::Document.new, Nokogiri::HTML::Document.new).call).to be true
     end
   end
 
@@ -16,7 +16,7 @@ describe Hexp::Nokogiri::Equality do
       node2 = Nokogiri::XML::Node.new('div', doc)
       node2['class'] = 'hello'
 
-      described_class.new(node1, node2).call.should be_true
+      expect(described_class.new(node1, node2).call).to be true
     end
   end
 
@@ -28,7 +28,7 @@ describe Hexp::Nokogiri::Equality do
       node2['class'] = 'hello'
       node2['id'] = 'zigzag'
 
-      described_class.new(node1, node2).call.should be_true
+      expect(described_class.new(node1, node2).call).to be true
     end
   end
 
@@ -39,7 +39,7 @@ describe Hexp::Nokogiri::Equality do
       node2 = Nokogiri::XML::Node.new('div', doc)
       node2 << Nokogiri::XML::Node.new('p', doc)
 
-      described_class.new(node1, node2).call.should be_true
+      expect(described_class.new(node1, node2).call).to be true
     end
   end
 
@@ -50,7 +50,7 @@ describe Hexp::Nokogiri::Equality do
       node2 = Nokogiri::XML::Node.new('div', doc)
       node2 << Nokogiri::XML::Node.new('em', doc)
 
-      described_class.new(node1, node2).call.should be_false
+      expect(described_class.new(node1, node2).call).to be false
     end
   end
 
@@ -62,7 +62,7 @@ describe Hexp::Nokogiri::Equality do
       node2 << Nokogiri::XML::Node.new('p', doc)
       node2 << Nokogiri::XML::Node.new('em', doc)
 
-      described_class.new(node1, node2).call.should be_false
+      expect(described_class.new(node1, node2).call).to be false
     end
   end
 

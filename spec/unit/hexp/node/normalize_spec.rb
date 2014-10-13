@@ -21,13 +21,13 @@ describe Hexp::Node::Normalize, '#call' do
     let(:node) { [:div, {class: 'foo'}] }
 
     it 'should treat the first as the tag' do
-      subject.tag.should == :div
+      expect(subject.tag).to be :div
     end
     it 'should treat the second as the attribute list, if it is a Hash' do
-      subject.attributes.should == {'class' => 'foo'}
+      expect(subject.attributes).to eql('class' => 'foo')
     end
     it 'should treat the second as a list of children, if it is an Array' do
-      subject.children.should == Hexp::List[]
+      expect(subject.children).to eql Hexp::List[]
     end
   end
 
@@ -35,7 +35,7 @@ describe Hexp::Node::Normalize, '#call' do
     let(:node) { [:div, "this is text in the div"] }
 
     it 'should set is as the single child' do
-      subject.children.should == Hexp::List["this is text in the div"]
+      expect(subject.children).to eql Hexp::List["this is text in the div"]
     end
   end
 
@@ -50,7 +50,7 @@ describe Hexp::Node::Normalize, '#call' do
     }
 
     it 'must normalize them recursively' do
-      subject.children.should == Hexp::List[
+      expect(subject.children).to eql Hexp::List[
         Hexp::Node[:h1, {},                  Hexp::List["Big Title"]   ],
         Hexp::Node[:p,  {class: 'greeting'}, Hexp::List["hello world"] ],
         "Some loose text"
@@ -71,7 +71,7 @@ describe Hexp::Node::Normalize, '#call' do
     }
 
     it 'must expand that object' do
-      subject.children.should == Hexp::List[
+      expect(subject.children).to eql Hexp::List[
         Hexp::Node[:em, {}, Hexp::List["I am in your hexpz"] ]
       ]
     end

@@ -3,19 +3,19 @@ require 'spec_helper'
 describe Hexp::Node::Attributes do
   describe 'attr?' do
     it 'should return true if the attribute is present' do
-      expect(H[:a, href: '/foo'].has_attr?(:href)).to be_true
+      expect(H[:a, href: '/foo'].has_attr?(:href)).to be true
     end
 
     it 'should return true if the attribute is present and empty' do
-      expect(H[:a, href: ''].has_attr?(:href)).to be_true
+      expect(H[:a, href: ''].has_attr?(:href)).to be true
     end
 
     it 'should return false if the attribute is not present' do
-      expect(H[:a].has_attr?(:href)).to be_false
+      expect(H[:a].has_attr?(:href)).to be false
     end
 
     it 'should work with a string argument' do
-      expect(H[:a, href: '/foo'].has_attr?('href')).to be_true
+      expect(H[:a, href: '/foo'].has_attr?('href')).to be true
     end
   end
 

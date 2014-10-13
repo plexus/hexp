@@ -13,7 +13,7 @@ describe Hexp::CssSelector::CommaSequence do
       let(:element)  { H[:li, class: 'baz'] }
 
       it 'should match' do
-        expect(comma_sequence.matches?(element)).to be_true
+        expect(comma_sequence.matches?(element)).to be true
       end
     end
   end

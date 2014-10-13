@@ -22,8 +22,9 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'ice_nine', '~> 0.9'
   gem.add_runtime_dependency 'equalizer', '~> 0.0'
 
-  gem.add_development_dependency 'rake', '~> 10.1'
-  gem.add_development_dependency 'rspec', '~> 2.14'
-  gem.add_development_dependency 'benchmark_suite', '~> 1.0'
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'benchmark_suite'
   gem.add_development_dependency 'mutant-rspec'
+  gem.add_development_dependency 'rspec-its'
 end

@@ -19,7 +19,7 @@ describe Hexp::Builder do
   context 'with a block parameter' do
     it 'should pass the builder to the block' do
       Hexp::Builder.new do |builder|
-        expect(Hexp::Builder === builder).to be_true
+        expect(Hexp::Builder === builder).to be true
       end
     end
 
@@ -44,7 +44,7 @@ describe Hexp::Builder do
     it 'should evaluate in the context of the builder' do
       this = self
       Hexp::Builder.new do
-        this.expect(::Hexp::Builder === self).to this.be_true
+        this.expect(::Hexp::Builder === self).to this.be true
       end
     end
 

@@ -5,6 +5,6 @@ describe Hexp::Node, 'to_dom' do
 
   it 'should delegate to Domize' do
     expect(Hexp::Node::Domize).to receive(:new).with(subject, {}).and_return( ->{ 'result' } )
-    subject.to_dom.should == 'result'
+    expect(subject.to_dom).to eql 'result'
   end
 end

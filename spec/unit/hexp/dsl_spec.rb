@@ -28,7 +28,7 @@ describe Hexp::DSL do
 
   it "should delegate `to_html' to to_hexp" do
       expect(hexpable.to_html).to match \
-        %r{<div class="prinses">Liefste, Hart en woorden houden voor jou stil</div>}
+        %r{<div class='prinses'>Liefste, Hart en woorden houden voor jou stil</div>}
   end
 
   it "should delegate `attr' to to_hexp" do
@@ -43,8 +43,8 @@ describe Hexp::DSL do
   end
 
   it "should delegate `class?' to to_hexp" do
-    expect(hexpable.class?(:prinses)).to be_true
-    expect(hexpable.class?(:prins)).to be_false
+    expect(hexpable.class?(:prinses)).to be true
+    expect(hexpable.class?(:prins)).to be false
   end
 
   it "should delegate `rewrite' to to_hexp" do

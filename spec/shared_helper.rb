@@ -1,4 +1,5 @@
 require 'hexp'
+require 'rspec/its'
 
 RSpec::Matchers.define :dom_eq do |other_dom|
   match do |dom|
