@@ -20,7 +20,7 @@ module Hexp
         end
 
         recurse = ->(next_node) { call(next_node) }
-        H[node.name.to_sym, attrs, node.children.map(&recurse)]
+        H[node.name.to_sym, attrs || {}, node.children.map(&recurse)]
       end
     end
   end

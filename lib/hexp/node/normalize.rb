@@ -11,8 +11,8 @@ module Hexp
       #     Hexp::Node::Normalize.new([:p, {class:'foo'}])
       #
       # @api public
-      def initialize(node)
-        @raw = node
+      def initialize(args)
+        @raw = args
       end
 
       # Normalize to strict hexp nodes, cfr SPEC.md for details
@@ -56,14 +56,10 @@ module Hexp
       #
       # @api private
       def children
-        last = @raw.last
-        if last.respond_to? :to_ary
-          last.to_ary
-        elsif @raw.count < 2 || last.instance_of?(Hash)
-          []
-        else
-          [last]
-        end
+        children = @raw.drop(1)
+        children = children.drop(1)      if children.first.instance_of?(Hash)
+        children = children.first.to_ary if children.first.respond_to?(:to_ary)
+        children
       end
 
       # Normalize the third element of a hexp node, the list of children

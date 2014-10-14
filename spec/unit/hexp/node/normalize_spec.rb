@@ -84,4 +84,12 @@ describe Hexp::Node::Normalize, '#call' do
     end
   end
 
+  context 'with multiple children not wrapped in an error' do
+    let(:node) { [:div, {foo: 'bar'}, "hello", [:p], [:span, "foo"]] }
+
+    it 'should work fine' do
+      expect(normalized).to eql Hexp::Node[:div, {"foo"=>"bar"}, Hexp::List["hello", Hexp::Node[:p], Hexp::Node[:span, Hexp::List["foo"]]]]
+    end
+  end
+
 end

@@ -2,6 +2,7 @@ module Hexp
   # A list of nodes
   #
   class List < DelegateClass(Array)
+    include Adamantium
 
     # Create new Hexp::List
     #

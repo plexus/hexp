@@ -58,11 +58,12 @@ module Hexp
     end
 
     def add_attr(key, value)
-      @buffer << SPACE << key << EQ << fmt_attr_value(value)
+      @buffer << SPACE << key << EQ
+      add_attr_value(value)
     end
 
-    def fmt_attr_value(value)
-      ?' << value.gsub(ESCAPE_ATTR_APOS_REGEX, ESCAPE_ATTR_APOS) << ?'
+    def add_attr_value(value)
+      @buffer << APOS << value.gsub(ESCAPE_ATTR_APOS_REGEX, ESCAPE_ATTR_APOS) << APOS
     end
 
     def escape_text(text)
