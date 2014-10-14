@@ -50,7 +50,7 @@ module Hexp
     def add_tag(tag, attrs, children)
       @buffer << LT << tag.to_s
       unless attrs.empty?
-        attrs.each(&method(:add_attr))
+        attrs.each {|k,v| add_attr(k,v)}
       end
       @buffer << GT
       children.each(&method(:add_node))
