@@ -87,5 +87,9 @@ module Hexp
     def to_html
       each_with_object('') {|n,s| s << n.to_html}
     end
+
+    def +(other)
+      self.class[*to_ary, *other.to_ary]
+    end
   end
 end

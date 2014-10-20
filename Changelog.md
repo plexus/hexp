@@ -2,6 +2,8 @@
 
 [full diff](http://github.com/plexus/hexp/compare/v0.3.3...master)
 
+* Make Hexp::List#+ return a Hexp::List
+
 ### v0.4.0.beta1
 
 [full diff](http://github.com/plexus/hexp/compare/v0.3.3...v0.4.0.beta1)
