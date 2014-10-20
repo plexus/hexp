@@ -325,7 +325,7 @@ module Hexp
       # @api private
       #
       def inspect_name
-        if defined?(H) && H == self
+        if defined?(H)
           'H'
         else
           self.name

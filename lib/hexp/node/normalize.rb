@@ -68,24 +68,24 @@ module Hexp
       #
       # @api private
       def normalized_children
-        Hexp::List[*
-          children.map do |child|
-            case child
-            when Hexp::Node, Hexp::TextNode
-              child
-            when String
-              Hexp::TextNode.new(child)
-            when ->(ch) { ch.respond_to? :to_hexp }
-              response = child.to_hexp
-              raise FormatError, "to_hexp must return a Hexp::Node, got #{response.inspect}" unless response.instance_of?(Hexp::Node) || response.instance_of?(Hexp::TextNode)
-              response
-            when Array
-              Hexp::Node[*child]
-            else
-              raise FormatError, "Invalid value in Hexp literal : #{child.inspect} (#{child.class}) does not implement #to_hexp ; #{children.inspect}"
-            end
-          end
-        ]
+        Hexp::List[* children ]
+      end
+
+      def self.coerce_node(node)
+        case node
+        when Hexp::Node, Hexp::TextNode
+          node
+        when String
+          Hexp::TextNode.new(node)
+        when ->(ch) { ch.respond_to? :to_hexp }
+          response = node.to_hexp
+          raise FormatError, "to_hexp must return a Hexp::Node, got #{response.inspect}" unless response.instance_of?(Hexp::Node) || response.instance_of?(Hexp::TextNode)
+          response
+        when Array
+          Hexp::Node[*node]
+        else
+          raise FormatError, "Invalid value in Hexp literal : #{node.inspect} (#{node.class}) does not implement #to_hexp"
+        end
       end
     end
 

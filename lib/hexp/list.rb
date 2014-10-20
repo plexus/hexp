@@ -14,7 +14,7 @@ module Hexp
     #
     # @api public
     def initialize(nodes)
-      super nodes.to_ary.freeze
+      super nodes.to_ary.map(&Node::Normalize.method(:coerce_node)).freeze
     end
 
     # Convenience constructor
@@ -82,6 +82,10 @@ module Hexp
     # @api public
     def eql?(other)
       self == other && self.class == other.class
+    end
+
+    def to_html
+      each_with_object('') {|n,s| s << n.to_html}
     end
   end
 end

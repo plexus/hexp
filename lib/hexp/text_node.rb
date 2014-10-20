@@ -144,5 +144,9 @@ module Hexp
     def select(&block)
       Node::Selection.new(self, block)
     end
+
+    def to_html(opts = {})
+      Unparser.new(opts).call(self)
+    end
   end
 end

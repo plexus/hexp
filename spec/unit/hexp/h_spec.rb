@@ -30,9 +30,9 @@ describe 'H notation' do
       Object.send(:remove_const, :H)
     end
 
-    it 'should set H to Hexp::Node' do
+    it 'should define H' do
       load 'hexp/h.rb'
-      expect(H).to eq(Hexp::Node)
+      expect(H).to be_a Module
     end
   end
 end
