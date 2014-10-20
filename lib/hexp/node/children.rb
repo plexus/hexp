@@ -72,9 +72,10 @@ module Hexp
       # @return [Hexp::Node]
       #
       # @api public
-      def set_children(new_children)
-        H[tag, attributes, new_children]
+      def content(*args)
+        H[tag, attributes, *args]
       end
+      alias set_children content
 
       # Perform an action on each child node, and replace the node with the result
       #
@@ -94,6 +95,7 @@ module Hexp
         return to_enum(:map_children) unless block_given?
         H[tag, attributes, children.map(&blk)]
       end
+
     end
   end
 end
