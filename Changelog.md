@@ -1,8 +1,8 @@
 ### Development
 
-[full diff](http://github.com/plexus/hexp/compare/v0.4.0...master)
+[full diff](http://github.com/plexus/hexp/compare/v0.4.1...master)
 
-### v0.4.0
+### v0.4.1
 
 * Make Hexp::List#+ return a Hexp::List
 * Add Hexp::Node#append as a convenient API for adding child nodes
