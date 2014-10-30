@@ -32,6 +32,7 @@ module Hexp
       #
       # @api private
       def self.included(klass)
+        super
         def klass.[](*members)
           new(members)
         end
