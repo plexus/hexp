@@ -1,5 +1,7 @@
 module Hexp
   class Unparser
+    include Adamantium
+
     APOS   = ?'.freeze
     QUOT   = ?".freeze
     LT     = '<'.freeze
@@ -24,46 +26,59 @@ module Hexp
     ESCAPE_TEXT_REGEX      = Regexp.new("[#{ESCAPE_TEXT.keys.join}]")
 
     DEFAULT_OPTIONS = {
-      encoding: Encoding.default_external
+      encoding: Encoding.default_external,
+      no_escape: [:script]
     }
+
+    attr_reader :options
 
     def initialize(options)
       @options = DEFAULT_OPTIONS.merge(options)
     end
 
     def call(node)
-      @buffer = String.new.force_encoding(@options[:encoding])
-      add_node(node)
-      @buffer.freeze
+      buffer = String.new.force_encoding(options[:encoding])
+      add_node(buffer, node)
+      buffer.freeze
     end
 
     private
 
-    def add_node(node)
+    def add_node(buffer, node)
       if node.text?
-        @buffer << escape_text(node)
+        buffer << escape_text(node)
       else
-        add_tag(node.tag, node.attributes, node.children)
+        add_tag(buffer, node.tag, node.attributes, node.children)
       end
     end
 
-    def add_tag(tag, attrs, children)
-      @buffer << LT << tag.to_s
+    def add_tag(buffer, tag, attrs, children)
+      buffer << LT << tag.to_s
       unless attrs.empty?
-        attrs.each {|k,v| add_attr(k,v)}
+        attrs.each {|k,v| add_attr(buffer, k,v)}
       end
-      @buffer << GT
-      children.each(&method(:add_node))
-      @buffer << LT << FSLASH << tag.to_s << GT
+      buffer << GT
+      add_child_nodes(buffer, tag, children)
+      buffer << LT << FSLASH << tag.to_s << GT
     end
 
-    def add_attr(key, value)
-      @buffer << SPACE << key << EQ
-      add_attr_value(value)
+    def add_child_nodes(buffer, tag, children)
+      # TODO look into the special parsing mode that browsers use inside <script> tags,
+      # at the least we should throw an error if the text contains </script>
+      if options[:no_escape].include?(tag) && children.length == 1 && children.first.text?
+        buffer << children.first
+      else
+        children.each {|node| add_node(buffer, node) }
+      end
     end
 
-    def add_attr_value(value)
-      @buffer << APOS << value.gsub(ESCAPE_ATTR_APOS_REGEX, ESCAPE_ATTR_APOS) << APOS
+    def add_attr(buffer, key, value)
+      buffer << SPACE << key << EQ
+      add_attr_value(buffer, value)
+    end
+
+    def add_attr_value(buffer, value)
+      buffer << APOS << value.gsub(ESCAPE_ATTR_APOS_REGEX, ESCAPE_ATTR_APOS) << APOS
     end
 
     def escape_text(text)
