@@ -9,6 +9,9 @@
 * Make Unparser Adamantium-immutable so instances can be included in
   Adamantiumized objects
 * Skip escaping inside <script> tags
+* Add a "rails integration" (ugh) to play nice with
+  ActiveSupport::SafeBuffer. use `gem 'hexp', require: 'hexp-rails'`
+  in your Gemfile
 
 ### v0.4.0.beta1
 
