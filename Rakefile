@@ -23,7 +23,7 @@ gem.define
 desc "Push gem to rubygems.org"
 task :push => :gem do
   sh "git tag v#{Hexp::VERSION}"
-  sh "git push --tags -f"
+  sh "git push --tags"
   sh "gem push pkg/hexp-#{Hexp::VERSION}.gem"
 end
 
