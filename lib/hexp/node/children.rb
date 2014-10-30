@@ -96,6 +96,9 @@ module Hexp
         H[tag, attributes, children.map(&blk)]
       end
 
+      def append(*nodes)
+        H[tag, attributes, children + nodes]
+      end
     end
   end
 end
