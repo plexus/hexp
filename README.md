@@ -20,7 +20,7 @@ Only when the data needs to be serialized and sent over the network is it conver
 * Security : Protection from XSS (cross-site scripting)
 * Productivity : components that create or alter fragments of a HTML become generic, reusable parts
 
-For a more in-depth explanation please see the slides of talk [Web Linguistics, Towards Higher Fluency](http://arnebrasseur.net/talks/eurucamp2013/presentation.html) given at Eurucamp 2013. (the video is not available yet.)
+For a more in-depth explanation please see the slides of talk [Web Linguistics, Towards Higher Fluency](http://arnebrasseur.net/talks/eurucamp2013/presentation.html) given at [eurucamp 2013](2013.eurucamp.org) [(video)](http://media.eurucamp.org/#talk-2013-plexus).
 
 **Creating Hexps**
 
