@@ -1,8 +1,14 @@
 ### Development
 
-[full diff](http://github.com/plexus/hexp/compare/v0.3.3...master)
+[full diff](http://github.com/plexus/hexp/compare/v0.4.0...master)
+
+### v0.4.0
 
 * Make Hexp::List#+ return a Hexp::List
+* Add Hexp::Node#append as a convenient API for adding child nodes
+* Make Unparser Adamantium-immutable so instances can be included in
+  Adamantiumized objects
+* Skip escaping inside <script> tags
 
 ### v0.4.0.beta1
 
