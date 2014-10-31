@@ -74,7 +74,7 @@ node = H[:nav, {"id"=>"menu"},
 puts node.to_html
 ```
 
-If the first argument to `H[...]` is a Symbol, than the result is a `Node` otherwise it's a `List`.
+If the first argument to `H[...]` is a Symbol, then the result is a `Node`, otherwise it's a `List`.
 
 You can parse exisiting HTML to Hexp with `Hexp.parse(...)`.
 
@@ -159,7 +159,7 @@ node.to_dom # => Convert to Nokogiri
 A `Hexp::List` wraps and delegates to a Ruby Array, so it has the same
 API as Array. Methods which mutate the Array will raise an exception.
 
-Additionally `Hexp::List` implements `to_html`, `append`, and `+`. Just like built in collections, the class implements `[]` as an alternative constructor.
+Additionally `Hexp::List` implements `to_html`, `append`, and `+`. Just like built-in collections, the class implements `[]` as an alternative constructor.
 
 Equality checks with `==` only compare value equality, so comparing to an Array with the same content returns true. Use `eql?` for a stronger "type and value" equality.
 
@@ -212,7 +212,7 @@ end
 
 When an object implements `to_hexp` it can be used where you would otherwise use a node. This can be useful for instance to create components that know how to render themselves.
 
-Yaks does not contain any core extensions, but there is an optional, opt-in, implementationof `to_hexp` for NilClass, so nils in a list of nodes won't raise an error. This lets you write things like
+Yaks does not contain any core extensions, but there is an optional, opt-in, implementation of `to_hexp` for NilClass, so nils in a list of nodes won't raise an error. This lets you write things like
 
 ``` ruby
 H[:p,
