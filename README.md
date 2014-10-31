@@ -131,7 +131,7 @@ node.merge_attrs(class: 'daring', id: 'poem')
 
 #### Children
 
-```
+``` ruby
 node.empty? # => false
 node.append(H[:blink, "ARRSOME"], H[:p, "bye"]) # => H[:p, {"class"=>"bold"}, ["A lovely paragraph", H[:blink, ["ARRSOME"]], H[:p, ["bye"]]]]
 node.text # => "A lovely paragraph"
@@ -210,9 +210,9 @@ end
 
 ## to_hexp
 
-When an object implements `to_hexp` it can be used where you would otherwise use a node. This can be useful for instance to create components that now how to render themselves.
+When an object implements `to_hexp` it can be used where you would otherwise use a node. This can be useful for instance to create components that know how to render themselves.
 
-Yaks does not contain any core extensions, but there is an optional, opt-in, implementationof `to_hexp` for NilClass, so nils in a list of node won't raise an error. This lets you write things like
+Yaks does not contain any core extensions, but there is an optional, opt-in, implementationof `to_hexp` for NilClass, so nils in a list of nodes won't raise an error. This lets you write things like
 
 ``` ruby
 H[:p,
