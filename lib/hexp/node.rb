@@ -52,13 +52,14 @@ module Hexp
   # {Hexp::Node#select}.
   #
   class Node
-    include Equalizer.new(:tag, :attributes, :children)
+    include Concord::Public.new(:tag, :attributes, :children)
     include Adamantium
     extend Forwardable
 
     include Hexp::Node::Attributes
     include Hexp::Node::Children
 
+    alias attrs attributes
     memoize :class_list
 
     # The HTML tag of this node
@@ -69,7 +70,7 @@ module Hexp
     # @return [Symbol]
     # @api public
     #
-    attr_reader :tag
+    #attr_reader :tag
 
     # The attributes of this node
     #
@@ -79,7 +80,7 @@ module Hexp
     # @return [Hash<String, String>]
     # @api public
     #
-    attr_reader :attributes
+    #attr_reader :attributes
 
     # The child nodes of this node
     #
@@ -90,7 +91,7 @@ module Hexp
     # @return [Hexp::List]
     # @api public
     #
-    attr_reader :children
+    #attr_reader :children
 
     # Main entry point for creating literal hexps
     #
@@ -124,7 +125,7 @@ module Hexp
     # @api public
     #
     def initialize(*args)
-      @tag, @attributes, @children = Normalize.new(args).call
+      super(*Normalize.new(args).call)
     end
 
     # Standard hexp coercion protocol, return self

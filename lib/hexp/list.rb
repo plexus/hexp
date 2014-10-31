@@ -91,5 +91,9 @@ module Hexp
     def +(other)
       self.class[*to_ary, *other.to_ary]
     end
+
+    def append(*args)
+      self + args
+    end
   end
 end

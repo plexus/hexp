@@ -2,10 +2,11 @@ require 'delegate'
 require 'forwardable'
 require 'pathname'
 
-require 'nokogiri' # TODO => replace with Builder
+require 'nokogiri'
 require 'sass'
 require 'adamantium'
 require 'equalizer'
+require 'concord'
 
 module Hexp
   ROOT = Pathname(__FILE__).dirname.parent

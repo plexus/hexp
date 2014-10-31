@@ -91,10 +91,6 @@ describe Hexp::Node::Attributes do
     it 'should override attributes' do
       expect(H[:foo, class: 'baz'].set_attrs(class: 'bar')).to eq H[:foo, class: 'bar']
     end
-
-    it 'should merge keep both old and new attributes' do
-      expect(H[:foo, class: 'baz'].set_attrs(src: 'bar')).to eq H[:foo, class: 'baz', src: 'bar']
-    end
   end
 
   describe 'merge_attrs' do

@@ -124,12 +124,10 @@ module Hexp
       def set_attrs(attrs)
         H[
           self.tag,
-          self.attributes.merge(Hash[*attrs.flat_map{|k,v| [k.to_s, v]}]),
+          Hash[*attrs.flat_map{|k,v| [k.to_s, v]}],
           self.children
         ]
       end
-      alias :% :set_attrs
-      alias :add_attributes :set_attrs
 
       # Remove an attribute by name
       #
@@ -188,6 +186,8 @@ module Hexp
         end
         result
       end
+      alias :% :merge_attrs
+
     end
   end
 end
