@@ -27,7 +27,9 @@ module Hexp
 
     DEFAULT_OPTIONS = {
       encoding: Encoding.default_external,
-      no_escape: [:script]
+      no_escape: [:script],
+      void: [ :area, :base, :br, :col, :command, :embed, :hr, :img, :input,
+              :keygen, :link, :meta, :param, :source, :track, :wbr ]
     }
 
     attr_reader :options
@@ -59,7 +61,7 @@ module Hexp
       end
       buffer << GT
       add_child_nodes(buffer, tag, children)
-      buffer << LT << FSLASH << tag.to_s << GT
+      buffer << LT << FSLASH << tag.to_s << GT unless void?(tag)
     end
 
     def add_child_nodes(buffer, tag, children)
@@ -83,6 +85,10 @@ module Hexp
 
     def escape_text(text)
       text.gsub(ESCAPE_TEXT_REGEX, ESCAPE_TEXT)
+    end
+
+    def void?(tag)
+      options[:void].include?(tag)
     end
   end
 end
