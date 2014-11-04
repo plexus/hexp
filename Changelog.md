@@ -1,6 +1,8 @@
 ### Development
 
-[full diff](http://github.com/plexus/hexp/compare/v0.4.1...master)
+[full diff](http://github.com/plexus/hexp/compare/v0.4.2...master)
+
+### v0.4.2
 
 * Added Hexp::List#append
 * set_attr now simply replaces the full attribute hash, use
