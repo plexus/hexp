@@ -2,6 +2,13 @@
 
 [full diff](http://github.com/plexus/hexp/compare/v0.4.1...master)
 
+* Added Hexp::List#append
+* set_attr now simply replaces the full attribute hash, use
+  merge_attr for "smart" behavior. % is now an alias of merge_attr,
+  not set_attr
+* Make the unparser aware of HTML "void" tags (tags that should not
+  have a closing tag)
+
 ### v0.4.1
 
 * Make Hexp::List#+ return a Hexp::List
