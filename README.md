@@ -12,7 +12,7 @@
 
 # Hexp
 
-**Hexp** (pronounced [ˈɦækspi:]) is a DOM API for Ruby. It lets you treat HTML in your applications as objects, instead of strings. It is a standalone, framework independent library. You can use it to build full web pages, or to clean up your helpers and presenters.
+**Hexp** (pronounced [ˈɦækspi:]) is a DOM API for Ruby. It lets you treat HTML in your applications as objects, instead of strings. It is a standalone, framework independent library. You can use it to build full web pages, or just to clean up your helpers and presenters.
 
 ## Fundamentals
 
