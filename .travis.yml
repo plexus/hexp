@@ -19,3 +19,4 @@ matrix:
     - rvm: jruby
     - rvm: ruby-head
     - rvm: jruby-head
+    - rvm: rbx
