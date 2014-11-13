@@ -130,20 +130,22 @@ module Hexp
         members.first.matches?(element)
       end
 
+      # Warning: Highly optimized cryptic code
       def matches_path?(path)
         return false if path.length < members.length
+        return false unless members.last.matches?(path.last)
 
-        path_idx = 0
-        path_end = path.length
+        path_idx = path.length    - 2
+        mem_idx  = members.length - 2
 
-        members.each do |mem|
-          until path_idx == path_end || mem.matches?(path[path_idx])
-            path_idx +=1
+        until path_idx < mem_idx || mem_idx == -1
+          if members[mem_idx].matches?(path[path_idx])
+            mem_idx -= 1
           end
-          return false if path_idx == path_end
+          path_idx -= 1
         end
 
-        true
+        mem_idx == -1
       end
 
       # Drop the first element of this Sequence
