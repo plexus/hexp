@@ -2,6 +2,9 @@
 
 [full diff](http://github.com/plexus/hexp/compare/v0.4.2...master)
 
+* Performance improvements: Introduce MutableTreeWalk to speed up css
+  selection, and other tweaks
+
 ### v0.4.2
 
 * Added Hexp::List#append

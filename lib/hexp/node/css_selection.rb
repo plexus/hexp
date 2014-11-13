@@ -73,10 +73,15 @@ module Hexp
       def each(&block)
         return to_enum(:each) unless block_given?
 
-        @node.children.each do |child|
-          next_selection_for(child).each(&block)
+        walk = MutableTreeWalk.new(@node)
+
+        until walk.end?
+          if comma_sequence.matches_path?(walk.path)
+            yield walk.current
+          end
+          walk.next!
         end
-        yield @node if node_matches?
+
         self
       end
 
@@ -91,14 +96,16 @@ module Hexp
       def rewrite(&block)
         return @node if @node.text?
 
-        new_node = H[
-          @node.tag,
-          @node.attributes,
-          @node.children.flat_map do |child|
-            next_selection_for(child).rewrite(&block)
+        walk = MutableTreeWalk.new(@node)
+
+        until walk.end?
+          if comma_sequence.matches_path?(walk.path)
+            walk.replace!(block.call(walk.current))
           end
-        ]
-        node_matches? ? block.call(new_node) : new_node
+          walk.next!
+        end
+
+        walk.result
       end
 
       private
@@ -129,49 +136,6 @@ module Hexp
       # @api private
       def node_matches?
         comma_sequence.matches?(@node)
-      end
-
-      # Consume the matching part of the comma sequence, return the rest
-      #
-      # Returns a new comma sequence with the parts removed that have been
-      # consumed by matching against this node. If no part matches, returns nil.
-      #
-      # @return [Hexp::CssSelector::CommaSequence]
-      #
-      # @api private
-      def next_comma_sequence
-        @next_comma_sequence ||= CssSelector::CommaSequence.new(consume_matching_heads)
-      end
-
-      # Recurse down a child down, passing in the remaining part of the selector
-      #
-      # @param [Hexp::Node] child
-      #   One of the children of the node in this selection object
-      #
-      # @return [Hexp::Node::CssSelection]
-      #
-      # @api private
-      def next_selection_for(child)
-        self.class.new(child, next_comma_sequence)
-      end
-
-      # For each sequence in the comma sequence, remove the head if it matches
-      #
-      # For example, if this node is a `H[:div]`, and the selector is
-      # `span.foo, div a[:href]`, then the result of this method will be
-      # `span.foo, a[:href]`. This can then be used to match any child nodes.
-      #
-      # @return [Hexp::CssSelector::CommaSequence]
-      #
-      # @api private
-      def consume_matching_heads
-        comma_sequence.members.flat_map do |sequence|
-          if sequence.head_matches? @node
-            [sequence, sequence.drop_head]
-          else
-            [sequence]
-          end
-        end.reject(&:empty?)
       end
 
     end

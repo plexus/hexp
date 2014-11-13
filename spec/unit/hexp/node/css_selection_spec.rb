@@ -18,7 +18,7 @@ describe Hexp::Node::CssSelection do
       let(:hexp) { H[:span, {id: 'span-1'}, H[:span, id: 'span-2']] }
 
       it 'should match all nodes of that tag' do
-        expect(selection.to_a).to eq [ H[:span, id: 'span-2'], hexp ]
+        expect(selection.to_a).to eq [ hexp, H[:span, id: 'span-2'] ]
       end
     end
   end

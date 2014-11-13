@@ -106,6 +106,12 @@ module Hexp
             sequence.head_matches?(element)
         end
       end
+
+      def matches_path?(path)
+        members.any? do |sequence|
+          sequence.matches_path?(path)
+        end
+      end
     end
 
     # A single CSS sequence like 'div span .foo'
@@ -122,6 +128,22 @@ module Hexp
       # @api private
       def head_matches?(element)
         members.first.matches?(element)
+      end
+
+      def matches_path?(path)
+        return false if path.length < members.length
+
+        path_idx = 0
+        path_end = path.length
+
+        members.each do |mem|
+          until path_idx == path_end || mem.matches?(path[path_idx])
+            path_idx +=1
+          end
+          return false if path_idx == path_end
+        end
+
+        true
       end
 
       # Drop the first element of this Sequence

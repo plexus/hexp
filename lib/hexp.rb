@@ -126,3 +126,4 @@ require 'hexp/h'
 
 require 'hexp/builder'
 require 'hexp/unparser'
+require 'hexp/mutable_tree_walk'
