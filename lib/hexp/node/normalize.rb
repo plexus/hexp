@@ -68,7 +68,11 @@ module Hexp
       #
       # @api private
       def normalized_children
-        Hexp::List[* children ]
+        if children.instance_of?(Hexp::List)
+          children
+        else
+          Hexp::List.new( children )
+        end
       end
 
       def self.coerce_node(node)
