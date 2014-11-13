@@ -4,7 +4,6 @@ module Hexp
     #
     module Members
       include Equalizer.new(:members)
-      include Adamantium
 
       extend Forwardable
       def_delegator :@members, :empty?

@@ -4,7 +4,6 @@ require 'pathname'
 
 require 'nokogiri'
 require 'sass'
-require 'adamantium'
 require 'equalizer'
 require 'concord'
 

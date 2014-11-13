@@ -53,14 +53,12 @@ module Hexp
   #
   class Node
     include Concord::Public.new(:tag, :attributes, :children)
-    include Adamantium
     extend Forwardable
 
     include Hexp::Node::Attributes
     include Hexp::Node::Children
 
     alias attrs attributes
-    memoize :class_list
 
     # The HTML tag of this node
     #
@@ -125,7 +123,19 @@ module Hexp
     # @api public
     #
     def initialize(*args)
-      super(*Normalize.new(args).call)
+      tag_ok   = args[0].instance_of?(Symbol)
+      raise "The tag of node should be a Symbol" unless tag_ok
+
+      attrs_ok = args[1].instance_of?(Hash) &&
+                 args[1].all? {|k,v| k.instance_of?(String) && v.instance_of?(String) }
+
+      if attrs_ok && args[2].instance_of?(List)
+        super(args[0], args[1], args[2])
+      elsif attrs_ok && args[2].instance_of?(Array)
+        super(args[0], args[1], List.new(args[2]))
+      else
+        super(*Normalize.new(args).call)
+      end.freeze
     end
 
     # Standard hexp coercion protocol, return self

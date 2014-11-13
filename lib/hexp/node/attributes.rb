@@ -88,7 +88,7 @@ module Hexp
       #
       # @api public
       def class_list
-        (attr('class') || '').split(' ')
+        @class_list ||= (attr('class') || '').split(' ')
       end
 
       # Remove a CSS class from this element

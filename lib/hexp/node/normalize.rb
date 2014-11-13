@@ -43,6 +43,7 @@ module Hexp
       #
       # @api private
       def normalized_attributes
+        return attributes if attributes.all? {|k,v| k.instance_of?(String) && v.instance_of?(String) }
         Hash[*
           attributes.flat_map do |key, value|
             [key, value].map(&:to_s)
@@ -56,10 +57,12 @@ module Hexp
       #
       # @api private
       def children
-        children = @raw.drop(1)
-        children = children.drop(1)      if children.first.instance_of?(Hash)
-        children = children.first.to_ary if children.first.respond_to?(:to_ary)
-        children
+        start = @raw[1].instance_of?(Hash) ? 2 : 1
+        if @raw[start].respond_to?(:to_ary)
+          @raw[start].to_ary
+        else
+          @raw.drop(start)
+        end
       end
 
       # Normalize the third element of a hexp node, the list of children

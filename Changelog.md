@@ -2,8 +2,15 @@
 
 [full diff](http://github.com/plexus/hexp/compare/v0.4.2...master)
 
-* Performance improvements: Introduce MutableTreeWalk to speed up css
-  selection, and other tweaks
+### v0.4.3
+
+Performance improvements
+
+* Introduce MutableTreeWalk to speed up css selection
+* Drop Adamantium. This means we have less of a guarantee of deep
+  immutability, but it does speed things up
+* Prevent type coercion from happening if inputs are already valid
+* Raise an exception when a node's tag is not a Symbol
 
 ### v0.4.2
 

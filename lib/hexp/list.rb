@@ -2,8 +2,6 @@ module Hexp
   # A list of nodes
   #
   class List < DelegateClass(Array)
-    include Adamantium
-
     # Create new Hexp::List
     #
     # @example
@@ -14,7 +12,11 @@ module Hexp
     #
     # @api public
     def initialize(nodes)
-      super nodes.to_ary.map(&Node::Normalize.method(:coerce_node)).freeze
+      if nodes.instance_of?(List)
+        super(nodes.__getobj__).freeze
+      else
+        super nodes.to_ary.map(&Node::Normalize.method(:coerce_node)).freeze
+      end
     end
 
     # Convenience constructor
