@@ -7,8 +7,11 @@ RSpec::Matchers.define :dom_eq do |other_dom|
   end
 end
 
-RSpec.configure do |configuration|
-  configuration.mock_with :rspec do |configuration|
+RSpec.configure do |rspec|
+  rspec.mock_with :rspec do |configuration|
     configuration.syntax = :expect
+  end
+  rspec.around(:each) do |example|
+    Timeout.timeout(1, &example)
   end
 end
