@@ -53,3 +53,11 @@ task :mutant do
   result  = Mutant::CLI.run(%w[-Ilib -rhexp --use rspec --score 100] + opts + [pattern])
   fail unless result == Mutant::CLI::EXIT_SUCCESS
 end
+
+require 'rspec/core/rake_task'
+
+desc "run rspec"
+RSpec::Core::RakeTask.new(:rspec) do |t, task_args|
+  t.rspec_opts = "-Ispec"
+  t.pattern = "spec"
+end
