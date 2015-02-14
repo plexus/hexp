@@ -46,6 +46,7 @@ end
 require 'mutant'
 task :default => :mutant
 
+desc "run mutant"
 task :mutant do
   pattern = ENV.fetch('PATTERN', 'Hexp*')
   opts    = ENV.fetch('MUTANT_OPTS', '').split(' ')
