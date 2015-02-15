@@ -1,6 +1,12 @@
 ### Development
 
-[full diff](http://github.com/plexus/hexp/compare/v0.4.2...master)
+[full diff](http://github.com/plexus/hexp/compare/v0.4.4...master)
+
+### v0.4.4
+
+* Drop the dependency on SASS, use Nokogiri instead for parsing CSS
+  selectors
+
 
 ### v0.4.3
 
