@@ -9,10 +9,7 @@ describe Hexp::CssSelector::Parser do
   context 'with a single tag' do
     let(:selector) { 'body' }
     it {
-      should eq HC::CommaSequence[
-        HC::Sequence[
-          HC::SimpleSequence[
-            HC::Element.new('body')]]]
+      should eq HC::CommaSequence[HC::Element.new('body')]
     }
   end
 
@@ -29,6 +26,7 @@ describe Hexp::CssSelector::Parser do
       should eq HC::CommaSequence[
         HC::Sequence[
           HC::SimpleSequence[
+            HC::Universal.new,
             HC::Id.new('main')],
           HC::SimpleSequence[
             HC::Element.new('a'),
@@ -40,11 +38,10 @@ describe Hexp::CssSelector::Parser do
     let(:selector) { 'div[link=href]' }
     it {
       should eq HC::CommaSequence[
-        HC::Sequence[
           HC::SimpleSequence[
             HC::Element.new('div'),
-            HC::Attribute.new('link', nil, '=', 'href', nil),
-          ]]]
+            HC::Attribute.new('link', :equal, 'href'),
+          ]]
     }
   end
 

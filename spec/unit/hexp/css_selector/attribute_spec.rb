@@ -1,12 +1,10 @@
 require 'spec_helper'
 
 describe Hexp::CssSelector::Attribute do
-  subject(:selector) { described_class.new(name, namespace, operator, value, flags) }
+  subject(:selector) { described_class.new(name, operator, value) }
   let(:name)      { nil }
-  let(:namespace) { nil }
   let(:operator)  { nil }
   let(:value)     { nil }
-  let(:flags)     { nil }
 
   describe 'without an operator' do
     let(:name) { 'href' }
@@ -26,7 +24,7 @@ describe Hexp::CssSelector::Attribute do
 
   describe 'with the "=" operator' do
     let(:name)     { 'class' }
-    let(:operator) { '=' }
+    let(:operator) { :equal }
     let(:value)    { 'foo' }
 
     it "should match if the attribute's value is exactly equal to the given value" do
@@ -44,7 +42,7 @@ describe Hexp::CssSelector::Attribute do
 
   describe 'the "~=" operator' do
     let(:name)     { 'class' }
-    let(:operator) { '~=' }
+    let(:operator) { :includes }
     let(:value)    { 'foo' }
 
     it 'should match an entry in a space separated list' do
@@ -62,7 +60,7 @@ describe Hexp::CssSelector::Attribute do
 
   describe 'the "|=" operator' do
     let(:name)     { 'id' }
-    let(:operator) { '|=' }
+    let(:operator) { :dash_match }
     let(:value)    { 'foo' }
 
     it 'should match if the attribute starts with the value, followed by a dash' do
@@ -80,7 +78,7 @@ describe Hexp::CssSelector::Attribute do
 
   describe 'the "^=" operator' do
     let(:name)     { 'id' }
-    let(:operator) { '^=' }
+    let(:operator) { :prefix_match }
     let(:value)    { 'foo' }
 
     it 'should match if the attribute is just the value' do
@@ -98,7 +96,7 @@ describe Hexp::CssSelector::Attribute do
 
   describe 'the "$=" operator' do
     let(:name)     { 'id' }
-    let(:operator) { '$=' }
+    let(:operator) { :suffix_match }
     let(:value)    { 'foo' }
 
     it 'should match if the attribute is just the value' do
@@ -116,7 +114,7 @@ describe Hexp::CssSelector::Attribute do
 
   describe 'the "*=" operator' do
     let(:name)     { 'id' }
-    let(:operator) { '*=' }
+    let(:operator) { :substring_match }
     let(:value)    { 'foo' }
 
     it 'should match if the attribute is just the value' do

@@ -100,9 +100,13 @@ module Hexp
       #
       # @api private
       def matches?(element)
-        members.any? do |sequence|
-          sequence.members.count == 1 &&
-            sequence.head_matches?(element)
+        members.any? do |member|
+          case member
+          when Sequence
+            member.members.count == 1 && member.head_matches?(element)
+          else
+            member.matches?(element)
+          end
         end
       end
 
@@ -164,6 +168,10 @@ module Hexp
     class SimpleSequence
       include Members
 
+      def matches_path?(path)
+        matches?(path.last)
+      end
+
       # Does the element match all parts of this SimpleSequence
       #
       # @params [Hexp::Node] element
@@ -176,11 +184,16 @@ module Hexp
           simple.matches?(element)
         end
       end
+      alias head_matches? matches?
     end
 
     # A CSS element declaration, like 'div'
     class Element
       include Named
+
+      def matches_path?(path)
+        matches?(path.last)
+      end
 
       # Does the node match this element selector
       #
@@ -196,6 +209,10 @@ module Hexp
 
     # Match any element, '*'
     class Universal
+      def self.new
+        @@instance ||= super
+      end
+
       def matches?(element)
         true
       end
@@ -250,9 +267,9 @@ module Hexp
     #
     # @api private
     class Attribute
-      include Equalizer.new(:name, :namespace, :operator, :value, :flags)
+      include Equalizer.new(:name, :operator, :value)
 
-      attr_reader :name, :namespace, :operator, :value, :flags
+      attr_reader :name, :operator, :value
 
       # Construct a new Attribute selector
       #
@@ -261,23 +278,17 @@ module Hexp
       #
       # @param [String] name
       #   Name of the attribute, like 'href'
-      # @param [String] namespace
-      #   unused
       # @param [nil, String] operator
       #   Operator like '~=', '^=', ... Use blank to simply test attribute
       #   presence.
       # @param [String] value
       #   Value to test for, operator dependent
-      # @param [Object] flags
-      #   unused
       #
       # @api private
-      def initialize(name, namespace, operator, value, flags)
+      def initialize(name, operator, value)
         @name      = name.freeze
-        @namespace = namespace.freeze
         @operator  = operator.freeze
         @value     = value.freeze
-        @flag      = flags.freeze
       end
 
       # Debugging representation
@@ -286,7 +297,7 @@ module Hexp
       #
       # @api private
       def inspect
-        "<#{self.class.name.split('::').last} name=#{name} namespace=#{namespace.inspect} operator=#{operator.inspect} value=#{value.inspect} flags=#{flags.inspect}>"
+        "<#{self.class.name.split('::').last} name=#{name} operator=#{operator.inspect} value=#{value.inspect}>"
       end
 
       # Does the node match this attribute selector
@@ -301,9 +312,6 @@ module Hexp
         return false unless element[name]
         attribute = element[name]
 
-        # TODO: check the spec with regards to IDENTIFIERS vs STRINGS as value
-        #       see if we can lett SASS parse the string instead of unwrapping
-        #       it ourselves
         value = self.value
         value = $1.gsub('\"', '"') if value =~ /\A"?(.*?)"?\z/
 
@@ -311,19 +319,19 @@ module Hexp
           # CSS 2
         when nil
           true
-        when '='  # exact match
+        when :equal  # '=': exact match
           attribute == value
-        when '~=' # space separated list contains
+        when :includes # '~=': space separated list contains
           attribute.split(' ').include?(value)
-        when '|=' # equal to, or starts with followed by a dash
+        when :dash_match # '|=' equal to, or starts with followed by a dash
           attribute =~ /\A#{Regexp.escape(value)}(-|\z)/
 
           # CSS 3
-        when '^=' # starts with
+        when :prefix_match #'^=': starts with
           attribute.index(value) == 0
-        when '$=' # ends with
+        when :suffix_match # '$=': ends with
           attribute =~ /#{Regexp.escape(value)}\z/
-        when '*=' # contains
+        when :substring_match # '*=': contains
           !!(attribute =~ /#{Regexp.escape(value)}/)
 
         else

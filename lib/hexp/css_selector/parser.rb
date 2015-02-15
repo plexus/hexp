@@ -28,7 +28,11 @@ module Hexp
       #
       # @api private
       def parse
-        rewrite_comma_sequence(SassParser.call(@selector))
+        CommaSequence.new(
+          ::Nokogiri::CSS.parse(@selector).map do |node|
+            node.accept(self)
+          end
+        )
       end
 
       # Parse a CSS selector in one go
@@ -41,77 +45,59 @@ module Hexp
         new(selector).parse
       end
 
-      private
-
-      # Map CommaSequence from the SASS namespace to our own
-      #
-      # @param [Sass::Selector::CommaSequence] comma_sequence
-      # @return [Hexp::CssSelector::CommaSequence]
-      #
-      # @api private
-      def rewrite_comma_sequence(comma_sequence)
-        CommaSequence.new(comma_sequence.members.map{|sequence| rewrite_sequence(sequence)})
+      def visit_descendant_selector(node)
+        Sequence.new(
+          node.value.map {|child| child.accept(self) }
+        )
       end
 
-      # Map Sequence from the SASS namespace to our own
-      #
-      # @param [Sass::Selector::Sequence] comma_sequence
-      # @return [Hexp::CssSelector::Sequence]
-      #
-      # @api private
-      def rewrite_sequence(sequence)
-        Sequence.new(sequence.members.map{|simple_sequence| rewrite_simple_sequence(simple_sequence)})
+      def visit_conditional_selector(node)
+        head, tail = node.value
+        children = [head]
+        while tail.type == :COMBINATOR
+          head, tail = tail.value
+          children << head
+        end
+        children << tail
+
+        SimpleSequence.new(
+          children.map {|child| child.accept(self) }
+        )
       end
 
-      # Map SimpleSequence from the SASS namespace to our own
-      #
-      # @param [Sass::Selector::SimpleSequence] comma_sequence
-      # @return [Hexp::CssSelector::SimpleSequence]
-      #
-      # @api private
-      def rewrite_simple_sequence(simple_sequence)
-        SimpleSequence.new(simple_sequence.members.map{|simple| rewrite_simple(simple)})
-      end
-
-      # Map Simple from the SASS namespace to our own
-      #
-      # @param [Sass::Selector::Simple] comma_sequence
-      # @return [Hexp::CssSelector::Simple]
-      #
-      # @api private
-      def rewrite_simple(simple)
-        case simple
-        when ::Sass::Selector::Element             # span
-          Element.new(simple.name.first)
-        when ::Sass::Selector::Class               # .foo
-          Class.new(simple.name.first)
-        when ::Sass::Selector::Id                  # #main
-          Id.new(simple.name.first)
-        when ::Sass::Selector::Attribute           # [href^="http://"]
-          raise "CSS attribute selector flags are curently ignored by Hexp (not implemented)" unless simple.flags.nil?
-          raise "CSS attribute namespaces are curently ignored by Hexp (not implemented)" unless simple.namespace.nil?
-          raise "CSS attribute operator #{simple.operator} not understood by Hexp" unless %w[= ~= ^= |= $= *=].include?(simple.operator) || simple.operator.nil?
-          Attribute.new(
-            simple.name.first,
-            simple.namespace,
-            simple.operator,
-            simple.value ? simple.value.first : nil,
-            simple.flags
-          )
-        when ::Sass::Selector::Universal           # *
+      def visit_element_name(node)
+        if node.value == ["*"]
           Universal.new
         else
-          raise "CSS selectors containing #{simple.class} are not implemented in Hexp"
+          Element.new(node.value.first)
         end
-
-        # As of yet unimplemented
-        # when ::Sass::Selector::Universal           # *
-        # when ::Sass::Selector::Parent              # & in Sass
-        # when ::Sass::Selector::Interpolation       # #{} in Sass
-        # when ::Sass::Selector::Pseudo              # :visited, ::first-line, :nth-child(2n+1)
-        # when ::Sass::Selector::SelectorPseudoClass # :not(.foo)
-
       end
+
+      def visit_class_condition(node)
+        Class.new(node.value.first)
+      end
+
+      def visit_id(node)
+        Id.new(node.value.first.sub(/^#/, ''))
+      end
+
+      # ul > li
+      def visit_child_selector(node)
+        raise "not implemented"
+      end
+
+      # [href^="http://"]
+      def visit_attribute_condition(node)
+        element, operator, value = node.value
+        name = element.value.first
+        Attribute.new(name.sub(/^@/, ''), operator, value)
+      end
+
+      # li:first / li:nth-child(3n)
+      def visit_pseudo_selector(node)
+        raise "not implemented"
+      end
+
     end
   end
 end

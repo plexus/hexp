@@ -3,7 +3,6 @@ require 'forwardable'
 require 'pathname'
 
 require 'nokogiri'
-require 'sass'
 require 'equalizer'
 require 'concord'
 
@@ -112,7 +111,6 @@ require 'hexp/list'
 require 'hexp/dom'
 
 require 'hexp/css_selector'
-require 'hexp/css_selector/sass_parser'
 require 'hexp/css_selector/parser'
 
 require 'hexp/errors'
