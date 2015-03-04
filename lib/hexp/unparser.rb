@@ -67,8 +67,8 @@ module Hexp
     def add_child_nodes(buffer, tag, children)
       # TODO look into the special parsing mode that browsers use inside <script> tags,
       # at the least we should throw an error if the text contains </script>
-      if options[:no_escape].include?(tag) && children.length == 1 && children.first.text?
-        buffer << children.first
+      if options[:no_escape].include?(tag) && children.all?(&:text?)
+        children.each {|node| buffer << node }
       else
         children.each {|node| add_node(buffer, node) }
       end
