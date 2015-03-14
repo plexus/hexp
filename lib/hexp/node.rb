@@ -112,6 +112,8 @@ module Hexp
       new(*args)
     end
 
+    alias concord_init initialize
+
     # Normalize the arguments
     #
     # @param args [Array] args a Hexp node components
@@ -130,11 +132,11 @@ module Hexp
                  args[1].all? {|k,v| k.instance_of?(String) && v.instance_of?(String) }
 
       if attrs_ok && args[2].instance_of?(List)
-        super(args[0], args[1], args[2])
+        concord_init(args[0], args[1], args[2])
       elsif attrs_ok && args[2].instance_of?(Array)
-        super(args[0], args[1], List.new(args[2]))
+        concord_init(args[0], args[1], List.new(args[2]))
       else
-        super(*Normalize.new(args).call)
+        concord_init(*Normalize.new(args).call)
       end.freeze
     end
 

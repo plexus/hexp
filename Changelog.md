@@ -1,6 +1,12 @@
 ### Development
 
-[full diff](http://github.com/plexus/hexp/compare/v0.4.5...master)
+[full diff](http://github.com/plexus/hexp/compare/v0.4.6...master)
+
+### v0.4.6
+
+* Bugfix: make sure the Node constructors correctly calls the
+  constructor defined by Concord. This bug was being triggered by
+  asset_packer. Not sure how or why, but this fixes it.
 
 ### v0.4.5
 
