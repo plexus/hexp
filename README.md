@@ -185,7 +185,7 @@ gem 'hexp', require: 'hexp-rails'
 
 ## Builder
 
-If you like the Builder syntax available in other gems like Builder and Hpricot, you can use `Hexp.build` to achieve the same
+If you like the Builder syntax available in other gems like Builder and Markaby, you can use `Hexp.build` to achieve the same
 
 ``` ruby
 Hexp.build do
