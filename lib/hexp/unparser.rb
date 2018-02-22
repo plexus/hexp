@@ -40,6 +40,7 @@ module Hexp
 
     def call(node)
       buffer = String.new.force_encoding(options[:encoding])
+      buffer << "<!DOCTYPE html>\n" if @options[:html5]
       add_node(buffer, node)
       buffer.freeze
     end
