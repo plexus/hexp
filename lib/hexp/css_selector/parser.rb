@@ -51,6 +51,7 @@ module Hexp
         )
       end
 
+      # div.caption
       def visit_conditional_selector(node)
         head, tail = node.value
         children = [head]
@@ -65,6 +66,7 @@ module Hexp
         )
       end
 
+      # p
       def visit_element_name(node)
         if node.value == ["*"]
           Universal.new
@@ -73,10 +75,12 @@ module Hexp
         end
       end
 
+      # .error
       def visit_class_condition(node)
         Class.new(node.value.first)
       end
 
+      # #cover
       def visit_id(node)
         Id.new(node.value.first.sub(/^#/, ''))
       end
@@ -94,8 +98,8 @@ module Hexp
       end
 
       # li:first / li:nth-child(3n)
-      def visit_pseudo_selector(node)
-        raise "not implemented"
+      def visit_pseudo_class(node)
+        PseudoClass.new(node.value)
       end
 
     end

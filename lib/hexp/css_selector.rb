@@ -142,8 +142,14 @@ module Hexp
         mem_idx  = members.length - 2
 
         until path_idx < mem_idx || mem_idx == -1
-          if members[mem_idx].matches?(path[path_idx])
-            mem_idx -= 1
+          if members[mem_idx].respond_to?(:matches_path?)
+            if members[mem_idx].matches_path?(path.take(path_idx+1))
+              mem_idx -= 1
+            end
+          else
+            if members[mem_idx].matches?(path[path_idx])
+              mem_idx -= 1
+            end
           end
           path_idx -= 1
         end
@@ -169,7 +175,13 @@ module Hexp
       include Members
 
       def matches_path?(path)
-        matches?(path.last)
+        members.all? do |simple|
+          if simple.respond_to?(:matches_path?)
+            simple.matches_path?(path)
+          else
+            simple.matches?(path.last)
+          end
+        end
       end
 
       # Does the element match all parts of this SimpleSequence
@@ -184,6 +196,7 @@ module Hexp
           simple.matches?(element)
         end
       end
+
       alias head_matches? matches?
     end
 
@@ -339,5 +352,34 @@ module Hexp
         end
       end
     end
+
+    # :first-child, :nth-child(3n) etc.
+    class PseudoClass
+      include Equalizer.new(:value)
+      attr_reader :value
+
+      def initialize(value)
+        @value = value
+      end
+
+      def matches_path?(path)
+        node = path[-1]
+        parent = path[-2]
+
+        value.all? do |pc|
+          case pc
+          when 'first-child'
+            node.equal?(parent.children.first)
+          when 'last-child'
+            node.equal?(parent.children.last)
+          when 'empty'
+            node.children.empty?
+          else
+            raise "not implemented, :#{pc} pseudo-class"
+          end
+        end
+      end
+    end
+
   end
 end
